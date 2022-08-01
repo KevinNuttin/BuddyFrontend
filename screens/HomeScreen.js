@@ -1,16 +1,34 @@
+import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacit, Button } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
+
+
+export default function Homescreen(props) {
   return (
     <View style={styles.container}>
       <Text>Homescreen</Text>
       <StatusBar style="auto" />
+      
+         {/* import the return button */}
+
+         <Button  
+      title="Sign-Up"
+      color="#f194ff"
+      onPress={() => props.navigation.navigate('BirthdayScreen')}>
+        </Button>
+
+      <Button  
+      title="Sign-In"
+      color="#f194ff"
+      onPress={() => props.navigation.navigate('SignInScreen')}>
+        </Button>
+
     </View>
+   
   );
 }
-
-
 
 
 const styles = StyleSheet.create({

@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+export default function PasswordScreen() {
   return (
     <View style={styles.container}>
       <Text>Password</Text>
       <StatusBar style="auto" />
+      <Button  
+      title="Confirmer"
+      color="#f194ff"
+      onPress={() => props.navigation.navigate('BirthdayScreen')}>
+        </Button>
+
     </View>
   );
 }
