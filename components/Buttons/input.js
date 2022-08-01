@@ -13,7 +13,7 @@ function Input(label) {
                 <View style={styles.label}>{label}</View>
                 <TextInput 
                     style={[styles.inputText, styles.input]} 
-                    placeHolder="" 
+                    placeHolder=""
                     onFocus={onFocus}
                     keyboardType="phone-pad"
                     />
@@ -28,6 +28,7 @@ function Input(label) {
                 <TextInput 
                 style={[styles.inputText, styles.inputHold]} 
                 placeHolder="" 
+                //secureTextEntry={true}
                 onFocus={onFocus}
                 keyboardType="phone-pad"
                 />
