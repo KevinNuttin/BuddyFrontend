@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Pressable, Text, View} from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
 function offsetButton(props) {
 
@@ -10,22 +10,22 @@ function offsetButton(props) {
         return(
 
             <View style={styles.container}>
-                <Pressable 
+                <TouchableOpacity 
                     style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
                         <Text style={styles.buttonText}>{props.titleButton}</Text>
-                </Pressable>
+                </TouchableOpacity>
             </View>
         )
     } else {
         return(
 
             <View style={styles.container}>
-                <Pressable 
+                <TouchableOpacity 
                     style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
                         <Text style={styles.buttonText}>{props.titleButton}</Text>
-                </Pressable>
+                </TouchableOpacity>
             </View>
         )
     }

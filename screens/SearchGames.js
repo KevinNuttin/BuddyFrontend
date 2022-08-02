@@ -12,7 +12,7 @@ import {
   
 
 export default function searchGames() {
-    const [message, setMessage] = useState('');
+    const [gameName, setGameName] = useState('');
 
   //** request au Backend en post pour chercher un jeu à partir de l'input à chaque changement useEffect pour envoyer un backend le nouvel input  */
 
@@ -23,13 +23,13 @@ export default function searchGames() {
     await fetch('http://localhost:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: 'gameName=Tomb'
+        body: `gameName=`+{gameName}
     });
 
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
    var rawResponse = await fetch('http://localhost:3000/library/games');
-    var response = await rawResponse.json();
-    console.log(response);
+    var gamesListSearch = await rawResponse.json();
+    console.log(gamesListSearch);
 }
 
       }, [message]);
@@ -41,17 +41,17 @@ export default function searchGames() {
             body: 'gameName=Tomb'
         });
         var rawResponse = await fetch('http://localhost:3000/library/games');
-         var response = await rawResponse.json();
-        console.log(response);
+         var gamesListSearch = await rawResponse.json();
+        console.log(gamesListSearch);
     }
 
     return (<View style={styles.container}>
         <Text>SearchGames</Text>
         <StatusBar style="auto" />
         <TextInput  
-        placeholder='Your message'
-        onChangeText={(val) => setMessage(val)}
-        value={message}>
+        placeholder='Your search'
+        onChangeText={(val) => setGameName(val)}
+        value={gameName}>
     </TextInput>
     <Button 
               title="Send"
