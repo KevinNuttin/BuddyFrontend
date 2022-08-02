@@ -10,6 +10,15 @@ import PseudoScreen from './screens/PseudoScreen';
 import BirthdayScreen from './screens/BirthdayScreen';
 import searchGames from './screens/SearchGames';
 
+import DiscoverScreen from './screens/DiscoverScreen';
+import AgeScreen from './screens/AgeScreen';
+import ProfilScreen from './screens/ProfilScreen';
+import PlatformScreen from './screens/PlatformScreen';
+import MoodScreen from './screens/MoodScreen';
+import MatchScreen from './screens/MatchScreen';
+import LanguageScreen from './screens/LanguageScreen';
+
+
 
 import { StyleSheet, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -34,6 +43,16 @@ function App(){
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
       <Stack.Screen name="SignInScreen" component={SignInScreen}/>
       <Stack.Screen name="SearchGames" component={searchGames}/>
+      
+
+      <Stack.Screen name="DiscoverScreen" component={DiscoverScreen} />
+      <Stack.Screen name="AgeScreen" component={AgeScreen} />
+      <Stack.Screen name="ProfilScreen" component={ProfilScreen} />
+      <Stack.Screen name="PlatformScreen" component={PlatformScreen}/>
+      <Stack.Screen name="MoodScreen" component={MoodScreen}/>
+      <Stack.Screen name="MatchScreen" component={MatchScreen} />
+      <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+     
 
     </Stack.Navigator>
   </NavigationContainer>

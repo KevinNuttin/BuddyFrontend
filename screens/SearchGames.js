@@ -1,26 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Button,
+} from "react-native";
 
 
+//** requett au Backend en post pour chercher un jeu à partir de l'input  */
 
- //** requett au Backend en post pour chercher un jeu à partir de l'input  */
+// TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input
+// TODO: ajouter dynamiquement le résultat de l'input au body de la request
 
-     // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
-    // TODO: ajouter dynamiquement le résultat de l'input au body de la request
-
-    /*await fetch('http://localhost:3000/library/games', {
+/*await fetch('http://localhost:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: 'gameName=Tomb'
     });*/
 
-    //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
-   /* var rawResponse = await fetch('http://localhost:3000/library/games');
+//** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
+/* var rawResponse = await fetch('http://localhost:3000/library/games');
     var response = await rawResponse.json();
     console.log(response); */
-    
-    useEffect(() => { 
+
+// enlever ce commentaire avant de push
+{
+  /*useEffect(() => { 
         socket.on('sendMessageFromBack', (messageData)=> {
           setListMessage([...listmessage,messageData])
         });  
@@ -58,4 +66,31 @@ export default function searchGames() {
           alignItems: 'center',
           justifyContent: 'center',
         },
-      });
+      }); */
+}
+
+export default function SearchGames(props) {
+  return (
+    <View style={styles.container}>
+      <Text>Searchgame</Text>
+ 
+
+      {/* import the return button */}
+
+      <Button
+        title="Confirmer"
+        color="#f194ff"
+        onPress={() => props.navigation.navigate("MoodScreen")}
+      ></Button>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
