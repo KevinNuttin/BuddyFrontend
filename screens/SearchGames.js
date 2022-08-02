@@ -12,8 +12,9 @@ export default function searchGames() {
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
     useEffect(() => { 
+        console.log("coucou");
         async function inputSearchGame() {
-    await fetch('http://localhost:3000/library/games', {
+    await fetch('http://192.168.10.150:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `gameName=`+{gameName}
@@ -25,7 +26,7 @@ export default function searchGames() {
     console.log(gamesListSearch);
 }
 
-      }, [message]);
+      }, [gameName]);
 
       async function inputSearch() {
         await fetch('http://localhost:3000/library/games', {
