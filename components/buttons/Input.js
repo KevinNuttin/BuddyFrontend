@@ -1,42 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View} from "react-native";
+import { StyleSheet, TextInput, View} from "react-native";
 
-function Input(props) {
+function Input(label, placeholder, props) {
 
-    const [isFocus, setisFocus] = useState(false)
-    const onFocus = () => setisFocus(true)
+    const [text, setText] = useState('');
 
-    // reste a configurer les placeholders en fonction des types d'input
+    // configurer les placeholders en fonction des types d'input
 
-    if(isFocus === false) {
-        return(
+    return(
 
-            <View style={styles.container}>
-                <View style={styles.label}>{props.label}</View>
-                <TextInput 
-                    style={[styles.inputText, styles.input]} 
-                    placeHolder=""
-                    onFocus={onFocus}
-                    keyboardType="phone-pad"
-                    />
-            </View>
-
-        )
-    } else {
-        return(
-
-            <View style={styles.container}>
-                <View style={[styles.label, {fontWeight: "600"}]}>{props.label}</View>
-                <TextInput 
-                style={[styles.inputText, styles.inputHold]} 
-                placeHolder="" 
-                //secureTextEntry={true}
-                onFocus={onFocus}
+        <View style={styles.container}>
+            <View style={styles.label}>{label}</View>
+            <TextInput 
+                style={[styles.inputText, styles.input]} 
+                onChangeText={(value) => setText(value)}
+                value={text}
                 keyboardType="phone-pad"
+                //secureTextEntry={true}
                 />
-            </View>
-        )
-    }
+        </View>
+
+    )
 }
 
 
@@ -56,17 +40,7 @@ const styles = StyleSheet.create({
         height: 55,
         borderWidth: 1,
         borderColor: "#372C60",
-        position: "relative",
-        zIndex: -1,
-
-    },
-
-    inputHold: {
-
-        width: 230,
-        height: 55,
-        borderWidth: 2,
-        borderColor: "#372C60",
+        marginBottom:20,
         position: "relative",
         zIndex: -1,
 
@@ -74,8 +48,6 @@ const styles = StyleSheet.create({
 
     inputText: {
 
-        fontFamily: "Biryani",
-        fontStyle: "normal",
         fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
@@ -88,8 +60,7 @@ const styles = StyleSheet.create({
 
       width: 70,
       height: 15,
-      fontFamily: "Inter",
-      fontStyle: "normal",
+
       fontWeight: "500",
       fontSize: 12,
       letterSpacing: 0.5,
