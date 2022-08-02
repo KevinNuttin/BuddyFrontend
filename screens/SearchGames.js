@@ -19,23 +19,22 @@ export default function searchGames() {
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
     useEffect(() => { 
+        console.log("coucou");
         async function inputSearchGame() {
-    await fetch('http://localhost:3000/library/games', {
+    await fetch('http://172.20.10.3:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `gameName=`+{gameName}
     });
 
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
-   var rawResponse = await fetch('http://localhost:3000/library/games');
-    var gamesListSearch = await rawResponse.json();
-    console.log(gamesListSearch);
-}
 
-      }, [message]);
+}
+inputSearchGame();
+      }, [gameName]);
 
       async function inputSearch() {
-        await fetch('http://localhost:3000/library/games', {
+        await fetch('http://172.20.10.3:3000/library/games', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: 'gameName=Tomb'
