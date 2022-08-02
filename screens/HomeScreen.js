@@ -22,6 +22,9 @@ export default function Homescreen(props) {
 
       <OffsetButton titleButton="Inscription" onPress={() => props.navigation.navigate('BirthdayScreen')}/>
       <OffsetButton titleButton="Connexion" onPress={() => props.navigation.navigate('SignInScreen')}/>
+      <OffsetButton titleButton="Connexion avec Discord" onPress={() => props.navigation.navigate('SignInScreen')}/>
+      <Button title="Connexion discord Matthieu" onPress={() => props.navigation.navigate('SignInScreen')}/>
+      <Button title="Connexion Kevin" onPress={() => props.navigation.navigate('SignInScreen')}/>
       <Tunnel/>
     </View>
    
