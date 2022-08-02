@@ -1,19 +1,23 @@
 
-import { StyleSheet, Text, View, Title } from "react-native";
+import { StyleSheet, Text, View, Title, Button } from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 
 
 
-export default function BirthdayScreen() {
+export default function BirthdayScreen(props) {
   return (
     <View style={styles.container}>
       {/* import the return button */}
 
-        <Text>=bonjour</Text>
-      
-        <OffsetMiniButton titleButton="Confirm"/>
-        
+        <Text>anniversaire</Text>
+        <Button  
+      title="Confirmer"
+      color="#f194ff"
+      onPress={() => props.navigation.navigate('PseudoScreen')}>
+        </Button>
 
+       
+       
         
     </View>
   );

@@ -1,6 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Button,
+} from "react-native";
 
   
 
@@ -64,4 +71,7 @@ export default function searchGames() {
           alignItems: 'center',
           justifyContent: 'center',
         },
-      });
+      }); 
+
+
+
