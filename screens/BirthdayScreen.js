@@ -8,21 +8,18 @@ export default function BirthdayScreen(props){
 return(
   <View style={styles.container}>
          {/* import the return button */}
-      <Button
-          name="arrow-back-outline"
-          size={20}
-          color="#ffffff"
+         <ion-icon name="arrow-back-outline">
+         onPress={() => props.navigation.navigate('HomeScreen')}
+         </ion-icon>
+       
 
-         onPress={() => props.navigation.navigate('HomeScreen')}>
-
-        </Button>
         <Text>Birthday</Text>
      <StatusBar style="auto" />
 
      <Button  
       title="Confirmer"
       color="#f194ff"
-      onPress={() => props.navigation.navigate('BirthdayScreen')}>
+      onPress={() => props.navigation.navigate('PseudoScreen')}>
         </Button>
 
 </View>

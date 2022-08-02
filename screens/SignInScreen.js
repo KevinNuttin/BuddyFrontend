@@ -6,13 +6,6 @@ export default function SignInScreen() {
   return (
     <View style={styles.container}>
       <Text>Sign-in</Text>
-      <StatusBar style="auto" />
-      <Button  
-      title="Confirmer"
-      color="#f194ff"
-      onPress={() => props.navigation.navigate('BirthdayScreen')}>
-        </Button>
-
     </View>
   );
 }

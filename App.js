@@ -27,60 +27,19 @@ function App(){
     <Stack.Navigator>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="BirthdayScreen" component={BirthdayScreen} />
-      <Stack.Screen name="Pseudo" component={PseudoScreen} />
-      <Stack.Screen name="Email" component={EmailScreen} />
-      <Stack.Screen name="Password" component={PasswordScreen} />
-      <Stack.Screen name="Sign-in" component={SignInScreen} />
+      <Stack.Screen name="PseudoScreen" component={PseudoScreen} />
+      <Stack.Screen name="EmailScreen" component={EmailScreen} />
+      <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
 
     </Stack.Navigator>
   </NavigationContainer>
 );
  }
-{/*
-//BirthdayScreen nav --> redirection to PseudoScreen
-function BirthdayScreenFunction(props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#2ecc71'}}>
-      <Button title="Confirmer"
-        onPress={() => props.navigation.navigate('Pseudo')}
-      />
-    </View>
-  );
- }
-
- //PseudoScreen nav --> redirection to EmailScreen
- function PseudoScreenFunction(props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#2ecc71'}}>
-      <Button title="Confirmer"
-        onPress={() => props.navigation.navigate('Email')}
-      />
-    </View>
-  );
- } 
-
-//EmailScreen nav --> redirection to PasswordScreen
- function EmailScreenFunction(props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#2ecc71'}}>
-      <Button title="Confirmer"
-        onPress={() => props.navigation.navigate('Password')}
-      />
-    </View>
-  );
- } 
-
-//PasswordScreen nav --> redirection to "On joue a quoi?"
-
-*/}
 
 
  
-
 export default App;
-
-
-
 
 
 
