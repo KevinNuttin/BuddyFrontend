@@ -1,6 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Button,
+} from "react-native";
 
 // Import du bouton confirmer qui redirect vers la page mood 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
@@ -16,39 +23,38 @@ export default function SearchGames(props) {
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
     useEffect(() => { 
+        console.log("coucou");
         async function inputSearchGame() {
-    await fetch('http://localhost:3000/library/games', {
+    await fetch('http://172.20.10.3:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: 'gameName=Tomb'
+        body: `gameName=`+{gameName}
     });
 
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
-   var rawResponse = await fetch('http://localhost:3000/library/games');
-    var response = await rawResponse.json();
-    console.log(response);
-}
 
-      }, [message]);
+}
+inputSearchGame();
+      }, [gameName]);
 
       async function inputSearch() {
-        await fetch('http://localhost:3000/library/games', {
+        await fetch('http://172.20.10.3:3000/library/games', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: 'gameName=Tomb'
         });
         var rawResponse = await fetch('http://localhost:3000/library/games');
-         var response = await rawResponse.json();
-        console.log(response);
+         var gamesListSearch = await rawResponse.json();
+        console.log(gamesListSearch);
     }
 
     return (<View style={styles.container}>
         <Text>SearchGames</Text>
         <StatusBar style="auto" />
         <TextInput  
-        placeholder='Your message'
-        onChangeText={(val) => setMessage(val)}
-        value={message}>
+        placeholder='Your search'
+        onChangeText={(val) => setGameName(val)}
+        value={gameName}>
     </TextInput>
     <Button 
               title="Send"
@@ -68,4 +74,7 @@ export default function SearchGames(props) {
           justifyContent: 'center',
           marginTop: 100, // A virer après les tests recherche de jeux
         },
-      });
+      }); 
+
+
+

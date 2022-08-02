@@ -15,6 +15,17 @@ import LanguageScreen from './screens/LanguageScreen';
 import AgeScreen from './screens/AgeScreen';
 
 
+
+import DiscoverScreen from './screens/DiscoverScreen';
+import AgeScreen from './screens/AgeScreen';
+import ProfilScreen from './screens/ProfilScreen';
+import PlatformScreen from './screens/PlatformScreen';
+import MoodScreen from './screens/MoodScreen';
+import MatchScreen from './screens/MatchScreen';
+import LanguageScreen from './screens/LanguageScreen';
+
+
+
 import { StyleSheet, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
