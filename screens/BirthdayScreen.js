@@ -1,7 +1,7 @@
 
 import { StyleSheet, Text, View, Title } from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
-import BackIcon from '../components/icons/BackIcon';
+
 
 
 export default function BirthdayScreen() {
@@ -12,7 +12,7 @@ export default function BirthdayScreen() {
         <Text>=bonjour</Text>
       
         <OffsetMiniButton titleButton="Confirm"/>
-        <BackIcon/>
+        
 
         
     </View>
