@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Pressable, Text, View} from "react-native";
 
-function OffsetMiniButton(props) {
+export default function OffsetMiniButton(props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-
     },
 
     button: {
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",
@@ -92,4 +91,3 @@ const styles = StyleSheet.create({
 
 })
 
-export default OffsetMiniButton
