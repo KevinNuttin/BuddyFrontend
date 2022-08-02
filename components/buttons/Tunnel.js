@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
+import React from "react";
+import { StyleSheet, View} from "react-native";
 
 function tunnel(number) {
+
+  var number = 0
 
   if(number === 2) {
     return(
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "flex-end",
+        marginRight: 20,
 
     },
 

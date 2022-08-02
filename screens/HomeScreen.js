@@ -1,32 +1,38 @@
-import React from "react";
-import { StyleSheet, View, ImageBackground, Image, Button } from 'react-native';
-
-import { NavigationContainer } from '@react-navigation/native'
-
+import React from "react"
+import { StyleSheet, View, ImageBackground, Image } from 'react-native'
 
 import OffsetButton from "../components/buttons/OffsetButton"
-import Tunnel from "../components/buttons/Tunnel"
 
 export default function Homescreen(props) {
+
+  var inscription = OffsetButton("Inscription", "BirthdayScreen",props)
+  var connexion = OffsetButton("connexion", "SignInScreen",props)
+  //var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
+  var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",props)
+  var kevin = OffsetButton("boutton pour Kevin", "SearchGames",props)
+
   return (
 
-    <View style={styles.container}>
-      <ImageBackground
-        resizeMode="cover"
-        style={styles.background}
-        source={require('../assets/backgrounds/fond_buddy.png')}/>
+    <ImageBackground
+      resizeMode="cover"
+      style={styles.background}
+      source={require('../assets/backgrounds/dégradé_buddy.png')}>
 
       <Image 
         style={styles.logo}
         source={require('../assets/logo/logo_buddy.png')}/>
 
-      <OffsetButton titleButton="Inscription" onPress={() => props.navigation.navigate('BirthdayScreen')}/>
-      <OffsetButton titleButton="Connexion" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <OffsetButton titleButton="Connexion avec Discord" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <Button title="Connexion discord Matthieu" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <Button title="Connexion Kevin" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <Tunnel/>
-    </View>
+      <View style={styles.container}>
+
+        {inscription}
+        {connexion}
+        {/*{discord}*/}
+        {matthieu}
+        {kevin}
+
+      </View>
+
+    </ImageBackground>
    
   );
 }
@@ -46,15 +52,16 @@ const styles = StyleSheet.create({
 
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
 
   },
 
   logo: {
 
-    width: 183,
-    marginBottom: 80,
+    flex: 1,
+    resizeMode: 'contain', 
+    width: "50%",
 
   }
 
 });
-
