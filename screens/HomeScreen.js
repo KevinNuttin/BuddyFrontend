@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, Button } from 'react-native';
+
+import BackIcon from "../components/icons/BackIcon"
+import OffsetButton from "../components/buttons/OffsetButton"
 
 export default function Homescreen(props) {
   return (
     <View style={styles.container}>
-      <Text>Homescreen</Text>
-      <StatusBar style="auto" />
-      
-         {/* import the return button */}
-
-         <Button  
-      title="Sign-Up"
-      color="#f194ff"
-      onPress={() => props.navigation.navigate('BirthdayScreen')}>
-        </Button>
-
-      <Button  
-      title="Sign-In"
-      color="#f194ff"
-      onPress={() => props.navigation.navigate('SignInScreen')}>
-        </Button>
-
+      <ImageBackground
+        source={require('../assets/backgrounds/fond_buddy.png')}/>
+      <Image 
+        style={styles.logo}
+        source={require('../assets/logo/logo_buddy.png')}/>
+      <BackIcon/>
+      <OffsetButton onPress={() => props.navigation.navigate('BirthdayScreen')}/>
+      <OffsetButton onPress={() => props.navigation.navigate('SignInScreen')}/>
     </View>
    
   );
@@ -29,11 +22,25 @@ export default function Homescreen(props) {
 
 
 const styles = StyleSheet.create({
+
   container: {
+
     flex: 1,
-    backgroundColor: '#fff',
+    ima,
     alignItems: 'center',
     justifyContent: 'center',
+
   },
+
+  logo: {
+
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 183,
+    marginTop: 100,
+
+  }
+
 });
 
