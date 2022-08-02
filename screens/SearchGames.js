@@ -2,11 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button} from "react-native";
 
-export default function searchGames() {
-    const [message, setMessage] = useState('');
-    
 
-    //** requett au Backend en post pour chercher un jeu à partir de l'input  */
+
+ //** requett au Backend en post pour chercher un jeu à partir de l'input  */
 
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
@@ -21,6 +19,19 @@ export default function searchGames() {
    /* var rawResponse = await fetch('http://localhost:3000/library/games');
     var response = await rawResponse.json();
     console.log(response); */
+    
+    useEffect(() => { 
+        socket.on('sendMessageFromBack', (messageData)=> {
+          setListMessage([...listmessage,messageData])
+        });  
+      }, [listmessage]);
+   async function searchGamesInput() {
+
+   }
+
+export default function searchGames() {
+    const [message, setMessage] = useState('');
+   
 
     return (<View style={styles.container}>
         <Text>SearchGames</Text>
