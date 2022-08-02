@@ -8,6 +8,16 @@ import OffsetButton from "../components/buttons/OffsetButton"
 import Tunnel from "../components/buttons/Tunnel"
 
 export default function Homescreen(props) {
+
+  var inscription = OffsetButton("Inscription", "SignInScreen",props)
+  var connexion = OffsetButton("connexion", "BirthdayScreen",props)
+  var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
+  var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",props)
+  var kevin = OffsetButton("boutton pour Kevin", "BirthdayScreen",props)
+
+
+
+
   return (
 
     <View style={styles.container}>
@@ -19,12 +29,13 @@ export default function Homescreen(props) {
       <Image 
         style={styles.logo}
         source={require('../assets/logo/logo_buddy.png')}/>
-
-      <Button title="Inscription" onPress={() => props.navigation.navigate('BirthdayScreen')}/>
-      <Button title="Connexion" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <OffsetButton titleButton="Connexion avec Discord" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <Button title="Connexion discord Matthieu" onPress={() => props.navigation.navigate('SignInScreen')}/>
-      <Button title="Connexion Kevin" onPress={() => props.navigation.navigate('SignInScreen')}/>
+ 
+      {inscription}
+      {connexion}
+      {discord}
+      {matthieu}
+      {kevin}
+      
       <Tunnel/>
     </View>
    

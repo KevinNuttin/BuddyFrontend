@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function offsetButton(props) {
+function offsetButton(title , redirection, props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
+
+    
 
     if(isPress === false) {
         return(
@@ -12,8 +14,10 @@ function offsetButton(props) {
             <View style={styles.container}>
                 <TouchableOpacity 
                     style={[styles.button, styles.shadow]} 
-                    onPress={onPress}>
-                        <Text style={styles.buttonText}>{props.titleButton}</Text>
+                    onPress={() => {props.navigation.navigate(redirection);
+                    }
+                    }>
+                        <Text style={styles.buttonText}>{title}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -24,7 +28,7 @@ function offsetButton(props) {
                 <TouchableOpacity 
                     style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
-                        <Text style={styles.buttonText}>{props.titleButton}</Text>
+                        <Text style={styles.buttonText}>{name}</Text>
                 </TouchableOpacity>
             </View>
         )
