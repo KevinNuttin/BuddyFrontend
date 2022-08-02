@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function offsetButton(name , redirection, props) {
+function offsetButton(title , redirection, props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
@@ -17,7 +17,7 @@ function offsetButton(name , redirection, props) {
                     onPress={() => {props.navigation.navigate(redirection);
                     }
                     }>
-                        <Text style={styles.buttonText}>{name}</Text>
+                        <Text style={styles.buttonText}>{title}</Text>
                 </TouchableOpacity>
             </View>
         )
