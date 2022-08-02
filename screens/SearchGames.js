@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  Button,
-} from "react-native";
+import React, {useState, useEffect} from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button} from "react-native";
 
   
 
@@ -21,10 +14,11 @@ export default function searchGames() {
     useEffect(() => { 
         console.log("coucou");
         async function inputSearchGame() {
-    await fetch('http://192.168.10.150:3000/library/games', {
+            
+    await fetch('http://localhost:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `gameName=`+{gameName}
+        body: `gameName=${gameName}`
     });
 
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
@@ -32,7 +26,6 @@ export default function searchGames() {
     var gamesListSearch = await rawResponse.json();
     console.log(gamesListSearch);
 }
-
       }, [gameName]);
 
       async function inputSearch() {
@@ -47,19 +40,12 @@ export default function searchGames() {
     }
 
     return (<View style={styles.container}>
-        <Text>SearchGames</Text>
         <StatusBar style="auto" />
-        <TextInput  
+        <TextInput  style={styles.input}
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
         value={gameName}>
     </TextInput>
-    <Button 
-              title="Send"
-              buttonStyle={{backgroundColor: "#eb4d4b"}}
-              type="solid"
-              onPress={()=> {inputSearch}}             
-          />
   
       </View>)
       }
@@ -71,7 +57,13 @@ export default function searchGames() {
           alignItems: 'center',
           justifyContent: 'center',
         },
-      }); 
-
-
-
+         input: {
+         backgroundColor: '#fff',
+         alignItems: 'center',
+         borderColor: '#f194ff',
+         borderWidth: 2,
+         width: 250,
+         height: 40,
+         justifyContent: 'center',
+        }
+      });
