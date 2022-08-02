@@ -20,7 +20,7 @@ export default function Homescreen(props) {
         style={styles.logo}
         source={require('../assets/logo/logo_buddy.png')}/>
 
-      <OffsetButton titleButton="Inscription" onPress={() => props.navigation.navigate('BirthdayScreen')}/>
+      <Button title="Inscription" onPress={() => props.navigation.navigate('BirthdayScreen')}/>
       <OffsetButton titleButton="Connexion" onPress={() => props.navigation.navigate('SignInScreen')}/>
       <OffsetButton titleButton="Connexion avec Discord" onPress={() => props.navigation.navigate('SignInScreen')}/>
       <Button title="Connexion discord Matthieu" onPress={() => props.navigation.navigate('SignInScreen')}/>
