@@ -10,6 +10,8 @@ import PseudoScreen from './screens/PseudoScreen';
 import BirthdayScreen from './screens/BirthdayScreen';
 import searchGames from './screens/SearchGames';
 
+
+
 import DiscoverScreen from './screens/DiscoverScreen';
 import AgeScreen from './screens/AgeScreen';
 import ProfilScreen from './screens/ProfilScreen';
@@ -43,7 +45,7 @@ function App(){
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
       <Stack.Screen name="SignInScreen" component={SignInScreen}/>
       <Stack.Screen name="SearchGames" component={searchGames}/>
-      
+   
 
       <Stack.Screen name="DiscoverScreen" component={DiscoverScreen} />
       <Stack.Screen name="AgeScreen" component={AgeScreen} />
