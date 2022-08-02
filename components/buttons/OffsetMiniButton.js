@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Pressable, Text, View} from "react-native";
 
-function OffsetMiniButton(text) {
+function OffsetMiniButton(props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
@@ -13,7 +13,7 @@ function OffsetMiniButton(text) {
                 <Pressable 
                     style={styles.button} 
                     onPress={onPress}>
-                        <Text style={styles.buttonText}>{text}</Text>
+                        <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
                 <View style={styles.buttonBackgroundOff}/>
             </View>
@@ -25,7 +25,7 @@ function OffsetMiniButton(text) {
                 <Pressable 
                     style={styles.button} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{text}</Text>
+                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{props.titleButton}</Text>
                 </Pressable>
                 <View style={styles.buttonBackgroundOn}/>
             </View>

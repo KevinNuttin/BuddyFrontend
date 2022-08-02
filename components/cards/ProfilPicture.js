@@ -12,7 +12,7 @@ function profilPicture(color) {
         <View style={styles.container}>
             <Image 
             style={styles.picture}
-            source={require('../../../assets/pp_default.png')}
+            source={require('../../../assets/avatarDefault.png')}
             />
             <View style={[styles.background, {backgroundColor: {color}}]}/>
         </View>

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function button(color, text) {
+function button(props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
 
 // Le paramètre de changement de couleur doit être ajouté
-    var color1 = "#FFA588"
-    var color2 = "#DDABFE"
+const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
 
     if(isPress === false) {
         return(
@@ -17,7 +16,7 @@ function button(color, text) {
                 <TouchableOpacity 
                     style={styles.button} 
                     onPress={onPress}>
-                        <Text style={styles.buttonText}>{text}</Text>
+                        <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </TouchableOpacity>
             </View>
 
@@ -26,9 +25,9 @@ function button(color, text) {
         return(
             <View style={styles.container}>
                 <TouchableOpacity 
-                    style={[styles.button, {backgroundColor:{color}}]} 
+                    style={[styles.button, {backgroundColor:{colorButton}}]} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: 600}]}>{text}</Text>
+                        <Text style={[styles.buttonText, {fontWeight: 600}]}>{props.title}</Text>
                 </TouchableOpacity>
             </View>
         )

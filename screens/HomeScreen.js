@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacit, Button } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-
-
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 export default function Homescreen(props) {
   return (

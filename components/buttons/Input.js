@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View} from "react-native";
 
-function Input(label) {
+function Input(props) {
 
     const [isFocus, setisFocus] = useState(false)
     const onFocus = () => setisFocus(true)
+
+    // reste a configurer les placeholders en fonction des types d'input
 
     if(isFocus === false) {
         return(
 
             <View style={styles.container}>
-                <View style={styles.label}>{label}</View>
+                <View style={styles.label}>{props.label}</View>
                 <TextInput 
                     style={[styles.inputText, styles.input]} 
                     placeHolder=""
@@ -24,7 +26,7 @@ function Input(label) {
         return(
 
             <View style={styles.container}>
-                <View style={[styles.label, {fontWeight: 600}]}>{label}</View>
+                <View style={[styles.label, {fontWeight: 600}]}>{props.label}</View>
                 <TextInput 
                 style={[styles.inputText, styles.inputHold]} 
                 placeHolder="" 

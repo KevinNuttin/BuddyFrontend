@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, Pressable, Text, View} from "react-native";
 
-function OffsetButton(color, text) {
+function offsetButton(props) {
 
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
 
 // Le paramètre de changement de couleur doit être ajouté
-    var color1 = "#FDEBE6"
-    var color2 = "#DDABFE"
+    const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
 
     if(isPress === false) {
         return(
@@ -17,9 +16,9 @@ function OffsetButton(color, text) {
                 <Pressable 
                     style={styles.button} 
                     onPress={onPress}>
-                        <Text style={styles.buttonText}>{text}</Text>
+                        <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOff, {backgroundColor: {color}}]}/>
+                <View style={[styles.buttonBackgroundOff, {backgroundColor: {colorButton}}]}/>
             </View>
 
         )
@@ -29,9 +28,9 @@ function OffsetButton(color, text) {
                 <Pressable 
                     style={styles.button} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{text}</Text>
+                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{props.title}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOn, {backgroundColor: {color}}]}/>
+                <View style={[styles.buttonBackgroundOn, {backgroundColor: {colorButton}}]}/>
             </View>
         )
     }
@@ -96,4 +95,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default OffsetButton
+export default offsetButton
