@@ -14,7 +14,8 @@ import searchGames from './screens/SearchGames';
 import { StyleSheet, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons';
+
+
 
 const Stack = createStackNavigator();
 
