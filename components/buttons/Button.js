@@ -7,7 +7,7 @@ function button(props) {
     const onPress = () => setIsPress(true)
 
 // Le paramètre de changement de couleur doit être ajouté
-const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
+//const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
 
     if(isPress === false) {
         return(
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",

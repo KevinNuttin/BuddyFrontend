@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",

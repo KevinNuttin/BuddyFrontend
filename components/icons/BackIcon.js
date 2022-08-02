@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View} from "react-native";
+import { TouchableOpacity, Image, View} from "react-native";
 
 function backIcon() {
 
@@ -13,8 +13,7 @@ function backIcon() {
                     onPress={onPress}>
                         <Image 
                         style={{width: 25}}
-                        source={require('../../assets/icons/back_inconBuddy.png')}
-                        />
+                        source={require('../../assets/icons/back_iconbuddy.png')}/>
                 </TouchableOpacity>
             </View>
         )

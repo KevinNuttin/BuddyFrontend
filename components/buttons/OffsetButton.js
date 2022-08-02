@@ -7,7 +7,7 @@ function offsetButton(props) {
     const onPress = () => setIsPress(true)
 
 // Le paramètre de changement de couleur doit être ajouté
-    const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
+    //const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
 
     if(isPress === false) {
         return(
@@ -18,7 +18,8 @@ function offsetButton(props) {
                     onPress={onPress}>
                         <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOff, {backgroundColor: {colorButton}}]}/>
+                {/* <View style={[styles.buttonBackgroundOff, {backgroundColor: {colorButton}}]}/> */}
+                <View style={styles.buttonBackgroundOff}/>
             </View>
 
         )
@@ -30,7 +31,8 @@ function offsetButton(props) {
                     onPress={onPress}>
                         <Text style={[styles.buttonText, {fontWeight: "600"}]}>{props.title}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOn, {backgroundColor: {colorButton}}]}/>
+                {/*<View style={[styles.buttonBackgroundOn, {backgroundColor: {colorButton}}]}/>*/}
+                <View style={styles.buttonBackgroundOn}/>
             </View>
         )
     }
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",
