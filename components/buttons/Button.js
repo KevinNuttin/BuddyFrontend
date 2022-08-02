@@ -6,9 +6,6 @@ function button(props) {
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
 
-// Le paramètre de changement de couleur doit être ajouté
-//const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
-
     if(isPress === false) {
         return(
 
@@ -27,7 +24,7 @@ function button(props) {
                 <TouchableOpacity 
                     style={[styles.button, {backgroundColor:{colorButton}}]} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: 600}]}>{props.title}</Text>
+                        <Text style={[styles.buttonText, {backgroundColor: "#DDABFE" }]}>{props.titleButton}</Text>
                 </TouchableOpacity>
             </View>
         )

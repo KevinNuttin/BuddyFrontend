@@ -11,11 +11,10 @@ function OffsetMiniButton(props) {
 
             <View style={styles.container}>
                 <Pressable 
-                    style={styles.button} 
+                    style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
                         <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={styles.buttonBackgroundOff}/>
             </View>
 
         )
@@ -23,11 +22,10 @@ function OffsetMiniButton(props) {
         return(
             <View style={styles.container}>
                 <Pressable 
-                    style={styles.button} 
+                    style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{props.titleButton}</Text>
+                        <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={styles.buttonBackgroundOn}/>
             </View>
         )
     }
@@ -55,38 +53,23 @@ const styles = StyleSheet.create({
 
     },
 
+    shadow: {
+        shadowColor: "#DDABFE",
+        shadowOffset: {width: 0, height: 3},
+        shadowOpacity: 1,
+        shadowRadius: 0,
+      },
+
     buttonText: {
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        //fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",
         textAlign: "center",
         marginTop: 7,
-
-    },
-
-    buttonBackgroundOff:{
-      
-      width: 135,
-      height: 40,
-      backgroundColor: "#DDABFE",
-      position: "absolute",
-      marginTop: 15,
-      marginLeft: 15,
-      zIndex: -1,
-
-    },
-
-    buttonBackgroundOn:{
-      
-      width: 135,
-      height: 40,
-      backgroundColor: "#DDABFE",
-      position: "absolute",
-      zIndex: -1,
 
     },
 

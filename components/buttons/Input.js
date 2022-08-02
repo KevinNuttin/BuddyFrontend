@@ -26,7 +26,7 @@ function Input(props) {
         return(
 
             <View style={styles.container}>
-                <View style={[styles.label, {fontWeight: 600}]}>{props.label}</View>
+                <View style={[styles.label, {fontWeight: "600"}]}>{props.label}</View>
                 <TextInput 
                 style={[styles.inputText, styles.inputHold]} 
                 placeHolder="" 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       height: 15,
       fontFamily: "Inter",
       fontStyle: "normal",
-      fontWeight: 500,
+      fontWeight: "500",
       fontSize: 12,
       letterSpacing: 0.5,
       textAlign: "center",
