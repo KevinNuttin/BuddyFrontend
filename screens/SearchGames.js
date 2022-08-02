@@ -1,6 +1,7 @@
 export default function searchGames(props) {
 
     //** requett au Backend en post pour chercher un jeu à partir de l'input  */
+    
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
 
