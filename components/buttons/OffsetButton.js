@@ -6,31 +6,26 @@ function offsetButton(props) {
     const [isPress, setIsPress] = useState(false)
     const onPress = () => setIsPress(true)
 
-// Le paramètre de changement de couleur doit être ajouté
-    const colorButton = selectedButton ? "#FDEBE6" : "#DDABFE"
-
     if(isPress === false) {
         return(
 
             <View style={styles.container}>
                 <Pressable 
-                    style={styles.button} 
+                    style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
                         <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOff, {backgroundColor: {colorButton}}]}/>
             </View>
-
         )
     } else {
         return(
+
             <View style={styles.container}>
                 <Pressable 
-                    style={styles.button} 
+                    style={[styles.button, styles.shadow]} 
                     onPress={onPress}>
-                        <Text style={[styles.buttonText, {fontWeight: "600"}]}>{props.title}</Text>
+                        <Text style={styles.buttonText}>{props.titleButton}</Text>
                 </Pressable>
-                <View style={[styles.buttonBackgroundOn, {backgroundColor: {colorButton}}]}/>
             </View>
         )
     }
@@ -53,43 +48,27 @@ const styles = StyleSheet.create({
         height: 55,
         borderWidth: 1,
         borderColor: "#372C60",
-        position: "relative",
-
+        marginBottom: 60,
 
     },
+
+    shadow: {
+        shadowColor: "#FDEBE6",
+        shadowOffset: {width: 0, height: 3},
+        shadowOpacity: 1,
+        shadowRadius: 0,
+      },
 
     buttonText: {
 
         fontFamily: "Biryani",
         fontStyle: "normal",
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 16,
         letterSpacing: 0.5,
         color: "#372C60",
         textAlign: "center",
         marginTop: 13,
-
-    },
-
-    buttonBackgroundOff:{
-      
-      width: 255,
-      height: 55,
-      backgroundColor: "#FDEBE6",
-      position: "absolute",
-      marginTop: 25,
-      marginLeft: 25,
-      zIndex: -1,
-
-    },
-
-    buttonBackgroundOn:{
-      
-      width: 255,
-      height: 55,
-      backgroundColor: "#FDEBE6",
-      position: "absolute",
-      zIndex: -1,
 
     },
 
