@@ -1,16 +1,14 @@
 
-import { StyleSheet, Text, View, Title, Button, TextInput} from "react-native";
+import { StyleSheet, Text, View, Title, Button, TextInput, ImageBackground} from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 
 
 
 export default function BirthdayScreen(props) {
   return (
-
-    //title 
-    //input 
    
     <View style={styles.container}>
+   
          <Text style={styles.titleText} >Ta Date d'Anniversaire</Text>
          <TextInput
         style={styles.input}
@@ -21,9 +19,7 @@ export default function BirthdayScreen(props) {
       color="#f194ff"
       onPress={() => props.navigation.navigate('PseudoScreen')}>
         </Button>
- 
-       
-       
+        
         
     </View>
   );
@@ -48,5 +44,5 @@ const styles = StyleSheet.create({
       margin: 12,
       borderWidth: 1,
       padding: 10,
-  }
+  },
 });
