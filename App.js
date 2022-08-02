@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import 'react-native-gesture-handler';
 
 import HomeScreen from './screens/HomeScreen';
 import EmailScreen from './screens/EmailScreen';
@@ -8,6 +8,7 @@ import PasswordScreen from './screens/PasswordScreen';
 import SignInScreen from './screens/SignInScreen';
 import PseudoScreen from './screens/PseudoScreen';
 import BirthdayScreen from './screens/BirthdayScreen';
+import searchGames from './screens/SearchGames';
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -31,7 +32,8 @@ function App(){
       <Stack.Screen name="PseudoScreen" component={PseudoScreen} />
       <Stack.Screen name="EmailScreen" component={EmailScreen} />
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
-      <Stack.Screen name="SignInScreen" component={SignInScreen} />
+      <Stack.Screen name="SignInScreen" component={SignInScreen}/>
+      <Stack.Screen name="SearchGames" component={searchGames}/>
 
     </Stack.Navigator>
   </NavigationContainer>
