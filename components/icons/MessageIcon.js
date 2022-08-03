@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View} from "react-native";
+import { TouchableOpacity, View, Image} from "react-native";
 
-function messageIcon() {
+function MessageIcon(redirection, props) {
 
     return(
 
@@ -16,4 +16,5 @@ function messageIcon() {
     )
 }
 
-export default messageIcon
+
+export default MessageIcon
