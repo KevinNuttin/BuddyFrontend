@@ -1,23 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView} from "react-native";
+import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
+  
 
-// Import du bouton confirmer qui redirect vers la page mood 
-import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
-
-
+export default function searchGames(props) {
     const [gameName, setGameName] = useState('');
     const [gameList, setGameList] = useState([]);
-
-export default function SearchGames(props) {
-
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
-
 
   //** request au Backend en post pour chercher un jeu à partir de l'input à chaque changement useEffect pour envoyer un backend le nouvel input  */
 
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
+
     useEffect(() => { 
         async function inputSearchGame() {
     await fetch('http://192.168.10.150:3000/library/games', {
@@ -29,7 +25,6 @@ export default function SearchGames(props) {
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
     var rawResponse = await fetch('http://192.168.10.150:3000/library/showgames');
     var gamesListSearch = await rawResponse.json();
-    setGameList([])
     setGameList(gamesListSearch)
     
 }
@@ -55,7 +50,7 @@ console.log("gamelist",gameList);
     <ScrollView style={{flex:1, marginTop: 50}}>
     {games}
     </ScrollView>
-  
+   {confirmer}
       </View>)
       }
 
@@ -77,4 +72,3 @@ console.log("gamelist",gameList);
          justifyContent: 'center',
         }
       });
-    
