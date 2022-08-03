@@ -9,8 +9,8 @@ import Tunnel from "../components/buttons/Tunnel"
 
 export default function Homescreen(props) {
 
-  var inscription = OffsetButton("Inscription", "SignInScreen",props)
-  var connexion = OffsetButton("connexion", "BirthdayScreen",props)
+  var inscription = OffsetButton("Inscription", "BirthdayScreen",props)
+  var connexion = OffsetButton("connexion", "SignInScreen",props)
   var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
   var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",props)
   var kevin = OffsetButton("boutton pour Kevin", "BirthdayScreen",props)

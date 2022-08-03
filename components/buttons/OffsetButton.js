@@ -15,6 +15,7 @@ function offsetButton(title , redirection, props) {
                 <TouchableOpacity 
                     style={[styles.button, styles.shadow]} 
                     onPress={() => {props.navigation.navigate(redirection);
+                        
                     }
                     }>
                         <Text style={styles.buttonText}>{title}</Text>
