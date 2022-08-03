@@ -3,6 +3,7 @@ import { StyleSheet, View, ImageBackground, Image } from 'react-native'
 
 import OffsetButton from "../components/buttons/OffsetButton"
 
+
 export default function Homescreen(props) {
 
   var inscription = OffsetButton("Inscription", "BirthdayScreen",props)
@@ -10,6 +11,8 @@ export default function Homescreen(props) {
   //var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
   var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",props)
   var kevin = OffsetButton("boutton pour Kevin", "SearchGames",props)
+  var profil = OffsetButton("profil", "ProfilScreen",props)
+
 
   return (
 
@@ -29,6 +32,7 @@ export default function Homescreen(props) {
         {/*{discord}*/}
         {matthieu}
         {kevin}
+        {profil}
 
       </View>
 
