@@ -9,10 +9,14 @@ import {
   Button,
 } from "react-native";
 
-  
+// Import du bouton confirmer qui redirect vers la page mood 
+import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 
-export default function searchGames() {
-    const [gameName, setGameName] = useState('');
+export default function SearchGames(props) {
+
+    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
+
+    const [message, setMessage] = useState('');
 
   //** request au Backend en post pour chercher un jeu à partir de l'input à chaque changement useEffect pour envoyer un backend le nouvel input  */
 
@@ -58,7 +62,7 @@ inputSearchGame();
               type="solid"
               onPress={()=> {inputSearch}}             
           />
-  
+        {confirmer}
       </View>)
       }
 
@@ -68,6 +72,7 @@ inputSearchGame();
           backgroundColor: '#fff',
           alignItems: 'center',
           justifyContent: 'center',
+          marginTop: 100, // A virer après les tests recherche de jeux
         },
       }); 
 

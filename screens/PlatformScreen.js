@@ -1,27 +1,82 @@
-import { StyleSheet, Text, View, Title, Button } from "react-native";
+import React, {useState} from "react"
+import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
-export default function PlatformScreen(props) {
-    return (
+import backIcon from "../components/icons/BackIcon"
+import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
+import Tunnel from "../components/buttons/Tunnel"
+
+function PlatformScreen(props) {
+
+  var retour = backIcon("SearchGames", props)
+  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen",props)
+  var tunnel = Tunnel("3")
+
+  return (
+
+    <ImageBackground
+      resizeMode="cover"
+      style={styles.background}
+      source={require('../assets/backgrounds/fond_buddy.png')}>
+
+      {retour}
+
       <View style={styles.container}>
-        <Text>Platform</Text>
-        
-        <Button  
-        title="Confirmer"
-        color="#f194ff"
-        onPress={() => props.navigation.navigate('LanguageScreen')}>
-          </Button>
-  
-      </View>
-      
-    );
-  }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
-  
+        <Text style={styles.text}>Sur quelle plateforme ?</Text>
+
+        {/* ICI les toggles */}
+        {confirmer}
+
+        {tunnel}
+
+      </View>
+    </ImageBackground>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+
+  background: {
+
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+  },
+
+  text: {
+
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 125,
+
+    fontWeight: "400",
+    fontSize: 26,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    textAlign: "center",
+
+  },
+
+  input: {
+    width : 200,
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 20,
+},
+
+});
+
+
+export default PlatformScreen

@@ -8,18 +8,14 @@ import PasswordScreen from './screens/PasswordScreen';
 import SignInScreen from './screens/SignInScreen';
 import PseudoScreen from './screens/PseudoScreen';
 import BirthdayScreen from './screens/BirthdayScreen';
-import searchGames from './screens/SearchGames';
-
-
-
-import DiscoverScreen from './screens/DiscoverScreen';
-import AgeScreen from './screens/AgeScreen';
-import ProfilScreen from './screens/ProfilScreen';
-import PlatformScreen from './screens/PlatformScreen';
+import SearchGames from './screens/SearchGames';
 import MoodScreen from './screens/MoodScreen';
-import MatchScreen from './screens/MatchScreen';
+import PlatformScreen from './screens/PlatformScreen';
 import LanguageScreen from './screens/LanguageScreen';
-
+import AgeScreen from './screens/AgeScreen';
+//import DiscoverScreen from './screens/DiscoverScreen';
+//import ProfilScreen from './screens/ProfilScreen';
+//import MatchScreen from './screens/MatchScreen';
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -44,17 +40,14 @@ function App(){
       <Stack.Screen name="EmailScreen" component={EmailScreen} />
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
       <Stack.Screen name="SignInScreen" component={SignInScreen}/>
-      <Stack.Screen name="SearchGames" component={searchGames}/>
-   
-
-      <Stack.Screen name="DiscoverScreen" component={DiscoverScreen} />
-      <Stack.Screen name="AgeScreen" component={AgeScreen} />
-      <Stack.Screen name="ProfilScreen" component={ProfilScreen} />
-      <Stack.Screen name="PlatformScreen" component={PlatformScreen}/>
+      <Stack.Screen name="SearchGames" component={SearchGames}/>
       <Stack.Screen name="MoodScreen" component={MoodScreen}/>
-      <Stack.Screen name="MatchScreen" component={MatchScreen} />
-      <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
-     
+      <Stack.Screen name="PlatformScreen" component={PlatformScreen}/>
+      <Stack.Screen name="LanguageScreen" component={LanguageScreen}/>
+      <Stack.Screen name="AgeScreen" component={AgeScreen}/>
+      {/*<Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
+      <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
+ <Stack.Screen name="MatchScreen" component={MatchScreen}/>*/}
 
     </Stack.Navigator>
   </NavigationContainer>
