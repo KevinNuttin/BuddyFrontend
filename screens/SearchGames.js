@@ -1,68 +1,61 @@
-import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  Button,
-} from "react-native";
+import React, {useState, useEffect} from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView} from "react-native";
 
 // Import du bouton confirmer qui redirect vers la page mood 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
+
+
+    const [gameName, setGameName] = useState('');
+    const [gameList, setGameList] = useState([]);
 
 export default function SearchGames(props) {
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
 
-    const [message, setMessage] = useState('');
 
   //** request au Backend en post pour chercher un jeu à partir de l'input à chaque changement useEffect pour envoyer un backend le nouvel input  */
 
      // TODO: ajouter un useEffect qui appel la fonction lorsqu'il y a un changement de l'input 
     // TODO: ajouter dynamiquement le résultat de l'input au body de la request
     useEffect(() => { 
-        console.log("coucou");
         async function inputSearchGame() {
-    await fetch('http://172.20.10.3:3000/library/games', {
+    await fetch('http://192.168.10.150:3000/library/games', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `gameName=`+{gameName}
+        body: `gameName=${gameName}`
     });
 
     //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
-
+    var rawResponse = await fetch('http://192.168.10.150:3000/library/showgames');
+    var gamesListSearch = await rawResponse.json();
+    setGameList([])
+    setGameList(gamesListSearch)
+    
 }
 inputSearchGame();
       }, [gameName]);
-
-      async function inputSearch() {
-        await fetch('http://172.20.10.3:3000/library/games', {
-            method: 'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: 'gameName=Tomb'
-        });
-        var rawResponse = await fetch('http://localhost:3000/library/games');
-         var gamesListSearch = await rawResponse.json();
-        console.log(gamesListSearch);
-    }
+      
+      var games = gameList.map((name, i) => {
+        return(
+            <Text key={i}>
+                {name}
+            </Text>
+        )
+      })
+console.log("gamelist",gameList);
 
     return (<View style={styles.container}>
-        <Text>SearchGames</Text>
         <StatusBar style="auto" />
-        <TextInput  
+        <TextInput  style={styles.input}
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
         value={gameName}>
     </TextInput>
-    <Button 
-              title="Send"
-              buttonStyle={{backgroundColor: "#eb4d4b"}}
-              type="solid"
-              onPress={()=> {inputSearch}}             
-          />
-        {confirmer}
+    <ScrollView style={{flex:1, marginTop: 50}}>
+    {games}
+    </ScrollView>
+  
       </View>)
       }
 
@@ -74,7 +67,14 @@ inputSearchGame();
           justifyContent: 'center',
           marginTop: 100, // A virer après les tests recherche de jeux
         },
-      }); 
-
-
-
+         input: {
+         backgroundColor: '#fff',
+         alignItems: 'center',
+         borderColor: '#f194ff',
+         borderWidth: 2,
+         width: 250,
+         height: 40,
+         justifyContent: 'center',
+        }
+      });
+    
