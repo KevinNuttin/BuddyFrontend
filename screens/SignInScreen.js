@@ -9,7 +9,8 @@ import Tunnel from "../components/buttons/Tunnel"
 function SignInScreen(props) {
 
     // En attendant le composant Input
-    const [text, setText] = useState('');
+    const [mail, setMail] = useState('');
+    const [mdp, setMdp] = useState('');
 
     //var PseudoInput = Input("Username")
     //var PasswordInput = Input("Password")
@@ -17,9 +18,17 @@ function SignInScreen(props) {
     var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
     var tunnel = Tunnel(5)
 
-    function comfirmation(redirection){
-    
-      props.navigation.navigate(redirection); 
+    async function comfirmation(redirection){
+      if(mail != null || mdp != null){
+        const data = await fetch('http://172.20.10.3:3000/users/sign-in', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          body: `&mail=${mail}&password=${mdp}`
+        })
+        const body = await data.json()
+        console.log(body);
+      if(body.result){
+      props.navigation.navigate(redirection);} }
     }
 
   return (
@@ -40,15 +49,15 @@ function SignInScreen(props) {
         {/* A remplacer par le composant Input*/}
         <TextInput
         style={styles.input}
-                onChangeText={(value) => setText(value)}
-                value={text}
+                onChangeText={(value) => setMail(value)}
+                value={mail}
                 keyboardType="default"
         />
 
         <TextInput
         style={styles.input}
-                onChangeText={(value) => setText(value)}
-                value={text}
+                onChangeText={(value) => setMdp(value)}
+                value={mdp}
                 keyboardType="default"
                 secureTextEntry={true}
         />
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
 },
 header: {
 
-  marginRight : 300,
+  marginRight : 30,
   marginTop : 30
   
 },

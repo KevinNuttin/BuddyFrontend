@@ -36,7 +36,7 @@ function connexion(redirection){
         {connexion}
         {matthieu}
         {kevin}
-        {profil}
+        
 
       </View>
 
