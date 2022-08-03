@@ -14,7 +14,7 @@ function BirthdayScreen(props) {
   //var emailInput = Input("Email")
   var retour = backIcon("PseudoScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "PasswordScreen",props)
-  var tunnel = Tunnel("4")
+  var tunnel = Tunnel(4)
 
   return (
 
@@ -39,7 +39,7 @@ function BirthdayScreen(props) {
         {/*{emailInput}*/}
         {confirmer}
 
-        <Tunnel/>
+        {tunnel}
 
           
       </View>

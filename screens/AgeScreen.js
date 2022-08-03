@@ -9,7 +9,7 @@ function AgeScreen(props) {
 
   var retour = backIcon("SearchGames", props)
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen",props)
-  var tunnel = Tunnel("5")
+  var tunnel = Tunnel(5)
 
   return (
 
