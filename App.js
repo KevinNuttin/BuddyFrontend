@@ -47,7 +47,7 @@ function App(){
       <Stack.Screen name="AgeScreen" component={AgeScreen}/>
       <Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
       <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
- <Stack.Screen name="MatchScreen" component={MatchScreen}/>
+      <Stack.Screen name="MatchScreen" component={MatchScreen}/>
 
     </Stack.Navigator>
   </NavigationContainer>
