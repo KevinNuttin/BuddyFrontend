@@ -13,9 +13,9 @@ import MoodScreen from './screens/MoodScreen';
 import PlatformScreen from './screens/PlatformScreen';
 import LanguageScreen from './screens/LanguageScreen';
 import AgeScreen from './screens/AgeScreen';
-//import DiscoverScreen from './screens/DiscoverScreen';
-//import ProfilScreen from './screens/ProfilScreen';
-//import MatchScreen from './screens/MatchScreen';
+import DiscoverScreen from './screens/DiscoverScreen';
+import ProfilScreen from './screens/ProfilScreen';
+import MatchScreen from './screens/MatchScreen';
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -55,9 +55,9 @@ function App(){
       <Stack.Screen name="PlatformScreen" component={PlatformScreen}/>
       <Stack.Screen name="LanguageScreen" component={LanguageScreen}/>
       <Stack.Screen name="AgeScreen" component={AgeScreen}/>
-      {/*<Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
+      <Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
       <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
- <Stack.Screen name="MatchScreen" component={MatchScreen}/>*/}
+ <Stack.Screen name="MatchScreen" component={MatchScreen}/>
 
     </Stack.Navigator>
   </NavigationContainer></Provider>

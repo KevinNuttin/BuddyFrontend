@@ -3,6 +3,7 @@ import { StyleSheet, View, ImageBackground, Image,TouchableOpacity } from 'react
 
 import OffsetButton from "../components/buttons/OffsetButton"
 
+
 export default function Homescreen(props) {
 
   var inscription = OffsetButton("Inscription", "BirthdayScreen",inscription)
@@ -33,9 +34,9 @@ function connexion(redirection){
       <View style={styles.container}>
         {inscription}
         {connexion}
-        {/*{discord}*/}
         {matthieu}
         {kevin}
+        {profil}
 
       </View>
 
