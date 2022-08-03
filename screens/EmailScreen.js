@@ -6,25 +6,33 @@ import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
+import { connect } from 'react-redux';
+
 function BirthdayScreen(props) {
 
+
   // En attendant le composant Input
-  const [text, setText] = useState('');
+  const [text, setText] = useState(props.user.mail);
 
   //var emailInput = Input("Email")
   var retour = backIcon("PseudoScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "PasswordScreen",props)
+  var confirmer = OffsetMiniButton("Confirmer", "PasswordScreen",comfirmation)
   var tunnel = Tunnel(4)
 
+  function comfirmation(redirection){
+    if(text != null){
+    props.onConfirmer(text)
+    props.navigation.navigate(redirection); }
+  }
   return (
 
     <ImageBackground
       resizeMode="cover"
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
-
+       <View style={styles.header}>
       {retour}
-
+      </View>
       <View style={styles.container}>
 
         <Text style={styles.text}>Ton Email</Text>
@@ -88,7 +96,31 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
 },
+header: {
+
+  marginRight : 300,
+  marginTop : 30
+  
+},
 
 });
 
-export default BirthdayScreen
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onConfirmer: function (mail) {
+      dispatch({ type: 'addMail', mail : mail  })
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return { user : state }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BirthdayScreen);
+

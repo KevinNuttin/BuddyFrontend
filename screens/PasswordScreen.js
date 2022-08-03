@@ -6,15 +6,36 @@ import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
-function BirthdayScreen(props) {
+import { connect } from 'react-redux';
+
+
+function PasswordScreen(props) {
+
+
 
   // En attendant le composant Input
-  const [text, setText] = useState('');
+  const [text, setText] = useState(props.user.mdp);
 
   //var passwordInput = Input("password")
   var retour = backIcon("EmailScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "SearchGames",props)
+  var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
   var tunnel = Tunnel(5)
+
+  async function comfirmation(redirection){
+    if(text != null){
+      var birthday = new Date("2015-03-26");
+      const data = await fetch('http://172.20.10.3:3000/users/sign-up', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `pseudo=${props.user.pseudo}&mail=${props.user.mail}&password=${text}&birthday=${props.user.age}&min=${18}&max=${35}`
+      })
+      const body = await data.json()
+      console.log(body);
+  
+    props.onConfirmer(text,)
+    if(body.result){
+    props.navigation.navigate(redirection);} }
+  }
 
   return (
 
@@ -23,7 +44,9 @@ function BirthdayScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
+<View style={styles.header}>
       {retour}
+      </View>
 
       <View style={styles.container}>
 
@@ -89,7 +112,31 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
 },
+header: {
+
+  marginRight : 300,
+  marginTop : 30
+  
+},
 
 });
 
-export default BirthdayScreen
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onConfirmer: function (password) {
+      dispatch({ type: 'addMdp', mdp : password  })
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return { user : state }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PasswordScreen);
+
+
