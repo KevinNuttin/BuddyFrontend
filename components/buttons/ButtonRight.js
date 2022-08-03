@@ -1,16 +1,27 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function OffsetButton(title , redirection, props) {
+function buttonLeft(title, props) {
+
+    const [isPress, setIsPress] = useState(false)
+    const onPress = () => setIsPress(true)
+    const colorButton = ""
+
+    if(!isPress){
+        colorButton = "#DDABFE"
+    } else {
+        colorButton = ""
+    }
 
     return(
         <View style={styles.container}>
             <TouchableOpacity 
-                style={styles.button} 
-                onPress={() => {props.navigation.navigate(redirection)}}>
+                style={[styles.button, {backgroudColor: {colorButton}} ]} 
+                onPress={onPress}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
         </View>
+
     )
 }
 
@@ -21,13 +32,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        flexWrap: "wrap",
 
     },
 
     button: {
 
-        width: 225,
-        height: 55,
+        width: 145,
+        height: 40,
         borderWidth: 1,
         borderColor: "#372C60",
         marginBottom: 60,
@@ -41,10 +53,10 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
         color: "#372C60",
         textAlign: "center",
-        marginTop: 13,
+        marginTop: 6,
 
     },
 
 })
 
-export default OffsetButton
+export default buttonLeft
