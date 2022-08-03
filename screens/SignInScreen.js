@@ -14,8 +14,13 @@ function SignInScreen(props) {
     //var PseudoInput = Input("Username")
     //var PasswordInput = Input("Password")
     var retour = backIcon("HomeScreen", props)
-    var confirmer = OffsetMiniButton("Confirmer", "SearchGames",props)
-    var tunnel = Tunnel("1")
+    var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
+    var tunnel = Tunnel(5)
+
+    function comfirmation(redirection){
+    
+      props.navigation.navigate(redirection); 
+    }
 
   return (
 
@@ -24,7 +29,9 @@ function SignInScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
+<View style={styles.header}>
       {retour}
+      </View>
 
       <View style={styles.container}>
 
@@ -97,6 +104,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginBottom: 20,
+},
+header: {
+
+  marginRight : 300,
+  marginTop : 30
+  
 },
 
 });

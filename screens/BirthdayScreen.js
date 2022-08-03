@@ -1,20 +1,32 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import { StyleSheet, Text, View, ImageBackground, TextInput,Button} from "react-native"
 
 import backIcon from "../components/icons/BackIcon"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import { connect } from 'react-redux';
+
 function BirthdayScreen(props) {
 
+
   // En attendant le composant Input
-  const [text, setText] = useState('');
+  const [text, setText] = useState(props.user.age);
+
 
   //var birthdayInput = Input("Âge")
   var retour = backIcon("HomeScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "PseudoScreen",props)
-  var tunnel = Tunnel("2")
+  var confirmer = OffsetMiniButton("Confirmer", "PseudoScreen",comfirmation)
+  var tunnel = Tunnel(1)
+
+  function comfirmation(redirection){
+    if(text != null){
+    props.onConfirmer(text)
+    props.navigation.navigate(redirection); }
+  }
 
   return (
 
@@ -38,11 +50,16 @@ function BirthdayScreen(props) {
                 keyboardType="phone-pad"
         />
         {/*{birthdayInput}*/}
+        
         {confirmer}
+      
+        
 
         {tunnel}
 
-      </View>
+    
+  
+    </View>
     </ImageBackground>
   );
 }
@@ -50,7 +67,9 @@ function BirthdayScreen(props) {
 const styles = StyleSheet.create({
 
   header: {
-    
+
+    marginRight : 300,
+    marginTop : 30
     
   },
 
@@ -96,5 +115,20 @@ const styles = StyleSheet.create({
 
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onConfirmer: function (age) {
+      dispatch({ type: 'addAge', age : age  })
+    }
+  }
+}
 
-export default BirthdayScreen
+function mapStateToProps(state) {
+  return { user : state }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BirthdayScreen);
+

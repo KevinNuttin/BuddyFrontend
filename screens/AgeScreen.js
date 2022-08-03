@@ -25,7 +25,9 @@ function AgeScreen(props) {
         <Text style={styles.text}>Tranche d'âge</Text>
 
         {/* ICI les toggles */}
+        
         {confirmer}
+       
 
         {tunnel}
 
@@ -74,6 +76,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginBottom: 20,
+},
+header: {
+
+  marginRight : 300,
+  marginTop : 30
+  
 },
 
 });

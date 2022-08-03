@@ -1,15 +1,23 @@
 import React from "react"
-import { StyleSheet, View, ImageBackground, Image } from 'react-native'
+import { StyleSheet, View, ImageBackground, Image,TouchableOpacity } from 'react-native'
 
 import OffsetButton from "../components/buttons/OffsetButton"
 
 export default function Homescreen(props) {
 
-  var inscription = OffsetButton("Inscription", "BirthdayScreen",props)
-  var connexion = OffsetButton("connexion", "SignInScreen",props)
+  var inscription = OffsetButton("Inscription", "BirthdayScreen",inscription)
+  var connexion = OffsetButton("connexion", "SignInScreen",connexion)
   //var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
-  var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",props)
-  var kevin = OffsetButton("boutton pour Kevin", "SearchGames",props)
+  var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",)
+  var kevin = OffsetButton("boutton pour Kevin", "SearchGames",)
+
+
+function inscription(redirection){
+  props.navigation.navigate(redirection); 
+}
+function connexion(redirection){
+  props.navigation.navigate(redirection); 
+}
 
   return (
 
@@ -23,7 +31,6 @@ export default function Homescreen(props) {
         source={require('../assets/logo/logo_buddy.png')}/>
 
       <View style={styles.container}>
-
         {inscription}
         {connexion}
         {/*{discord}*/}
@@ -62,6 +69,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain', 
     width: "50%",
 
-  }
+  },button: {
+
+    flex: 1,
+    
+   
+    backgroundColor: "red"
+  },
 
 });

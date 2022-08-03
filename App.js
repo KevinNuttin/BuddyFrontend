@@ -22,7 +22,16 @@ import { StyleSheet, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import age from './reducers/age';
+import pseudo from './reducers/pseudo';
+import mail from './reducers/mail';
+import mdp from './reducers/password';
 
+
+import {Provider} from 'react-redux';
+import {createStore, combineReducers}  from 'redux';
+
+const store = createStore(combineReducers({ age, pseudo, mail, mdp}));
 
 const Stack = createStackNavigator();
 
@@ -32,6 +41,7 @@ function App(){
 
  
  return (
+  <Provider store={store}>
   <NavigationContainer>
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -50,7 +60,7 @@ function App(){
  <Stack.Screen name="MatchScreen" component={MatchScreen}/>*/}
 
     </Stack.Navigator>
-  </NavigationContainer>
+  </NavigationContainer></Provider>
 );
  }
 
