@@ -1,6 +1,8 @@
 import React from "react"
 import { StyleSheet, Text, View, ImageBackground} from "react-native"
 
+
+import Header2 from "../components/cards/Header2"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
 
@@ -15,6 +17,8 @@ function MoodScreen(props) {
       resizeMode="cover"
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
+
+      <Header2/>
 
       <View style={styles.container}>
 
@@ -33,6 +37,12 @@ function MoodScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
+  background: {
+
+    height: "100%",
+    
+  },
 
   container: {
 

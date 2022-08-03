@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
-import backIcon from "../components/icons/BackIcon"
+import Header from "../components/cards/Header"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
@@ -11,14 +11,12 @@ import { connect } from 'react-redux';
 
 function PasswordScreen(props) {
 
-
-
   // En attendant le composant Input
   const [text, setText] = useState(props.user.mdp);
 
   //var passwordInput = Input("password")
-  var retour = backIcon("EmailScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
+  var header = Header("EmailScreen", props)
+  var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
   var tunnel = Tunnel(5)
 
   async function comfirmation(redirection){
@@ -44,9 +42,7 @@ function PasswordScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
-<View style={styles.header}>
-      {retour}
-      </View>
+      {header}
 
       <View style={styles.container}>
 
@@ -83,9 +79,7 @@ const styles = StyleSheet.create({
 
   background: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: "100%",
 
   },
 
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 125,
+    marginTop: 80,
 
     fontWeight: "400",
     fontSize: 26,
@@ -105,18 +99,13 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    
     width : 200,
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 20,
-},
-header: {
-
-  marginRight : 300,
-  marginTop : 30
-  
+    marginBottom: 40,
 },
 
 });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput } from 'react-native';
 
-import backIcon from "../components/icons/BackIcon"
+import Header from "../components/cards/Header"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
@@ -14,7 +14,7 @@ function SignInScreen(props) {
 
     //var PseudoInput = Input("Username")
     //var PasswordInput = Input("Password")
-    var retour = backIcon("HomeScreen", props)
+    var header = Header("HomeScreen", props)
     var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
     var tunnel = Tunnel(5)
 
@@ -38,9 +38,7 @@ function SignInScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
-<View style={styles.header}>
-      {retour}
-      </View>
+      {header}
 
       <View style={styles.container}>
 
@@ -85,9 +83,7 @@ const styles = StyleSheet.create({
 
   background: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: "100%",
 
   },
 
@@ -96,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 125,
+    marginTop: 80,
 
     fontWeight: "400",
     fontSize: 26,
@@ -112,13 +108,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 20,
-},
-header: {
-
-  marginRight : 30,
-  marginTop : 30
-  
+    marginBottom: 10,
 },
 
 });

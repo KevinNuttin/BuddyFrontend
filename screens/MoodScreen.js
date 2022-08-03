@@ -1,14 +1,14 @@
 import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
-import backIcon from "../components/icons/BackIcon"
+import Header from "../components/cards/Header"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function MoodScreen(props) {
 
-  var retour = backIcon("SearchGames", props)
-  var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen",props)
+  var header = Header("SearchGames", props)
+  var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", props)
   var tunnel = Tunnel("2")
 
   return (
@@ -18,7 +18,7 @@ function MoodScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
-      {retour}
+      {header}
 
       <View style={styles.container}>
 
@@ -46,9 +46,7 @@ const styles = StyleSheet.create({
 
   background: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: "100%",
 
   },
 
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 125,
+    marginTop: 80,
 
     fontWeight: "400",
     fontSize: 26,
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 40,
 },
 
 });
