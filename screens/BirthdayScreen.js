@@ -23,8 +23,9 @@ function BirthdayScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
+        <View style={styles.header}>
       {retour}
-
+      </View>
       <View style={styles.container}>
 
         <Text style={styles.text}>Ta date de naissance</Text>
@@ -47,6 +48,11 @@ function BirthdayScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
+  header: {
+    
+    
+  },
 
   container: {
 

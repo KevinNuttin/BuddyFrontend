@@ -10,11 +10,11 @@ import {
 } from "react-native";
 
 // Import du bouton confirmer qui redirect vers la page mood 
-import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
+//import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 
 export default function SearchGames(props) {
 
-    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
+    //var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
 
     const [message, setMessage] = useState('');
 
@@ -62,7 +62,6 @@ inputSearchGame();
               type="solid"
               onPress={()=> {inputSearch}}             
           />
-        {confirmer}
       </View>)
       }
 
