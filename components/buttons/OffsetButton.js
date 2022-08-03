@@ -1,13 +1,15 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function OffsetButton(title , redirection, props) {
+function OffsetButton(title , redirection,onPress) {
 
     return(
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.button} 
-                onPress={() => {props.navigation.navigate(redirection)}}>
+                onPress={() => {
+                    onPress(redirection)
+                }}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
         </View>
