@@ -5,7 +5,7 @@ function backIcon(redirection, props) {
 
     return(
 
-        <View style={{marginTop: 30, marginLeft: 30}}>
+        <View style={{marginTop: 60, marginRight: "75%"}}>
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection)}}>
                     <Image 

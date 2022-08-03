@@ -14,7 +14,7 @@ function PseudoScreen(props) {
   //var pseudoInput = Input("Username")
   var retour = backIcon("BirthdayScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "EmailScreen",props)
-  var tunnel = Tunnel(2)
+  var tunnel = Tunnel("3")
 
   return (
 
