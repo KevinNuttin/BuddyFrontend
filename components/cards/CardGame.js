@@ -1,67 +1,92 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Image, View} from "react-native";
+import React, {useState, useEffect} from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable} from "react-native";
 
-function gameCard(pictureGame) {
 
-    const [isPress, setIsPress] = useState(false)
-    const onPress = () => setIsPress(true)
 
-    if(isPress === false) {
-        return(
-            <View style={styles.container}>
-                <TouchableOpacity 
-                    style={styles.picture}
-                    onPress={onPress}>
-                    <Image source={pictureGame}/>
-                </TouchableOpacity>
-            </View>
+function CardGame(props) {
 
-        )
-    } else {
-        return(
-            <View style={styles.container}>
-                <TouchableOpacity 
-                    style={styles.pictureSelected}
-                    onPress={onPress}>
-                    <Image source={pictureGame}/>
-                </TouchableOpacity>
-            </View>
+const [gameName, setGameName] = useState('');
+const [gameSelected, setGameSelected] = useState(false);
 
-        )
+var SelectColor ={...styles.GameCard, borderWidth: 2, borderColor: '#f194ff'}
+
+  function GameSelectColor(name, img) {
+    console.log("click");
+    if(props.GameLike == false) {
+    props.handleClickAddGameParent(name, img)
+    //TODO ajouter la route pour ajouter un jeux en DB
+    setGameSelected(true)
+    } else{
+        props.handleClickDeleteGameParent(name, img)
+        //TODO ajouter la route pour supprimer la clé étrangère du jeux en DB
+    setGameSelected(false)
     }
 }
 
+if(props.GameLike){
+    SelectColor ={...styles.GameCard, borderWidth: 2, borderColor: "#FFA588"}
+}else{
+    SelectColor ={...styles.GameCard}
+}
+
+
+    return(
+        <Pressable onPress={() => GameSelectColor(props.name,props.img)} >
+        <View style= {SelectColor}>
+        <Text style={styles.GameName}>{props.name}</Text>
+        <Image source={{ uri: `${props.img}`}} style={styles.image }></Image>
+        </View>
+        </Pressable>
+        )   
+}
+
 const styles = StyleSheet.create({
-    
     container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 100, // A virer après les tests recherche de jeux
+    },
+     input: {
+     backgroundColor: '#fff',
+     alignItems: 'center',
+     borderColor: '#f194ff',
+     borderWidth: 2,
+     width: 250,
+     height: 40,
+     justifyContent: 'center',
+    },
+    GameName:{
+        paddingLeft: 15, 
+        alignItems: 'center',
+        marginTop:15,
+        marginBottom: 15, 
+        paddingBottom:15,
+        fontSize: 16,
+        height: 60,
+        borderBottomColor:'#f194ff',
+        borderBottomWidth:2,
+    },
+    image: {
+        width: 175,
+        height: 170,
+        
+      },
+      GameCard: { 
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 180,
+        flexWrap: 'wrap',
+        margin: 4,
+        borderRadius: 5,
+      },
+      CardContainer: { 
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+      }
+  });
 
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-        marginRight: 10,
-        marginBottom: 10,
-
-},
-
-    picture: {
-
-        width: 116,
-        height: 124,
-        borderWidth: 1,
-        borderColor: "#372C60",
-
-},
-
-    pictureSelected: {
-
-        width: 116,
-        height: 124,
-        borderWidth: 4,
-        borderColor: "#FFA588",
-
-},
-
-})
-
-export default gameCard
+  export default CardGame;
