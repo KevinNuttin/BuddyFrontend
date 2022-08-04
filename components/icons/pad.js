@@ -1,15 +1,15 @@
 import React from "react";
 import { Image } from "react-native";
 
-function UserIcon() {
+function PadIcon() {
 
     return(
 
         <Image 
         style={{width: 25}}
-        source={require('../../assets/icons/user_iconbuddy.png')}/>
+        source={require('../../assets/icons/pad_iconbuddy.png')}/>
 
     )
 }
 
-export default UserIcon
+export default PadIcon

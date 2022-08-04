@@ -2,14 +2,18 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
+import Toggle from "../components/buttons/Toggle"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function LanguageScreen(props) {
 
   var header = Header("LanguageScreen", props)
+  var toggle1 = Toggle("Français", "English")
+  var toggle2 = Toggle("Deutsch", "Espagnol")
+  var toggle3 = Toggle("조선말", "日本語 ")
   var confirmer = OffsetMiniButton("Confirmer", "SearchGames", goGames)
-  var tunnel = Tunnel("4")
+  var tunnel = Tunnel(5)
 
   function goGames(redirection){
     props.navigation.navigate(redirection); 
@@ -28,7 +32,10 @@ function LanguageScreen(props) {
 
         <Text style={styles.text}>On communique en...</Text>
 
-        {/* ICI les toggles */}
+        {toggle1}
+        {toggle2}
+        {toggle3}
+        
         {confirmer}
 
         {tunnel}

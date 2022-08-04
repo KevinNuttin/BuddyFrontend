@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image, View} from "react-native";
+import { StyleSheet, TouchableOpacity, View} from "react-native";
 
 import BackIcon from "../icons/BackIcon";
 
