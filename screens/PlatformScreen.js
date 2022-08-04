@@ -2,14 +2,18 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
+import Toggle from "../components/buttons/Toggle"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
+  var toggle1 = Toggle("PC", "Xbox")
+  var toggle2 = Toggle("PS", "Switch")
+  var toggle3 = Toggle("Mobile", "Retro")
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
-  var tunnel = Tunnel("3")
+  var tunnel = Tunnel(4)
 
   function goLanguage(redirection){
     props.navigation.navigate(redirection); 
@@ -28,7 +32,10 @@ function PlatformScreen(props) {
 
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
-        {/* ICI les toggles */}
+        {toggle1}
+        {toggle2}
+        {toggle3}
+
         {confirmer}
 
         {tunnel}
@@ -68,15 +75,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
 
   },
-
-  input: {
-    width : 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 40,
-},
 
 });
 

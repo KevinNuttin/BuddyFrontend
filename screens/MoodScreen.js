@@ -9,9 +9,12 @@ import Tunnel from "../components/buttons/Tunnel"
 function MoodScreen(props) {
 
   var header = Header("SearchGames", props)
-  //var toggle = Toggle("Chill", "TryHarder", props)
+  var toggle1 = Toggle("Chill", "TryHarder")
+  var toggle2 = Toggle("Normal", "Compétitif")
+  var toggle3 = Toggle("Zen", "Rageux")
+  var toggle4 = Toggle("Civilisé", "Toxique")
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
-  var tunnel = Tunnel(2)
+  var tunnel = Tunnel(3)
 
   function goPlatform(redirection){
     props.navigation.navigate(redirection); 
@@ -30,7 +33,11 @@ function MoodScreen(props) {
 
         <Text style={styles.text}>Ton mood</Text>
 
-      
+            {toggle1}
+            {toggle2}
+            {toggle3}
+            {toggle4}
+
         {confirmer}
 
         {tunnel}
@@ -71,14 +78,7 @@ const styles = StyleSheet.create({
 
   },
 
-  input: {
-    width : 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 40,
-},
+
 
 });
 
