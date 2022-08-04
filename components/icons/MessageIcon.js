@@ -1,20 +1,15 @@
-import React, { useState } from "react";
-import { TouchableOpacity, View, Image} from "react-native";
+import React from "react";
+import { Image } from "react-native";
 
-function MessageIcon(redirection, props) {
+function MessageIcon() {
 
     return(
 
-        <View style={{marginTop: 60, marginLeft: "75%"}}>
-            <TouchableOpacity  
-                onPress={() => {props.navigation.navigate(redirection)}}>
-                    <Image 
-                    style={{width: 25}}
-                    source={require('../../assets/icons/message_iconbuddy.png')}/>
-            </TouchableOpacity>
-        </View>
+        <Image 
+        style={{width: 25}}
+        source={require('../../assets/icons/back_iconbuddy.png')}/>
+
     )
 }
-
 
 export default MessageIcon

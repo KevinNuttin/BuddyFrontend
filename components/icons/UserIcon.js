@@ -1,19 +1,15 @@
 import React from "react";
-import { TouchableOpacity, View} from "react-native";
+import { Image } from "react-native";
 
-function userIcon() {
+function UserIcon() {
 
     return(
 
-        <View style={{marginTop: 60, marginRight: "75%"}}>
-            <TouchableOpacity  
-                onPress={() => {props.navigation.navigate(redirection)}}>
-                    <Image 
-                    style={{width: 25}}
-                    source={require('../../assets/icons/user_iconbuddy.png')}/>
-            </TouchableOpacity>
-        </View>
+        <Image 
+        style={{width: 25}}
+        source={require('../../assets/icons/back_iconbuddy.png')}/>
+
     )
 }
 
-export default userIcon
+export default UserIcon
