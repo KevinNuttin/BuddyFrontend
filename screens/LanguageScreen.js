@@ -8,8 +8,12 @@ import Tunnel from "../components/buttons/Tunnel"
 function LanguageScreen(props) {
 
   var header = Header("LanguageScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "AgeScreen",props)
+  var confirmer = OffsetMiniButton("Confirmer", "SearchGames", goGames)
   var tunnel = Tunnel("4")
+
+  function goGames(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
 

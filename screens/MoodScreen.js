@@ -9,9 +9,13 @@ import Tunnel from "../components/buttons/Tunnel"
 function MoodScreen(props) {
 
   var header = Header("SearchGames", props)
-  var toggle = Toggle("Chill", "TryHarder", props)
-  var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", props)
-  var tunnel = Tunnel("2")
+  //var toggle = Toggle("Chill", "TryHarder", props)
+  var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
+  var tunnel = Tunnel(2)
+
+  function goPlatform(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
 
@@ -26,7 +30,7 @@ function MoodScreen(props) {
 
         <Text style={styles.text}>Ton mood</Text>
 
-        {toggle}
+      
         {confirmer}
 
         {tunnel}

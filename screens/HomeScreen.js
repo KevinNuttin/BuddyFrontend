@@ -6,17 +6,20 @@ import OffsetButton from "../components/buttons/OffsetButton"
 
 export default function Homescreen(props) {
 
-  var inscription = OffsetButton("Inscription", "BirthdayScreen",inscription)
-  var connexion = OffsetButton("Connexion", "MoodScreen",connexion) //SignInScreen
+  var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
+  var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
   //var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
   var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",)
-  var kevin = OffsetButton("boutton pour Kevin", "SearchGames",)
+  var kevin = OffsetButton("boutton pour Kevin", "SearchGames", searchgame)
 
 
 function inscription(redirection){
   props.navigation.navigate(redirection); 
 }
 function connexion(redirection){
+  props.navigation.navigate(redirection); 
+}
+function searchgame(redirection){
   props.navigation.navigate(redirection); 
 }
 
