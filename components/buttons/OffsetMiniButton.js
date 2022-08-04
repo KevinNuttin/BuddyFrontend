@@ -4,24 +4,22 @@ import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 function OffsetMiniButton(title, redirection, onPress) {
 
     return(
-        <View style={styles.container}>
+
+        <View>
             <TouchableOpacity 
                 style={styles.button} 
-                onPress={() => {onPress(redirection)}}>
+                onPress={() => {
+                    onPress(redirection)
+                }}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
+            
+            <View style={styles.rectangle}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    
-    container: {
-
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
 
     button: {
 
@@ -29,8 +27,8 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth: 1,
         borderColor: "#372C60",
-        marginBottom: 60,
-
+        padding: 6,
+        zIndex: 100,
     },
 
     buttonText: {
@@ -40,9 +38,18 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
         color: "#372C60",
         textAlign: "center",
-        marginTop: 7,
+        zIndex: 50,
 
     },
+
+    rectangle: {
+
+        width: 135,
+        height: 40,
+        backgroundColor: "#EACBFF",
+        top: -35,
+        left: 5,
+    }
 
 })
 

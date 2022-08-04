@@ -17,7 +17,7 @@ function LanguageScreen(props) {
   var ES = ButtonRight("Espagnol")
   var JP = ButtonRight("日本語")
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
-  var tunnel = Tunnel(5)
+  var tunnel = Tunnel(4)
 
   function goGames(redirection){
     props.navigation.navigate(redirection); 
@@ -36,9 +36,11 @@ function LanguageScreen(props) {
 
         <Text style={styles.text}>On communique en...</Text>
 
-        {FR}{EN}
-        {DE}{ES}
-        {CO}{JP}
+          <View style={styles.buttons}>
+            {FR}{EN}
+            {DE}{ES}
+            {CO}{JP}
+          </View>
         
         {confirmer}
 
@@ -54,15 +56,14 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
+    flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 
   background: {
 
     height: "100%",
-
   },
 
   text: {
@@ -77,17 +78,19 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
-  input: {
-    width : 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 40,
-},
+  buttons: {
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexWrap: "wrap",
+    width: "90%",
+    marginTop: -10,
+    marginBottom: 250,
+  }
 
 });
 

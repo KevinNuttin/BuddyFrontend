@@ -9,9 +9,7 @@ import ProfilPicture from "../components/cards/ProfilPicture"
 
 function MoodScreen(props) {
 
-  //var header = Header()
-  //var message = OffsetMiniButton("Message", "DiscoverScreen") // redirection à definir
-  var header = Header2("swipe", "DiscoverScreen", goDiscover)
+  var header = Header2(props)
   var message = OffsetMiniButton("Message", "DiscoverScreen", goDiscover)
   var swipe = OffsetMiniButton("swipe", "DiscoverScreen", goDiscover)
 
@@ -35,14 +33,11 @@ function MoodScreen(props) {
         {ProfilPicture()}
         </View>
 
-
         <Text style={styles.text1}>I'ts a MATCH !</Text>
-        <Text style={styles.text2}>With Sophie_Fonsec</Text>
-
+        <Text style={styles.text2}>With Sophie_Fonsec{"\n\n\n"}╰(*°▽°*)╯</Text>
 
         {message}
         {swipe}
-
 
       </View>
     </ImageBackground>
@@ -54,7 +49,6 @@ const styles = StyleSheet.create({
   background: {
 
     height: "100%",
-    
   },
 
   container: {
@@ -62,30 +56,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-
-  },
-
-  background: {
-
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
   },
 
   profils: {
 
     flexDirection: "row",
-
+    marginTop: -40,
+    marginBottom: -60,
   },
 
   text1: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
-    fontWeight: "Bold",
+    fontWeight: "800",
     fontSize: 36,
     letterSpacing: 0.5,
     color: "#372C60",
@@ -95,15 +77,12 @@ const styles = StyleSheet.create({
 
   text2: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
-    fontWeight: "300",
+    fontWeight: "400",
     fontSize: 18,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
+    marginBottom: 80,
 
   },
 

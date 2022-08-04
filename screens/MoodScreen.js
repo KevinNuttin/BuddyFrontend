@@ -14,7 +14,7 @@ function MoodScreen(props) {
   var toggle3 = Toggle("Zen", "Rageux")
   var toggle4 = Toggle("Civilisé", "Toxique")
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
-  var tunnel = Tunnel(3)
+  var tunnel = Tunnel(2)
 
   function goPlatform(redirection){
     props.navigation.navigate(redirection); 
@@ -33,10 +33,12 @@ function MoodScreen(props) {
 
         <Text style={styles.text}>Ton mood</Text>
 
-            {toggle1}
-            {toggle2}
-            {toggle3}
-            {toggle4}
+            <View style={styles.buttons}>
+              {toggle1}
+              {toggle2}
+              {toggle3}
+              {toggle4}
+            </View>
 
         {confirmer}
 
@@ -51,34 +53,36 @@ function MoodScreen(props) {
 
 const styles = StyleSheet.create({
 
-  container: {
-
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-
   background: {
 
     height: "100%",
+  },
 
+  container: {
+
+    flex: 1,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   text: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 80,
+    marginTop: 60,
+    marginBottom: 60,
 
     fontWeight: "400",
     fontSize: 26,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
+
+  buttons: {
+
+    flex: 1,
+    marginBottom: 20,
+  }
 
 });
 

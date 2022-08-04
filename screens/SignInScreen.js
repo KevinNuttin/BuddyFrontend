@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ImageBackground, TextInput } from 'react-native
 import Header from "../components/cards/Header"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
-import Tunnel from "../components/buttons/Tunnel"
+
 
 function SignInScreen(props) {
 
@@ -16,8 +16,6 @@ function SignInScreen(props) {
     //var PasswordInput = Input("Password")
     var header = Header("HomeScreen", props)
     var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
-    var tunnel = Tunnel(1)
-
 
 //! ATTENTION bien modifier avec son IP
 
@@ -55,6 +53,7 @@ function SignInScreen(props) {
                 onChangeText={(value) => setMail(value)}
                 value={mail}
                 keyboardType="default"
+                placeholder="Ton Email"
         />
 
         <TextInput
@@ -63,11 +62,10 @@ function SignInScreen(props) {
                 value={mdp}
                 keyboardType="default"
                 secureTextEntry={true}
+                placeholder="Ton mot de passe"
         />
         {/*{birthdayInput}*/}
         {confirmer}
-
-        {tunnel}
 
       </View>
     </ImageBackground>
@@ -78,42 +76,39 @@ function SignInScreen(props) {
 
 const styles = StyleSheet.create({
 
-  container: {
-
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-
   background: {
 
     height: "100%",
+  },
 
+  container: {
+
+    flex: 1,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   text: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 80,
+    marginTop: 20,
+    marginBottom: 140,
 
     fontWeight: "400",
     fontSize: 26,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
   input: {
+
     width : 200,
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 10,
+    marginTop: -20,
+    marginBottom: 60,
 },
 
 });

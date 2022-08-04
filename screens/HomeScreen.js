@@ -10,6 +10,7 @@ import {
 import OffsetButton from "../components/buttons/OffsetButton";
 
 export default function Homescreen(props) {
+  
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription);
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion); //SignInScreen
 
@@ -36,26 +37,17 @@ export default function Homescreen(props) {
       <View style={styles.container}>
         {inscription}
         {connexion}
-
-        
-
-     
-        
-
       </View>
+
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
 
   background: {
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -64,10 +56,14 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "contain",
     width: "50%",
+    marginTop: 100,
   },
-  button: {
-    flex: 1,
 
-    backgroundColor: "red",
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
+
 });

@@ -11,13 +11,13 @@ function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
   var PC = ButtonLeft("PC")
-  var PS4 = ButtonLeft("Deutsch")
+  var PS4 = ButtonLeft("PS4")
   var XboxOne = ButtonLeft("XboxOne")
   var Switch = ButtonRight("Switch")
   var PS5 = ButtonRight("PS5")
   var XboxSeries = ButtonRight("XboxSeries")
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
-  var tunnel = Tunnel(4)
+  var tunnel = Tunnel(3)
 
   function goLanguage(redirection){
     props.navigation.navigate(redirection); 
@@ -36,13 +36,15 @@ function PlatformScreen(props) {
 
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
-        {PC}{Switch}
-        {PS4}{PS5}
-        {XboxOne}{XboxSeries}
+          <View style={styles.buttons}>
+            {PC}{Switch}
+            {PS4}{PS5}
+            {XboxOne}{XboxSeries}
+          </View>
 
-        {confirmer}
+            {confirmer}
 
-        {tunnel}
+            {tunnel}
 
       </View>
     </ImageBackground>
@@ -54,15 +56,14 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
+    flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 
   background: {
 
     height: "100%",
-
   },
 
   text: {
@@ -77,8 +78,19 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
+
+  buttons: {
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexWrap: "wrap",
+    width: "90%",
+    marginTop: -10,
+    marginBottom: 250,
+  }
 
 });
 

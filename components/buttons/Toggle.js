@@ -32,6 +32,7 @@ function Toggle(title, title2, onPress) {
     }
 
     return(
+
         <View style={styles.container}>
             <TouchableOpacity  
                 style={colorButton}
@@ -47,8 +48,6 @@ function Toggle(title, title2, onPress) {
         </View>
 
     )
-
-
 }
 
 const styles = StyleSheet.create({
@@ -68,7 +67,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth: 1,
         borderColor: "#372C60",
-
     },
 
     buttonText: {
