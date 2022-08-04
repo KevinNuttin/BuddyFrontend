@@ -7,10 +7,11 @@ import OffsetButton from "../components/buttons/OffsetButton"
 export default function Homescreen(props) {
 
   var inscription = OffsetButton("Inscription", "BirthdayScreen",inscription)
-  var connexion = OffsetButton("Connexion", "SignInScreen",connexion)
+  var connexion = OffsetButton("Connexion", "ProfilScreen",connexion)
   //var discord = OffsetButton("connexion avec discord", "BirthdayScreen",props)
   var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",)
   var kevin = OffsetButton("boutton pour Kevin", "SearchGames",)
+
 
 
 function inscription(redirection){
@@ -19,6 +20,12 @@ function inscription(redirection){
 function connexion(redirection){
   props.navigation.navigate(redirection); 
 }
+
+function profil(redirection){
+  props.navigation.navigate(redirection); 
+}
+
+
 
   return (
 
@@ -36,6 +43,8 @@ function connexion(redirection){
         {connexion}
         {matthieu}
         {kevin}
+
+     
         
 
       </View>

@@ -25,11 +25,12 @@ const styles = StyleSheet.create({
   },
 
   picture: {
-    width: 116,
-    height: 116,
+    width: 180,
+    height: 180,
     borderWidth: 1,
     borderColor: "#372C60",
-    transform: [{ rotate: "45deg" }],
+    transform: [{ rotate: "360deg" }],
+    borderRadius: 360,
   },
 
   background: {
