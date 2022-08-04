@@ -6,10 +6,18 @@ import Header2 from "../components/cards/Header2"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
 
+
 function MoodScreen(props) {
 
-  var message = OffsetMiniButton("Message", "",props) // redirection à definir
-  var swipe = OffsetMiniButton("swipe", "DiscoverScreen",props)
+  //var header = Header()
+  //var message = OffsetMiniButton("Message", "DiscoverScreen") // redirection à definir
+  var header = Header2("swipe", "DiscoverScreen", goDiscover)
+  var message = OffsetMiniButton("Message", "DiscoverScreen", goDiscover)
+  var swipe = OffsetMiniButton("swipe", "DiscoverScreen", goDiscover)
+
+  function goDiscover(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
 
@@ -18,14 +26,19 @@ function MoodScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
-      <Header2/>
+      {header}
 
       <View style={styles.container}>
 
-        {ProfilPicture}
+        <View style={styles.profils}>
+        {ProfilPicture()}
+        {ProfilPicture()}
+        </View>
 
-        <Text style={styles.text}>I'ts a match</Text>
-        <Text style={styles.text}>With</Text>
+
+        <Text style={styles.text1}>I'ts a MATCH !</Text>
+        <Text style={styles.text2}>With Sophie_Fonsec</Text>
+
 
         {message}
         {swipe}
@@ -60,15 +73,34 @@ const styles = StyleSheet.create({
 
   },
 
-  text: {
+  profils: {
+
+    flexDirection: "row",
+
+  },
+
+  text1: {
 
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 125,
 
-    fontWeight: "400",
-    fontSize: 26,
+    fontWeight: "Bold",
+    fontSize: 36,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    textAlign: "center",
+
+  },
+
+  text2: {
+
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+    fontWeight: "300",
+    fontSize: 18,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",

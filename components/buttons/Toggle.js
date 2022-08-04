@@ -3,37 +3,52 @@ import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
 function Toggle(title, title2, onPress) {
 
-    const [selected, setSelected] = useState(false);
+    const [selectedRight, setSelectedRight] = useState(true);
+    const [selectedLeft, setSelectedLeft] = useState(false);
 
     var onPress = ()=> {
-        //if(selected === true){setSelected(true)} else {setSelected(false)}
-        setSelected(true)
-      }
+        if(selectedRight === false) {
+            setSelectedRight(true) 
+            setSelectedLeft(false)
+        } else {
+            setSelectedRight(false)
+            setSelectedLeft(true)
+      }}
 
     var colorButton
+    var colorButton2
 
-    if(selected === true){
-        colorButton = {backgroundColor: "#DDABFE"}
+    if(selectedRight === true ){
+        colorButton = {...styles.button, backgroundColor: "#FFA588"}
     } else {
-        colorButton = {backgroundColor: "#FFFFFF"}
+        colorButton = {...styles.button}
+    }
+
+    if(selectedLeft === true ){
+
+        colorButton2 = {...styles.button, backgroundColor: "#DDABFE"}
+    } else {
+        colorButton2 = {...styles.button}
     }
 
     return(
         <View style={styles.container}>
             <TouchableOpacity  
-                style={[styles.button, {colorButton}] } 
+                style={colorButton}
                 onPress={onPress}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-                style={ styles.button } 
+                style={colorButton2} 
                 onPress={onPress}>
                     <Text style={styles.buttonText}>{title2}</Text>
             </TouchableOpacity>
         </View>
 
     )
+
+
 }
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import { StyleSheet, View} from "react-native";
 
 function tunnel(number) {
 
-  var number = 0
+  var number
 
   if(number === 2) {
     return(

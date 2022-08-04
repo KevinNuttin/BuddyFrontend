@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, Title, Button } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button } from "react-native";
 
 import Header2 from "../components/cards/Header2"
 
@@ -23,6 +23,7 @@ export default function DiscoverScreen(props) {
             </Button>
     
         </View>
+        
       </ImageBackground>
       
     );
@@ -31,6 +32,8 @@ export default function DiscoverScreen(props) {
   const styles = StyleSheet.create({
 
     background: {
+
+
 
       height: "100%",
       

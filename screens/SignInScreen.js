@@ -15,8 +15,8 @@ function SignInScreen(props) {
     //var PseudoInput = Input("Username")
     //var PasswordInput = Input("Password")
     var header = Header("HomeScreen", props)
-    var confirmer = OffsetMiniButton("Confirmer", "SearchGames",comfirmation)
-    var tunnel = Tunnel(5)
+    var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
+    var tunnel = Tunnel(1)
 
 
 //! ATTENTION bien modifier avec son IP

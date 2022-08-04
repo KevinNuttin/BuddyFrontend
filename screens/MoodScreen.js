@@ -19,7 +19,7 @@ function MoodScreen(props) {
   function goPlatform(redirection){
     props.navigation.navigate(redirection); 
   }
-
+  
   return (
 
     <ImageBackground
@@ -44,7 +44,9 @@ function MoodScreen(props) {
 
       </View>
     </ImageBackground>
-  );
+
+  )
+
 }
 
 const styles = StyleSheet.create({
@@ -78,9 +80,6 @@ const styles = StyleSheet.create({
 
   },
 
-
-
 });
-
 
 export default MoodScreen

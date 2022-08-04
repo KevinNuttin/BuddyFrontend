@@ -2,16 +2,20 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
-import Toggle from "../components/buttons/Toggle"
+import ButtonLeft from "../components/buttons/ButtonLeft"
+import ButtonRight from "../components/buttons/ButtonRight"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
-  var toggle1 = Toggle("PC", "Xbox")
-  var toggle2 = Toggle("PS", "Switch")
-  var toggle3 = Toggle("Mobile", "Retro")
+  var PC = ButtonLeft("PC")
+  var PS4 = ButtonLeft("Deutsch")
+  var XboxOne = ButtonLeft("XboxOne")
+  var Switch = ButtonRight("Switch")
+  var PS5 = ButtonRight("PS5")
+  var XboxSeries = ButtonRight("XboxSeries")
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
   var tunnel = Tunnel(4)
 
@@ -32,9 +36,9 @@ function PlatformScreen(props) {
 
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
-        {toggle1}
-        {toggle2}
-        {toggle3}
+        {PC}{Switch}
+        {PS4}{PS5}
+        {XboxOne}{XboxSeries}
 
         {confirmer}
 
