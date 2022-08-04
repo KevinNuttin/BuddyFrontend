@@ -111,9 +111,9 @@ export default function searchGames(props) {
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
-    function comfirmation(){
-       
-       console.log("clique");
+    function comfirmation(redirection){
+       console.log("ça va ?");
+         
       }
 
 //** récupérer la liste des jeux au chargement de l'app via l'API depuis le back pour affichage sous forme de liste dans le front */
@@ -159,18 +159,20 @@ useEffect(() => {
         <StatusBar style="auto" />
 
        
-        <TextInput  style={styles.input}
+        <TextInput  style={styles.input} 
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
         value={gameName}>
     </TextInput>
 
-
+   
     <ScrollView style={{marginTop: 50,}}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
        {gamesList}
         </View>
     </ScrollView>
+
+
   {confirmer}
       </View>)
       }
