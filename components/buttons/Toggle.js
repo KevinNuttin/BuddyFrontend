@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { StyleSheet, Pressable, Text, View} from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function Toggle(title, title2, props) {
+function Toggle(title, title2, onPress) {
 
-    const [isPress, setIsPress] = useState(false)
-    const onPress = () => setIsPress(true)
-    //const colorButton = ""
+    const [selected, setSelected] = useState(false);
 
-    // if(!isPress){
-    //     colorButton = "#DDABFE"
-    // } else {
-    //     colorButton = ""
-    // }
+    var onPress = ()=> {
+        //if(selected === true){setSelected(true)} else {setSelected(false)}
+        setSelected(true)
+      }
+
+    var colorButton
+
+    if(selected === true){
+        colorButton = {backgroundColor: "#DDABFE"}
+    } else {
+        colorButton = {backgroundColor: "#FFFFFF"}
+    }
 
     return(
         <View style={styles.container}>
-            <Pressable 
-                style={styles.button } 
+            <TouchableOpacity  
+                style={[styles.button, {colorButton}] } 
                 onPress={onPress}>
                     <Text style={styles.buttonText}>{title}</Text>
-            </Pressable>
+            </TouchableOpacity>
 
-            <Pressable 
+            <TouchableOpacity 
                 style={ styles.button } 
                 onPress={onPress}>
                     <Text style={styles.buttonText}>{title2}</Text>
-            </Pressable>
+            </TouchableOpacity>
         </View>
 
     )
@@ -39,7 +44,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        flexWrap: "wrap",
 
     },
 
@@ -49,7 +53,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth: 1,
         borderColor: "#372C60",
-        marginBottom: 60,
 
     },
 
