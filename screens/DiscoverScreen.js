@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, Title, Button } from "react-native";
+import { StyleSheet, Text, View, Title, Button, ImageBackground } from "react-native";
 
 import Header2 from "../components/cards/Header2"
 

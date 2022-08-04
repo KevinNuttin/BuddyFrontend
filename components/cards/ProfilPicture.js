@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 100,
+    marginTop: 40,
   },
 
   picture: {
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     height: 180,
     borderWidth: 1,
     borderColor: "#372C60",
-    transform: [{ rotate: "360deg" }],
     borderRadius: 360,
   },
 
