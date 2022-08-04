@@ -112,8 +112,8 @@ export default function searchGames(props) {
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
     function comfirmation(redirection){
-       
-        props.navigation.navigate(redirection); 
+       console.log("ça va ?");
+         
       }
 
 //** récupérer la liste des jeux au chargement de l'app via l'API depuis le back pour affichage sous forme de liste dans le front */
@@ -158,21 +158,21 @@ useEffect(() => {
     return (<View style={styles.container}>
         <StatusBar style="auto" />
 
-        //* BARRE DE RECHERCHE
-        <TextInput  style={styles.input}
+       
+        <TextInput  style={styles.input} 
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
         value={gameName}>
     </TextInput>
 
-    //* LISTE DE JEUX À AFFICHER
+   
     <ScrollView style={{marginTop: 50,}}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
        {gamesList}
         </View>
     </ScrollView>
 
-    //* BOUTON DE CONFIRMATION
+
   {confirmer}
       </View>)
       }
