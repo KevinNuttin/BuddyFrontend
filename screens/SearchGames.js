@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable} from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
+import { connect } from 'react-redux';
 
 export default function searchGames(props) {
     const [gameList, setGameList] = useState([]);
@@ -105,32 +106,21 @@ export default function searchGames(props) {
         "img": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
         "name": "Tomb Raider (2013)",
       },
-      {
-        "img": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
-        "name": "Counter-Strike: Global Offensive",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
-        "name": "The Elder Scrolls V: Skyrim",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
-        "name": "Left 4 Dead 2",
-      }]
+     ]
      
-if(wishGame.length =0){
-    var confirmer = OffsetMiniButton("Confirmer", "",props)
-}else{
-    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",props)
-}
-    
-    
-    //** request au Backend en post pour chercher un jeu à partir de l'input à chaque changement useEffect pour envoyer un backend le nouvel input  */
+
+    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
+
+    function comfirmation(redirection){
+       console.log("ça va ?");
+         
+      }
+
+//** récupérer la liste des jeux au chargement de l'app via l'API depuis le back pour affichage sous forme de liste dans le front */
 
 useEffect(() => {  
-    //** récupérer la liste des jeux de la recherche depuis le back pour affichage sous forme de liste dans le front */
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.136:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.150:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }
@@ -139,6 +129,7 @@ useEffect(() => {
 }, 
 []);
 
+//* Boucle dans le liste des jeux qui sont stockés dans un tableau, si le jeux est déjà présent dans la wishlist une variable déjà like se met à true
 
     var gamesList = fakeData.map((game, i) => {
         var result = wishGame.find(element => element.name == game.name)
@@ -147,33 +138,42 @@ useEffect(() => {
             iLike = true
         }
        
+        //* au clique sur un jeux ajout dans un état du jeux à la wishlist de jeux avec le nom et l'image
         var handleClickAddGame = async (name, img) => {
-            if(wishGame.lengt < 5){
             setWishGame([...wishGame, {name:name,img:img}])
-            }else{}
+    
           }
+
+        //* au clique sur un jeux suppression dans un état du jeux à la wishlist de jeux avec le nom grâce à un filter
           var handleClickDeleteGame = async (name, img) => {
             setWishGame(wishGame.filter(object => object.name != name))
           }
 
+          //* retourne le composant CardGame qui est un jeu en lui passant via le reversedataflow les infos de nom, img, like pour mettre à jour la couleur de la carde si selection
      return( <CardGame key={i} GameLike={iLike} name={game.name} img={game.img} handleClickAddGameParent={handleClickAddGame} handleClickDeleteGameParent={handleClickDeleteGame}/>)
     })
 
     
-
+    //* retourne l'affichage de la barre de recherche, la liste des jeux et le bouton de confirmation 
     return (<View style={styles.container}>
         <StatusBar style="auto" />
-        <TextInput  style={styles.input}
+
+       
+        <TextInput  style={styles.input} 
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
         value={gameName}>
     </TextInput>
+
+   
     <ScrollView style={{marginTop: 50,}}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
        {gamesList}
         </View>
     </ScrollView>
-   {confirmer}
+
+
+  {confirmer}
       </View>)
       }
 
