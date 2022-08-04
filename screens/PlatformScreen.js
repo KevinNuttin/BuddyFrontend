@@ -8,8 +8,12 @@ import Tunnel from "../components/buttons/Tunnel"
 function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen",props)
+  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
   var tunnel = Tunnel("3")
+
+  function goLanguage(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
 
