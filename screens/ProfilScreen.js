@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Pressable
 } from "react-native";
 import React, { useState } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
@@ -16,7 +17,7 @@ import CardGame from "../components/cards/CardGame";
 
 export default function ProfilScreen(props) {
   var ProfilPic = ProfilPicture();
-  var Card = CardGame();
+  var card = CardGame();
 
 
   return (
@@ -54,11 +55,11 @@ export default function ProfilScreen(props) {
 
           {/* View pour les images de jeux / les mettre en llignes --> envisager un caroussel */}
           <ScrollView style={styles.scroll} horizontal={true}>
-            {Card}
-            {Card}
-            {Card}
-            {Card}
-            {Card}
+         {card}
+         {card}
+         {card}
+         {card}
+         {card}
           </ScrollView>
         </View>
       </View>
@@ -109,6 +110,8 @@ const styles = StyleSheet.create({
 
   emoji: {
     flexDirection: "row",
+    marginTop: -120,
+
   },
   header: {
     flex: 1,
@@ -116,4 +119,22 @@ const styles = StyleSheet.create({
   },
 
   scroll: {},
+  GameName:{
+    paddingLeft: 15, 
+    marginTop:15,
+    marginBottom: 15, 
+    paddingBottom:15,
+    fontSize: 16,
+    borderBottomColor: '#f194ff',
+    borderBottomWidth:1,
+    height: 60,
+},
+image: {
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    marginTop: -20,
+  },
+
 });
+

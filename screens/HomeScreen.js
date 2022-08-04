@@ -12,12 +12,19 @@ export default function Homescreen(props) {
   var kevin = OffsetButton("boutton pour Kevin", "SearchGames",)
 
 
+
 function inscription(redirection){
   props.navigation.navigate(redirection); 
 }
 function connexion(redirection){
   props.navigation.navigate(redirection); 
 }
+
+function profil(redirection){
+  props.navigation.navigate(redirection); 
+}
+
+
 
   return (
 
@@ -35,6 +42,8 @@ function connexion(redirection){
         {connexion}
         {matthieu}
         {kevin}
+
+     
         
 
       </View>
