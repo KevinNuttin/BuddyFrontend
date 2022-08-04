@@ -1,13 +1,15 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import { StyleSheet, Text, View, ImageBackground } from "react-native"
 
 import Header from "../components/cards/Header"
+import Toggle from "../components/buttons/Toggle"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function MoodScreen(props) {
 
   var header = Header("SearchGames", props)
+  var toggle = Toggle("Chill", "TryHarder", props)
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", props)
   var tunnel = Tunnel("2")
 
@@ -24,7 +26,7 @@ function MoodScreen(props) {
 
         <Text style={styles.text}>Ton mood</Text>
 
-        {/* ICI les toggles */}
+        {toggle}
         {confirmer}
 
         {tunnel}
