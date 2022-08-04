@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable} from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert} from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -16,9 +16,21 @@ export default function searchGames(props) {
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
+    createTwoButtonAlert = () =>
+    Alert.alert(
+      "Vous n'avez pas de jeux",
+      "Merci d'ajouter au moins un jeux  wesh!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
     function comfirmation(redirection){
-       console.log("ça va ?");
-         
+        console.log(wishGame.length);
+        if(wishGame.length > 0){
+       props.navigation.navigate(redirection); 
+        }else(createTwoButtonAlert())
+          
       }
 
 //** récupérer la liste des jeux au chargement de l'app via l'API depuis le back pour affichage sous forme de liste dans le front */
