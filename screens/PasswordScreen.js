@@ -17,6 +17,13 @@ function PasswordScreen(props) {
   //var passwordInput = Input("password")
   var header = Header("EmailScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
+
+  //! BOUTON DE DEMO A SUPPRIMER
+  var confirmer2 = OffsetMiniButton("Confirmer", "SearchGames", comfirmation2)
+  async function comfirmation2(redirection){
+    props.navigation.navigate(redirection)
+  }
+
   var tunnel = Tunnel(4)
 
   async function comfirmation(redirection){
@@ -58,7 +65,7 @@ function PasswordScreen(props) {
                 placeholder="Tu y es presque..."
         />
         {/*{passwordInput}*/}
-        {confirmer}
+        {confirmer2}
 
        {tunnel}
           

@@ -1,3 +1,6 @@
+import { LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...', 'ViewPropTypes will be removed ...', ]); 
+LogBox.ignoreAllLogs();
 
 import React from 'react';
 import 'react-native-gesture-handler';
