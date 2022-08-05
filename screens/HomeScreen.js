@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import {StyleSheet, View, ImageBackground, Image} from "react-native";
 
 import OffsetButton from "../components/buttons/OffsetButton";
 
@@ -14,12 +8,12 @@ export default function Homescreen(props) {
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
 
-function inscription(redirection){
-  props.navigation.navigate(redirection); 
-}
-function connexion(redirection){
-  props.navigation.navigate(redirection); 
-}
+  function inscription(redirection){
+    props.navigation.navigate(redirection); 
+  }
+  function connexion(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
     <ImageBackground

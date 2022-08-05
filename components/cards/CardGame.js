@@ -25,7 +25,7 @@ var SelectColor ={...styles.GameCard, borderWidth: 2, borderColor: '#f194ff'}
 }
 
 if(props.GameLike){
-    SelectColor ={...styles.GameCard, borderWidth: 2, borderColor: "#FFA588"}
+    SelectColor ={...styles.GameCard, backgroundColor: "#FDEDE6", borderRadius: 20}
 }else{
     SelectColor ={...styles.GameCard}
 }
@@ -44,13 +44,11 @@ if(props.GameLike){
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: 100, // A virer après les tests recherche de jeux
     },
      input: {
-     backgroundColor: '#fff',
      alignItems: 'center',
      borderColor: '#f194ff',
      borderWidth: 2,
@@ -59,26 +57,28 @@ const styles = StyleSheet.create({
      justifyContent: 'center',
     },
     GameName:{
-        paddingLeft: 15, 
         alignItems: 'center',
+        textAlign: 'center',
         marginTop:15,
         marginBottom: 15, 
         paddingBottom:15,
         fontSize: 16,
         height: 60,
-        borderBottomColor:'#f194ff',
-        borderBottomWidth:2,
+ 
     },
     image: {
-        width: 175,
+        width: 160,
         height: 170,
+        borderRadius: 20,
+        marginBottom:-40,
         
       },
       GameCard: { 
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 180,
+        width: 160,
+        height: 265,
         flexWrap: 'wrap',
         margin: 4,
         borderRadius: 5,

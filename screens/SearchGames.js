@@ -1,20 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert} from "react-native";
+
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert, ImageBackground} from "react-native";
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
-import Tunnel from "../components/buttons/Tunnel";
 import SelectDropdown from 'react-native-select-dropdown';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
+import Header from '../components/cards/Header';
+import Tunnel from '../components/buttons/Tunnel';
 
 export default function searchGames(props) {
     const [gameList, setGameList] = useState([]);
     const [wishGame, setWishGame] = useState([]);
     const [gameName, setGameName] = useState([]);
-
-
+    var header = Header("SignInScreen", props)
+    var tunnel = Tunnel(1)
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
@@ -98,20 +100,24 @@ useEffect(() => {
             return (
             <View style={styles.item} >
                 <Text style={styles.textItem}>{item.name}</Text>
-                <Image style={styles.icon} source={require('../assets/icons/option_iconbuddy.png')} onPress={() => handleClickDeleteGame(item.name)} />
+                <Image style={styles.icon} source={require('../assets/icons/trash_iconbuddy.png')} onPress={() => handleClickDeleteGame(item.name)} />
             </View>
             );
         }
 
     
     //* retourne l'affichage de la barre de recherche, la liste des jeux et le bouton de confirmation 
-    return (<View style={styles.container}>
+    return (
+        <ImageBackground resizeMode= "cover" style = {styles.background} source= {require ("../assets/backgrounds/fond_buddy.png")}>
+        {header}
+        <View style={styles.container}>
+            <Text style = {styles.text}>On joue à quoi ?</Text>
         <StatusBar style="auto" />
-        <TextInput  style={styles.input} 
+       {/*  <TextInput  style={styles.input} 
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
-        value={gameName}>
-    </TextInput>
+    value={gameName}>
+    </TextInput>*/}
 
                 <Dropdown
                     style={styles.dropdown}
@@ -132,27 +138,42 @@ useEffect(() => {
                 />
 
    
-    <ScrollView style={{marginTop: 50,}}>
+    <ScrollView style={{marginTop: 20, marginBottom: 20, }}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
        {gamesList}
         </View>
     </ScrollView>
-
-
-  {confirmer}
-      </View>)
+    
+<View style={{marginBottom: 50,}}>{confirmer}</View>
+{tunnel}
+       
+      </View>
+      </ImageBackground>)
       }
 
       const styles = StyleSheet.create({
+        background : {
+            height: "100%",
+
+        },
         container: {
           flex: 1,
-          backgroundColor: '#fff',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 100, // A virer après les tests recherche de jeux
+          
+        },
+        text: {
+            marginTop: 0,
+            marginBottom: 0,
+            fontWeight: "400",
+            fontSize: 26,
+            letterSpacing: 0.5,
+            color: '#372C60',
+            textAlign: "center",
+
         },
          input: {
-         backgroundColor: '#fff',
          alignItems: 'center',
          borderColor: '#f194ff',
          borderWidth: 2,
@@ -172,8 +193,8 @@ useEffect(() => {
         },
         image: {
             alignItems: 'center',
-            width: 170,
-            height: 170,
+            width: 120,
+            height: 160,
           },
           GameCard: { 
             flexDirection: 'row',
@@ -188,11 +209,10 @@ useEffect(() => {
             flexWrap: 'wrap',
           },
           dropdown: {
-            width:180,
-            backgroundColor: 'white',
-            borderBottomColor: 'gray',
-            borderBottomWidth: 0.5,
+            width:120,
             marginTop: 20,
+            textAlign:"center",
+            justifyContent: "center"
         },
         icon: {
             marginRight: 5,

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ImageBackground, Button, Image } from "react-na
 import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
 
+
 const cardsData = [
   { src: require('../assets/avatars/avatar1.png') },
   { src: require('../assets/avatars/avatar2.png') },
@@ -16,11 +17,17 @@ const cardsData = [
 
   function Card({ data }) {
     return (
-      <View style={[styles.card, { backgroundColor: data.backgroundColor }]}>
+      <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
         <Text>{data.text}</Text>
         <Image style={styles.img} source = {data.src}></Image>
         <Text style={styles.pseudo}> {data.pseudo}</Text>
         <Text style={styles.description}>{data.description}</Text>
+
+        <View style = {styles.like}>
+          <Image source={require('../assets/icons/like_iconbuddy.png')}></Image>
+          <Image source={require('../assets/icons/unlike_iconbuddy.png')}></Image>
+        </View>
+
       </View>
     );
   }
@@ -95,7 +102,7 @@ const cardsData = [
               // stackDepth={3}
             />
           ) : (
-            <StatusCard text="Loading..." />
+            <StatusCard text="Loading Buddies..." />
           )}
         </View>
       </ImageBackground>
@@ -113,32 +120,30 @@ const cardsData = [
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      
     },
 
     card: {
-      
+
+
       flexDirection: "column",
       justifyContent: "space-evenly",
       alignItems: "center",
 
-      
       width: 320,
       height: 580,
-      borderWidth: 4,
-      borderColor: "#745ACE",
       borderRadius: 40,
       textAlign: "center",
       padding: 50,
-      backgroundColor: "FDEBE6",
     },
 
     pseudo: {
+
       fontWeight: "400",
       fontSize: 26,
       letterSpacing: 0.5,
-      color: "#372C60",
+      color: "#FFFF",
       marginTop: -60,
-
     },
 
     description: {
@@ -147,23 +152,30 @@ const cardsData = [
       fontSize: 16,
       fontStyle: "italic",
       letterSpacing: 0.5,
-      color: "#372C60",
+      color: "#FFFF",
       textAlign: "center",
-
-      marginTop: -80,
     },
 
     img: {
 
       borderWidth: 4,
-      borderColor: "#745ACE",
+
+      borderColor: "#FFFF",
       borderRadius: 100,
-      marginTop: -140,
+      marginTop: -100,
+      marginBottom:40,
+
     },
 
     cardsText: {
       fontSize: 22,
       marginBottom: 20,
     },
+    like:{
+    flexDirection: "row-reverse",
+    justifyContent: "space-evenly",
+    width: 450,
+    marginBottom: -70,
+    }
   });
   

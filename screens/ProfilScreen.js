@@ -1,15 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Title,
-  Button,
-  ImageBackground,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image, SafeAreaView, ScrollView, Pressable } from "react-native";
 
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
@@ -19,7 +8,7 @@ import Header2 from "../components/cards/Header2";
 export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
-  var header = Header2("DiscoverScreen", "DiscoverScreen", props)
+  var header = Header2("DiscoverScreen","DiscoverScreen",props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);
@@ -27,8 +16,9 @@ export default function ProfilScreen(props) {
 
   useEffect(() => {
     async function loadData() {
+      
       var rawData = await fetch(
-        "http://192.168.10.144:3000/users/profil?token=3xFbU9iw24lAVWLVQssErWODNUK2gLWb"
+        "http://192.168.10.144:3000/users/getprofil"
       );
 
       var data = await rawData.json();
@@ -46,11 +36,11 @@ export default function ProfilScreen(props) {
   }, []);
 
   var test = dataPlatform.map((plateforme, i) => {
-    return <Text style={styles.text2}>{plateforme.plateforme}</Text>;
+    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
   });
 
-  var image = dataGames.map ((image, i ) => {
-    return   <Image
+  var image = dataGames.map ((image, j ) => {
+    return   <Image key={j}
               source={{
                 uri: image.image,
               }}
@@ -76,7 +66,7 @@ export default function ProfilScreen(props) {
 
         <View style={styles.containerText}>
           <Text style={styles.text1}>{dataPseudo}</Text>
-          {test}
+          <View style={styles.plateforme}>{test}</View>
           <Text style={styles.text3}>
             Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
           </Text>
@@ -93,7 +83,7 @@ export default function ProfilScreen(props) {
 
         {/* View pour les images de jeux / les mettre en lignes --> envisager un caroussel */}
         <ScrollView style={styles.scroll} horizontal={true}>
-              {image}
+          {image}
         </ScrollView>
       </View>
     </ImageBackground>
@@ -155,12 +145,13 @@ const styles = StyleSheet.create({
   emoji: {
 
     flexDirection: "row",
-    marginTop: 40,
+    marginTop: 150,
+    marginBottom:50,
   },
 
   scroll: {
     marginRight: 10,
-    marginLeft: 10,
+    marginLeft: 20,
   },
 
   GameName: {
@@ -173,5 +164,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 60,
   },
+  image:{
+    height:100,
+    width:100,
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  plateforme:{
+    flexDirection:"row",
+    marginTop:10,
+    marginBottom: 50,
+    width: 300,
+    justifyContent: "space-evenly"
+  }
 
 });
