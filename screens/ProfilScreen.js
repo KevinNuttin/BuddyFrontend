@@ -28,7 +28,7 @@ export default function ProfilScreen(props) {
   useEffect(() => {
     async function loadData() {
       var rawData = await fetch(
-        "http://192.168.10.140:3000/users/profil?token=3xFbU9iw24lAVWLVQssErWODNUK2gLWb"
+        "http://192.168.10.144:3000/users/profil?token=3xFbU9iw24lAVWLVQssErWODNUK2gLWb"
       );
 
       var data = await rawData.json();
