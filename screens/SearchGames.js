@@ -17,6 +17,7 @@ export default function searchGames(props) {
     var tunnel = Tunnel(1)
 
 
+console.log("coucou");
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
