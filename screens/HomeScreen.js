@@ -10,17 +10,9 @@ import {
 import OffsetButton from "../components/buttons/OffsetButton";
 
 export default function Homescreen(props) {
-  
-  var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription);
-  var connexion = OffsetButton("Connexion", "SearchGames", connexion); //SignInScreen
 
-<<<<<<< HEAD
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
-  var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",)
-  var kevin = OffsetButton("boutton pour Kevin", "DiscoverScreen", searchgame)
-
-
 
 function inscription(redirection){
   props.navigation.navigate(redirection); 
@@ -28,23 +20,6 @@ function inscription(redirection){
 function connexion(redirection){
   props.navigation.navigate(redirection); 
 }
-function searchgame(redirection){
-  props.navigation.navigate(redirection); 
-}
-
-function profil(redirection){
-  props.navigation.navigate(redirection); 
-}
-=======
->>>>>>> 191a37925d8a989f1bd99878e4a1fb1f02681048
-
-  function inscription(redirection) {
-    props.navigation.navigate(redirection);
-  }
-  function connexion(redirection) {
-    props.navigation.navigate(redirection);
-  }
-
 
   return (
     <ImageBackground

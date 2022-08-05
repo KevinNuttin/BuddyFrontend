@@ -9,7 +9,7 @@ import ProfilPicture from "../components/cards/ProfilPicture"
 
 function MoodScreen(props) {
 
-  var header = Header2(props)
+  var header = Header2("DiscoverScreen", props)
   var message = OffsetMiniButton("Message", "DiscoverScreen", goDiscover)
   var swipe = OffsetMiniButton("swipe", "DiscoverScreen", goDiscover)
 
@@ -61,7 +61,10 @@ const styles = StyleSheet.create({
   profils: {
 
     flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: -40,
+    marginLeft : 20,
     marginBottom: -60,
   },
 

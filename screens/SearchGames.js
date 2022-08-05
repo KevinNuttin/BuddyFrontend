@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert} from "react-native";
+
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
+import Tunnel from "../components/buttons/Tunnel";
 import SelectDropdown from 'react-native-select-dropdown';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
@@ -37,9 +39,11 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.150:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.144:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
+    console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
+    console.log("coucou")
 }
     dataLoad();
     

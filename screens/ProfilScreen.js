@@ -19,7 +19,7 @@ import Header2 from "../components/cards/Header2";
 export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
-  var header = Header2()
+  var header = Header2("DiscoverScreen", "DiscoverScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);

@@ -9,14 +9,6 @@ import Tunnel from "../components/buttons/Tunnel"
 
 function LanguageScreen(props) {
 
-<<<<<<< HEAD
-  var header = Header("LanguageScreen", props)
-  var toggle1 = Toggle("Français", "English")
-  var toggle2 = Toggle("Deutsch", "Espagnol")
-  var toggle3 = Toggle("조선말", "日本語 ")
-  var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
-  var tunnel = Tunnel(5)
-=======
   var header = Header("PlatformScreen", props)
   var FR = ButtonLeft("Français")
   var DE = ButtonLeft("Deutsch")
@@ -26,7 +18,6 @@ function LanguageScreen(props) {
   var JP = ButtonRight("日本語")
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
   var tunnel = Tunnel(4)
->>>>>>> 191a37925d8a989f1bd99878e4a1fb1f02681048
 
   function goGames(redirection){
     props.navigation.navigate(redirection); 
