@@ -1,126 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable} from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert, ImageBackground} from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
-import { connect } from 'react-redux';
+import SelectDropdown from 'react-native-select-dropdown';
+import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
+const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
+import Header from '../components/cards/Header';
+import Tunnel from '../components/buttons/Tunnel';
 
 export default function searchGames(props) {
     const [gameList, setGameList] = useState([]);
     const [wishGame, setWishGame] = useState([]);
     const [gameName, setGameName] = useState([]);
+    var header = Header("SignInScreen", props)
+    var tunnel = Tunnel(1)
 
-    var fakeData =[ {
-        "img": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
-        "name": "Grand Theft Auto V",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
-        "name": "The Witcher 3: Wild Hunt",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/328/3283617cb7d75d67257fc58339188742.jpg",
-        "name": "Portal 2",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-        "name": "Tomb Raider (2013)",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
-        "name": "Counter-Strike: Global Offensive",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
-        "name": "The Elder Scrolls V: Skyrim",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
-        "name": "Left 4 Dead 2",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
-        "name": "Portal",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg",
-        "name": "BioShock Infinite",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
-        "name": "Life is Strange",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/588/588c6bdff3d4baf66ec36b1c05b793bf.jpg",
-        "name": "Borderlands 2",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
-        "name": "Red Dead Redemption 2",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg",
-        "name": "Half-Life 2",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg",
-        "name": "BioShock",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
-        "name": "Limbo",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg",
-        "name": "DOOM (2016)",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg",
-        "name": "Fallout 4",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg",
-        "name": "Destiny 2",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg",
-        "name": "God of War",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg",
-        "name": "Team Fortress 2",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
-        "name": "Grand Theft Auto V",
-      },
-      {
-        "img": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
-        "name": "The Witcher 3: Wild Hunt",
-      },
-     {
-        "img": "https://media.rawg.io/media/games/328/3283617cb7d75d67257fc58339188742.jpg",
-        "name": "Portal 2",
-      },
-       {
-        "img": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-        "name": "Tomb Raider (2013)",
-      },
-     ]
-     
+
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
+    createTwoButtonAlert = () =>
+    Alert.alert(
+      "Tu n'as pas de jeux...",
+      "Merci d'ajouter au moins un jeux  wesh!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
     function comfirmation(redirection){
-       console.log("g");
-         
+        console.log(wishGame.length);
+        if(wishGame.length > 0){
+       props.navigation.navigate(redirection); 
+        }else(createTwoButtonAlert())
+          
       }
 
 //** récupérer la liste des jeux au chargement de l'app via l'API depuis le back pour affichage sous forme de liste dans le front */
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.150:3000/library/games');
+    var rawResponse = await fetch('http://172.20.10.3:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }
@@ -131,7 +52,7 @@ useEffect(() => {
 
 //* Boucle dans le liste des jeux qui sont stockés dans un tableau, si le jeux est déjà présent dans la wishlist une variable déjà like se met à true
 
-    var gamesList = fakeData.map((game, i) => {
+    var gamesList = gameList.map((game, i) => {
         var result = wishGame.find(element => element.name == game.name)
         var iLike = false
         if(result != undefined){
@@ -139,54 +60,118 @@ useEffect(() => {
         }
        
         //* au clique sur un jeux ajout dans un état du jeux à la wishlist de jeux avec le nom et l'image
+
         var handleClickAddGame = async (name, img) => {
+            if(wishGame.length < 5){
             setWishGame([...wishGame, {name:name,img:img}])
-    
+        }
           }
 
         //* au clique sur un jeux suppression dans un état du jeux à la wishlist de jeux avec le nom grâce à un filter
-          var handleClickDeleteGame = async (name, img) => {
+
+          var handleClickDeleteGame = (name, img) => {
+            console.log("name",name);
             setWishGame(wishGame.filter(object => object.name != name))
           }
 
           //* retourne le composant CardGame qui est un jeu en lui passant via le reversedataflow les infos de nom, img, like pour mettre à jour la couleur de la carde si selection
+
      return( <CardGame key={i} GameLike={iLike} name={game.name} img={game.img} handleClickAddGameParent={handleClickAddGame} handleClickDeleteGameParent={handleClickDeleteGame}/>)
     })
 
+    var gameWishList = wishGame.map((game, i) => {
+        if(gameWishList){
+      return(
+        noGame
+      )}else{
+        return(
+        <Text>{game.name}</Text>
+        )
+      }
+    
+    })
+  
+        const [dropdown, setDropdown] = useState("Vos jeux");
+        const [selected, setSelected] = useState([]);
+
+        const _renderItem = item => {
+            return (
+            <View style={styles.item} >
+                <Text style={styles.textItem}>{item.name}</Text>
+                <Image style={styles.icon} source={require('../assets/icons/trash_iconbuddy.png')} onPress={() => handleClickDeleteGame(item.name)} />
+            </View>
+            );
+        }
+
     
     //* retourne l'affichage de la barre de recherche, la liste des jeux et le bouton de confirmation 
-    return (<View style={styles.container}>
+    return (
+        <ImageBackground resizeMode= "cover" style = {styles.background} source= {require ("../assets/backgrounds/fond_buddy.png")}>
+        {header}
+        <View style={styles.container}>
+            <Text style = {styles.text}>On joue à quoi ?</Text>
         <StatusBar style="auto" />
-
-       
-        <TextInput  style={styles.input} 
+       {/*  <TextInput  style={styles.input} 
         placeholder='Your search'
         onChangeText={(val) => setGameName(val)}
-        value={gameName}>
-    </TextInput>
+    value={gameName}>
+    </TextInput>*/}
+
+                <Dropdown
+                    style={styles.dropdown}
+                    containerStyle={styles.shadow}
+                    data={wishGame}
+                    labelField="label"
+                    valueField="value"
+                    label="Dropdown"
+                    placeholder="Tes jeux"
+                    value={dropdown}
+                    onChange={item => {
+                    setDropdown(item.name);
+                    setWishGame(wishGame.filter(obj => obj.name != item.name))
+                    
+                    }}
+                    renderItem={item => _renderItem(item)}
+                    textError="Error"
+                />
 
    
-    <ScrollView style={{marginTop: 50,}}>
+    <ScrollView style={{marginTop: 20, marginBottom: 20, }}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
        {gamesList}
         </View>
     </ScrollView>
-
-
-  {confirmer}
-      </View>)
+    
+<View style={{marginBottom: 50,}}>{confirmer}</View>
+{tunnel}
+       
+      </View>
+      </ImageBackground>)
       }
 
       const styles = StyleSheet.create({
+        background : {
+            height: "100%",
+
+        },
         container: {
           flex: 1,
-          backgroundColor: '#fff',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 100, // A virer après les tests recherche de jeux
+          
+        },
+        text: {
+            marginTop: 0,
+            marginBottom: 0,
+            fontWeight: "400",
+            fontSize: 26,
+            letterSpacing: 0.5,
+            color: '#372C60',
+            textAlign: "center",
+
         },
          input: {
-         backgroundColor: '#fff',
          alignItems: 'center',
          borderColor: '#f194ff',
          borderWidth: 2,
@@ -206,8 +191,8 @@ useEffect(() => {
         },
         image: {
             alignItems: 'center',
-            width: 170,
-            height: 170,
+            width: 120,
+            height: 160,
           },
           GameCard: { 
             flexDirection: 'row',
@@ -220,5 +205,37 @@ useEffect(() => {
           CardContainer: { 
             flexDirection: 'row',
             flexWrap: 'wrap',
-          }
+          },
+          dropdown: {
+            width:120,
+            marginTop: 20,
+            textAlign:"center",
+            justifyContent: "center"
+        },
+        icon: {
+            marginRight: 5,
+            width: 18,
+            height: 18,
+        },
+        item: {
+            paddingVertical: 17,
+            paddingHorizontal: 4,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
+        textItem: {
+            flex: 1,
+            fontSize: 16,
+        },
+        shadow: {
+            shadowColor: '#000',
+            shadowOffset: {
+            width: 0,
+            height: 1,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 1.41,
+            elevation: 2,
+        },
       });

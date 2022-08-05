@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image, View} from "react-native";
+import { StyleSheet, TouchableOpacity, View} from "react-native";
 
 import BackIcon from "../icons/BackIcon";
 
@@ -22,11 +22,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: 60,
         marginLeft: 40,
         marginRight: 40,
-        height: 60,
-
     },
 
 })

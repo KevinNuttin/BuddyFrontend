@@ -1,30 +1,53 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
-function OffsetButton(title , redirection,onPress) {
+// Composant Bouton de redirection pour la HomeScreen
+
+function OffsetButton(title , redirection, onPress) {
+
+    // Mecanique qui permet de centrer le rectangle au bouton (peu lisible avant redirection ???)
+
+    // const [pressed, setPressed] = useState(false)
+
+    // var isPress = () => {
+
+    //     if(pressed === false){
+            
+    //         setPressed(true)
+
+    //     } else {
+
+    //         setPressed(false)
+    //     }
+    // }
+
+    // var positionButton
+
+    // if(pressed === true ) {
+    //     positionButton = {...styles.rectangle, top: -55, left: 0}
+        
+    // } else {
+    //     positionButton = {...styles.rectangle}
+    // }
 
     return(
-        <View style={styles.container}>
+
+        <View>
             <TouchableOpacity 
                 style={styles.button} 
                 onPress={() => {
                     onPress(redirection)
+                    {/*isPress(true) va avec la mecanique du rectangle*/}
                 }}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
+            <View style={styles.rectangle}/>
         </View>
+
     )
 }
 
 const styles = StyleSheet.create({
-    
-    container: {
-
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-
-    },
 
     button: {
 
@@ -32,7 +55,8 @@ const styles = StyleSheet.create({
         height: 55,
         borderWidth: 1,
         borderColor: "#372C60",
-        marginBottom: 60,
+        padding: 16,
+        zIndex: 100,
 
     },
 
@@ -43,9 +67,18 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
         color: "#372C60",
         textAlign: "center",
-        marginTop: 13,
+        zIndex: 50,
 
     },
+
+    rectangle: {
+
+        width: 225,
+        height: 55,
+        backgroundColor: "#EACBFF",
+        top: -45,
+        left: 10,
+    }
 
 })
 

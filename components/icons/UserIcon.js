@@ -6,8 +6,7 @@ function UserIcon() {
     return(
 
         <Image 
-        style={{width: 25}}
-        source={require('../../assets/icons/back_iconbuddy.png')}/>
+        source={require('../../assets/icons/user_iconbuddy.png')}/>
 
     )
 }

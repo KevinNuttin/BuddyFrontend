@@ -2,14 +2,26 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
+import ButtonLeft from "../components/buttons/ButtonLeft"
+import ButtonRight from "../components/buttons/ButtonRight"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen",props)
-  var tunnel = Tunnel("3")
+  var PC = ButtonLeft("PC")
+  var PS4 = ButtonLeft("PS4")
+  var XboxOne = ButtonLeft("XboxOne")
+  var Switch = ButtonRight("Switch")
+  var PS5 = ButtonRight("PS5")
+  var XboxSeries = ButtonRight("XboxSeries")
+  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
+  var tunnel = Tunnel(3)
+
+  function goLanguage(redirection){
+    props.navigation.navigate(redirection); 
+  }
 
   return (
 
@@ -24,10 +36,15 @@ function PlatformScreen(props) {
 
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
-        {/* ICI les toggles */}
-        {confirmer}
+          <View style={styles.buttons}>
+            {PC}{Switch}
+            {PS4}{PS5}
+            {XboxOne}{XboxSeries}
+          </View>
 
-        {tunnel}
+            {confirmer}
+
+            {tunnel}
 
       </View>
     </ImageBackground>
@@ -39,15 +56,14 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
+    flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 
   background: {
 
     height: "100%",
-
   },
 
   text: {
@@ -62,17 +78,19 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
-  input: {
-    width : 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 40,
-},
+  buttons: {
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexWrap: "wrap",
+    width: "90%",
+    marginTop: -10,
+    marginBottom: 250,
+  }
 
 });
 

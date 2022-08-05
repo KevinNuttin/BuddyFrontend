@@ -6,7 +6,9 @@ import OptionIcon from "../icons/OptionIcon";
 import MessageIcon from "../icons/MessageIcon";
 import MessageBadgeIcon from "../icons/MessageBadgeIcon";
 
-function Header2(redirection, props) {
+function Header2(redirection,redirection2, props) {
+
+
 
     return(
         <View style={styles.container}>
@@ -31,11 +33,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: 60,
         marginLeft: 40,
         marginRight: 40,
-        height: 60,
-
     },
 
 })

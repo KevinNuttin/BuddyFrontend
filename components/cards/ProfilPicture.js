@@ -19,24 +19,22 @@ function profilPicture(color) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 100,
+    flex: 1,
+    marginTop: 60,
   },
 
   picture: {
-    width: 116,
-    height: 116,
+    width: 140,
+    height: 140,
     borderWidth: 1,
     borderColor: "#372C60",
-    transform: [{ rotate: "45deg" }],
+    borderRadius: 360,
   },
 
   background: {
     width: 116,
     height: 116,
     backgroundColor: "#DDABFE",
-    transform: [{ rotate: "45deg" }],
   },
 });
 

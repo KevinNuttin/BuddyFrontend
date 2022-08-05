@@ -1,40 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function buttonLeft(title, props) {
+function ButtonLeft(title, onPress) {
 
     const [isPress, setIsPress] = useState(false)
-    const onPress = () => setIsPress(true)
-    const colorButton = ""
 
-    if(!isPress){
-        colorButton = "#FFA588"
+    var onPress = () => {
+
+        if(isPress === false){
+            
+            setIsPress(true)
+
+        } else {
+
+            setIsPress(false)
+        }
+    }
+    
+
+    var colorButton
+
+    if(isPress === true ) {
+        colorButton = {...styles.button, backgroundColor: "#FFA588"}
     } else {
-        colorButton = ""
+        colorButton = {...styles.button}
     }
 
+
     return(
-        <View style={styles.container}>
             <TouchableOpacity 
-                style={[styles.button, {backgroudColor: {colorButton}} ]} 
+                style={colorButton} 
                 onPress={onPress}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
-        </View>
-
     )
 }
 
 const styles = StyleSheet.create({
-    
-    container: {
-
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-
-    },
 
     button: {
 
@@ -59,4 +61,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default buttonLeft
+export default ButtonLeft

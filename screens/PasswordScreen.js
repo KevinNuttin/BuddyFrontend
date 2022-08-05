@@ -17,7 +17,14 @@ function PasswordScreen(props) {
   //var passwordInput = Input("password")
   var header = Header("EmailScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
-  var tunnel = Tunnel(5)
+
+  //! BOUTON DE DEMO A SUPPRIMER
+  var confirmer2 = OffsetMiniButton("Confirmer", "SearchGames", comfirmation2)
+  async function comfirmation2(redirection){
+    props.navigation.navigate(redirection)
+  }
+
+  var tunnel = Tunnel(4)
 
   async function comfirmation(redirection){
     if(text != null){
@@ -55,12 +62,12 @@ function PasswordScreen(props) {
                 value={text}
                 keyboardType="default"
                 secureTextEntry={true}
+                placeholder="Tu y es presque..."
         />
         {/*{passwordInput}*/}
-        {confirmer}
+        {confirmer2}
 
        {tunnel}
-
           
       </View>
     </ImageBackground>
@@ -69,43 +76,38 @@ function PasswordScreen(props) {
 
 const styles = StyleSheet.create({
 
-  container: {
-
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-
   background: {
 
     height: "100%",
+  },
 
+  container: {
+
+    flex: 1,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   text: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 80,
+    marginTop: 100,
+    marginBottom: 140,
 
     fontWeight: "400",
     fontSize: 26,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
   input: {
-    
+
     width : 200,
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 40,
+    marginBottom: 60,
 },
 
 });

@@ -3,13 +3,12 @@ import { StyleSheet, View} from "react-native";
 
 function tunnel(number) {
 
-  
+  var number
 
   if(number === 2) {
     return(
       <View style={styles.container}>
         <View style={[styles.tunnel, {backgroundColor: "#745ACE", width: 60}]}/>
-        <View style={styles.tunnel}/>
         <View style={styles.tunnel}/>
         <View style={styles.tunnel}/>
       </View>
@@ -20,7 +19,6 @@ function tunnel(number) {
         <View style={styles.container}>
           <View style={[styles.tunnel, {backgroundColor: "#745ACE", width: 100}]}/>
           <View style={styles.tunnel}/>
-          <View style={styles.tunnel}/>
         </View>
       )
 
@@ -28,22 +26,13 @@ function tunnel(number) {
     return(
       <View style={styles.container}>
         <View style={[styles.tunnel, {backgroundColor: "#745ACE", width: 140}]}/>
-        <View style={styles.tunnel}/>
       </View>
     )
-
-} if(number === 5) {
-  return(
-    <View style={styles.container}>
-      <View style={[styles.tunnel, {backgroundColor: "#745ACE", width: 180}]}/>
-    </View>
-  )
 
 } else {
     return(
         <View style={styles.container}>
           <View style={[styles.tunnel, {backgroundColor: "#745ACE"}]}/>
-          <View style={styles.tunnel}/>
           <View style={styles.tunnel}/>
           <View style={styles.tunnel}/>
           <View style={styles.tunnel}/>
