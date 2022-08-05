@@ -2,18 +2,31 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
-import Toggle from "../components/buttons/Toggle"
+import ButtonLeft from "../components/buttons/ButtonLeft"
+import ButtonRight from "../components/buttons/ButtonRight"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 function LanguageScreen(props) {
 
+<<<<<<< HEAD
   var header = Header("LanguageScreen", props)
   var toggle1 = Toggle("Français", "English")
   var toggle2 = Toggle("Deutsch", "Espagnol")
   var toggle3 = Toggle("조선말", "日本語 ")
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
   var tunnel = Tunnel(5)
+=======
+  var header = Header("PlatformScreen", props)
+  var FR = ButtonLeft("Français")
+  var DE = ButtonLeft("Deutsch")
+  var CO = ButtonLeft("조선말")
+  var EN = ButtonRight("English")
+  var ES = ButtonRight("Espagnol")
+  var JP = ButtonRight("日本語")
+  var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
+  var tunnel = Tunnel(4)
+>>>>>>> 191a37925d8a989f1bd99878e4a1fb1f02681048
 
   function goGames(redirection){
     props.navigation.navigate(redirection); 
@@ -32,9 +45,11 @@ function LanguageScreen(props) {
 
         <Text style={styles.text}>On communique en...</Text>
 
-        {toggle1}
-        {toggle2}
-        {toggle3}
+          <View style={styles.buttons}>
+            {FR}{EN}
+            {DE}{ES}
+            {CO}{JP}
+          </View>
         
         {confirmer}
 
@@ -50,15 +65,14 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
+    flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 
   background: {
 
     height: "100%",
-
   },
 
   text: {
@@ -73,17 +87,19 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
-  input: {
-    width : 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 40,
-},
+  buttons: {
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexWrap: "wrap",
+    width: "90%",
+    marginTop: -10,
+    marginBottom: 250,
+  }
 
 });
 

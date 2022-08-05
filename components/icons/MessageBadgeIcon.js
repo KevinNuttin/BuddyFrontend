@@ -6,7 +6,6 @@ function MessageBadgeIcon() {
     return(
 
         <Image 
-        style={{width: 25}}
         source={require('../../assets/icons/messageBadge_iconbuddy.png')}/>
 
     )

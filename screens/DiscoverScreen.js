@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react"
-import { StyleSheet, Text, View, Title, Button, ImageBackground, Image} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button, Image } from "react-native";
 
 import Header2 from "../components/cards/Header2"
-import CardsSwipe from 'react-native-cards-swipe';
 import SwipeCards from "react-native-swipe-cards-deck";
 
 const cardsData = [
@@ -89,9 +88,14 @@ const cardsData = [
   }
   
   const styles = StyleSheet.create({
+
+    background: {
+
+      height: "100%",
+    },
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
     },

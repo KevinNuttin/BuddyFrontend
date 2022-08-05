@@ -18,7 +18,7 @@ export default function searchGames(props) {
 
     createTwoButtonAlert = () =>
     Alert.alert(
-      "Vous n'avez pas de jeux",
+      "Tu n'as pas de jeux...",
       "Merci d'ajouter au moins un jeux  wesh!",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
@@ -116,7 +116,7 @@ useEffect(() => {
                     labelField="label"
                     valueField="value"
                     label="Dropdown"
-                    placeholder="Vos jeux"
+                    placeholder="Tes jeux"
                     value={dropdown}
                     onChange={item => {
                     setDropdown(item.name);

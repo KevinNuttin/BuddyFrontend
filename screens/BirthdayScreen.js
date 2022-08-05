@@ -19,7 +19,7 @@ function BirthdayScreen(props) {
   //var birthdayInput = Input("Âge")
   var header = Header("HomeScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "PseudoScreen",comfirmation)
-  var tunnel = Tunnel(2)
+  var tunnel = Tunnel(1)
 
   function comfirmation(redirection){
     if(text != null){
@@ -46,60 +46,53 @@ function BirthdayScreen(props) {
                 onChangeText={(value) => setText(value)}
                 value={text}
                 keyboardType="phone-pad"
+                placeholder="La vraie bien sûr..."
         />
         {/*{birthdayInput}*/}
         
         {confirmer}
       
-        
-
         {tunnel}
 
-    
-  
-    </View>
+      </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
 
-  container: {
-
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-
   background: {
 
     height: "100%",
+  },
 
+  container: {
+
+    flex: 1,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   text: {
 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 80,
+    marginTop: 100,
+    marginBottom: 140,
 
     fontWeight: "400",
     fontSize: 26,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
   input: {
+
     width : 200,
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 40,
+    marginBottom: 60,
 },
 
 });
