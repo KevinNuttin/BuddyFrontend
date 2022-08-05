@@ -112,7 +112,7 @@ export default function searchGames(props) {
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
     function comfirmation(redirection){
-       console.log("ça va ?");
+       console.log("g");
          
       }
 

@@ -19,7 +19,7 @@ function BirthdayScreen(props) {
   //var birthdayInput = Input("Âge")
   var header = Header("HomeScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "PseudoScreen",comfirmation)
-  var tunnel = Tunnel(2)
+  var tunnel = Tunnel(1)
 
   function comfirmation(redirection){
     if(text != null){
