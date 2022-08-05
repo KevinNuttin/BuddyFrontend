@@ -9,7 +9,7 @@ export default function Homescreen(props) {
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
   var matthieu = OffsetButton("bouton pour matthieu", "BirthdayScreen",)
-  var kevin = OffsetButton("boutton pour Kevin", "SearchGames", searchgame)
+  var kevin = OffsetButton("boutton pour Kevin", "DiscoverScreen", searchgame)
 
 
 

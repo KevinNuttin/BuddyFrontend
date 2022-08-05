@@ -12,7 +12,7 @@ function LanguageScreen(props) {
   var toggle1 = Toggle("Français", "English")
   var toggle2 = Toggle("Deutsch", "Espagnol")
   var toggle3 = Toggle("조선말", "日本語 ")
-  var confirmer = OffsetMiniButton("Confirmer", "SearchGames", goGames)
+  var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
   var tunnel = Tunnel(5)
 
   function goGames(redirection){
