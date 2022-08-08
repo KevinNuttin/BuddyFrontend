@@ -37,7 +37,7 @@ function PasswordScreen(props) {
       const body = await data.json()
       console.log(body);
   
-    props.onConfirmer(text,)
+    props.onConfirmer(text)
     if(body.result){
     props.navigation.navigate(redirection);} }
   }

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react"
 import { StyleSheet, Text, View, ImageBackground, Button, Image } from "react-native";
+
 import Header2 from "../components/cards/Header2";
-import SwipeCards  from 'react-native-swipe-cards-deck';
+import SwipeCards from "react-native-swipe-cards-deck";
+
 
 const cardsData = [
   { src: require('../assets/avatars/avatar1.png') },
@@ -20,10 +22,12 @@ const cardsData = [
         <Image style={styles.img} source = {data.src}></Image>
         <Text style={styles.pseudo}> {data.pseudo}</Text>
         <Text style={styles.description}>{data.description}</Text>
+
         <View style = {styles.like}>
-        <Image source={require('../assets/icons/like_iconbuddy.png')}></Image>
-        <Image source={require('../assets/icons/unlike_iconbuddy.png')}></Image>
+          <Image source={require('../assets/icons/like_iconbuddy.png')}></Image>
+          <Image source={require('../assets/icons/unlike_iconbuddy.png')}></Image>
         </View>
+
       </View>
     );
   }
@@ -46,12 +50,12 @@ const cardsData = [
     useEffect(() => {
       setTimeout(() => {
         setCards([
-        { text: "youhou", pseudo: "Michele", backgroundColor: "FDEBE6", description: "Salut c'est Michele, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).", src: require('../assets/avatars/avatar1.png', )},
-        { text: "youhou", pseudo: "Jean-Jean", backgroundColor: "FDEBE6", description: "Salut c'est Jean-Jean, j'aime photocopier du sable. Tu connais Pokemon ?", src: require('../assets/avatars/avatar2.png') },
-        { text: "youhou", pseudo: "Mimi", backgroundColor: "FDEBE6", description: "Salut c'est Mimi, je suis elleboniste, je teste l'eau des piscines et je dis si elle est bonne", src: require('../assets/avatars/avatar3.png') },
-        { text: "youhou", pseudo: "Pedro", backgroundColor: "FDEBE6", description: "Salut c'est Pedro, je mets les pieds où je veux et c'est souvent dans la gueule... ", src: require('../assets/avatars/avatar4.png') },
-        { text: "youhou", pseudo: "Sophie_Fonsec", backgroundColor: "FDEBE6", description: "Yo, je suis Végan mais c'est pas grave. Tu connais DOOM ?", src: require('../assets/avatars/avatar5.png')},
-        { text: "youhou", pseudo: "Polin", backgroundColor: "FDEBE6", description: "Flem de faire ma decription. Je joue a lol c'est normal.", src: require('../assets/avatars/avatar6.png') },
+        { pseudo: "Michele", backgroundColor: "FDEBE6", description: "Salut c'est Michele, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).", src: require('../assets/avatars/avatar1.png', )},
+        { pseudo: "Jean-Jean", backgroundColor: "FDEBE6", description: "Salut c'est Jean-Jean, j'aime photocopier du sable. Tu connais Pokemon ?", src: require('../assets/avatars/avatar2.png') },
+        { pseudo: "Mimi", backgroundColor: "FDEBE6", description: "Salut c'est Mimi, je suis elleboniste, je teste l'eau des piscines et je dis si elle est bonne", src: require('../assets/avatars/avatar3.png') },
+        { pseudo: "Pedro", backgroundColor: "FDEBE6", description: "Salut c'est Pedro, je mets les pieds où je veux et c'est souvent dans la gueule... ", src: require('../assets/avatars/avatar4.png') },
+        { pseudo: "Sophie_Fonsec", backgroundColor: "FDEBE6", description: "Yo, je suis Végan mais c'est pas grave. Tu connais DOOM ?", src: require('../assets/avatars/avatar5.png')},
+        { pseudo: "Polin", backgroundColor: "FDEBE6", description: "Flem de faire ma decription. Je joue a lol c'est normal.", src: require('../assets/avatars/avatar6.png') },
         ]);
       }, 3000);
     }, []);
@@ -98,7 +102,7 @@ const cardsData = [
               // stackDepth={3}
             />
           ) : (
-            <StatusCard text="Loading..." />
+            <StatusCard text="Loading Buddies..." />
           )}
         </View>
       </ImageBackground>
@@ -120,9 +124,12 @@ const cardsData = [
     },
 
     card: {
+
+
       flexDirection: "column",
       justifyContent: "space-evenly",
       alignItems: "center",
+
       width: 320,
       height: 580,
       borderRadius: 40,
@@ -131,12 +138,12 @@ const cardsData = [
     },
 
     pseudo: {
+
       fontWeight: "400",
       fontSize: 26,
       letterSpacing: 0.5,
       color: "#FFFF",
       marginTop: -60,
-
     },
 
     description: {
@@ -152,10 +159,12 @@ const cardsData = [
     img: {
 
       borderWidth: 4,
+
       borderColor: "#FFFF",
       borderRadius: 100,
       marginTop: -100,
       marginBottom:40,
+
     },
 
     cardsText: {

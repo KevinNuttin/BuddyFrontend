@@ -1,15 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Title,
-  Button,
-  ImageBackground,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image, SafeAreaView, ScrollView, Pressable } from "react-native";
 
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
@@ -29,7 +18,8 @@ export default function ProfilScreen(props) {
     async function loadData() {
       
       var rawData = await fetch(
-        "http://192.168.10.131:3000/users/getprofil");
+        "http://192.168.10.144:3000/users/getprofil"
+      );
 
       var data = await rawData.json();
       console.log("logggg", data.user.pseudo);
