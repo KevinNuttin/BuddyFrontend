@@ -4,11 +4,13 @@ import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
 import CardGame from "../components/cards/CardGame";
 import Header2 from "../components/cards/Header2";
+import Header3 from "../components/cards/Header3";
 
 export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
   var header = Header2("DiscoverScreen","DiscoverScreen",props)
+  var headerEdit = Header3("DiscoverScreen", "DiscoverScreen", "EditScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);
@@ -18,8 +20,7 @@ export default function ProfilScreen(props) {
     async function loadData() {
       
       var rawData = await fetch(
-        "http://192.168.10.144:3000/users/getprofil"
-      );
+        "http://192.168.10.130:3000/users/getprofil");
 
       var data = await rawData.json();
       console.log("logggg", data.user.pseudo);
@@ -59,7 +60,8 @@ export default function ProfilScreen(props) {
       style={styles.background}
       source={require("../assets/backgrounds/fond_buddy.png")}>
 
-      {header}
+      {headerEdit}
+  
 
       <View style={styles.container}>
         {ProfilPic}
