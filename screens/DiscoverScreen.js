@@ -54,15 +54,15 @@ const cardsData = [
         { pseudo: "Jean-Jean", backgroundColor: "FDEBE6", description: "Salut c'est Jean-Jean, j'aime photocopier du sable. Tu connais Pokemon ?", src: require('../assets/avatars/avatar2.png') },
         { pseudo: "Mimi", backgroundColor: "FDEBE6", description: "Salut c'est Mimi, je suis elleboniste, je teste l'eau des piscines et je dis si elle est bonne", src: require('../assets/avatars/avatar3.png') },
         { pseudo: "Pedro", backgroundColor: "FDEBE6", description: "Salut c'est Pedro, je mets les pieds où je veux et c'est souvent dans la gueule... ", src: require('../assets/avatars/avatar4.png') },
-        { pseudo: "Sophie_Fonsec", backgroundColor: "FDEBE6", description: "Yo, je suis Végan mais c'est pas grave. Tu connais DOOM ?", src: require('../assets/avatars/avatar5.png')},
-        { pseudo: "Polin", backgroundColor: "FDEBE6", description: "Flem de faire ma decription. Je joue a lol c'est normal.", src: require('../assets/avatars/avatar6.png') },
+        { pseudo: "Sophie_Fonsec", backgroundColor: "FDEBE6", description: "Yo, je suis Végan et j'adore DOOM.s", src: require('../assets/avatars/avatar5.png')},
+        { pseudo: "Polin", backgroundColor: "FDEBE6", description: "Flem de faire ma decription. Je joue à lol c'est normal.", src: require('../assets/avatars/avatar6.png') },
         ]);
       }, 3000);
     }, []);
   
     function handleYup(card) {
       console.log(`Yup for ${card.text}`);
-      props.navigation.navigate("MatchScreen")
+      props.navigation.navigate("MatchScreen") // force le match pour la demo (à retirer)
       return true; // return false if you wish to cancel the action
     }
     function handleNope(card) {

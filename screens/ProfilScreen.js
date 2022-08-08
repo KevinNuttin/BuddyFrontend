@@ -36,7 +36,7 @@ export default function ProfilScreen(props) {
   }, []);
 
   var test = dataPlatform.map((plateforme, i) => {
-    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
+    return <Text key={i} style={styles.plateform}>{plateforme.plateforme}</Text>;
   });
 
   var image = dataGames.map ((image, j ) => {
@@ -65,9 +65,9 @@ export default function ProfilScreen(props) {
         {ProfilPic}
 
         <View style={styles.containerText}>
-          <Text style={styles.text1}>{dataPseudo}</Text>
+          <Text style={styles.pseudo}>{dataPseudo}</Text>
           <View style={styles.plateforme}>{test}</View>
-          <Text style={styles.text3}>
+          <Text style={styles.description}>
             Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
           </Text>
         </View>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 
-  text1: {
+  pseudo: {
     fontWeight: "bold",
     fontSize: 26,
     letterSpacing: 0.5,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  text2: {
+  plateform: {
     fontWeight: "200",
     fontSize: 16,
     letterSpacing: 0.5,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  text3: {
+  description: {
     fontWeight: "400",
     fontSize: 18,
     fontStyle: "italic",
@@ -164,12 +164,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 60,
   },
+
   image:{
     height:100,
     width:100,
     marginRight: 20,
     marginLeft: 20,
   },
+  
   plateforme:{
     flexDirection:"row",
     marginTop:10,
