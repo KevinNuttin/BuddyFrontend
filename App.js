@@ -37,7 +37,9 @@ import mdp from './reducers/password';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers}  from 'redux';
 
-const store = createStore(combineReducers({ age, pseudo, mail, mdp}));
+import socket from './reducers/socket';
+
+const store = createStore(combineReducers({ age, pseudo, mail, mdp,socket}));
 
 const Stack = createStackNavigator();
 

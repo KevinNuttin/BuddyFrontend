@@ -1,19 +1,48 @@
-import React, { useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, ImageBackground, TextInput,ScrollView} from "react-native"
+import { Button, ListItem,  } from 'react-native-elements';
+import { connect } from 'react-redux';
+
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
-
+import socketIOClient from 'socket.io-client';
 
 function ChatScreen(props) {
+  const [ text, setText] = useState('')
 
-    const [ message, setMessage] = useState("")
+    const [ message, setMessage] = useState([])
 
-    var send = OffsetMiniButton("Envoyer", sendMessage)
+    const [ pseudo, setPseudo] = useState('')
+
+    const [ currentRoom, setRoom] = useState('MnMS')
+
+
+    var send = OffsetMiniButton("Envoyer","NO", sendMessage)
+
+
+
+
+    var socket = props.socket;
 
     function sendMessage(){
+      socket.emit("message", currentRoom, text, pseudo);
 
     }
+
+    useEffect(() => {
+      
+
+      
+    socket.on('messageFromBack', (room, newMessage, userPseudo) => {
+      async function relou(){
+    if(currentRoom == room){
+       setMessage([...message,{content : newMessage , pseudo : userPseudo}])}
+    }
+    relou();
+    });
+    
+  }, [message]);
 
   return (
 
@@ -23,13 +52,38 @@ function ChatScreen(props) {
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
       <View style={styles.container}>
+      <ScrollView style={{ width : 300, marginTop : 20}}>
+        {message.map((message, i) =>
+        (<ListItem key={i}>
+          <ListItem.Content>
+            <ListItem.Title>{message.content}</ListItem.Title>
+            <ListItem.Subtitle>{message.pseudo}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>)
+        )}
+      </ScrollView>
+
       </View>
 
       <View style={styles.sender}>
         <TextInput
         style={styles.input}
-            onChangeText={(message) => setMessage(message)}
+            onChangeText={(val) => setText(val)}
             value={message}
+            keyboardType="default"
+            placeholder=""
+        />
+        <TextInput
+        style={styles.input}
+            onChangeText={(val) => setRoom(val)}
+            value={currentRoom}
+            keyboardType="default"
+            placeholder=""
+        />
+        <TextInput
+        style={styles.input}
+            onChangeText={(val) => setPseudo(val)}
+            value={pseudo}
             keyboardType="default"
             placeholder=""
         />
@@ -78,4 +132,17 @@ const styles = StyleSheet.create({
 
 });
 
-export default ChatScreen
+
+function mapStateToProps(state) {
+  return { socket: state.socket };
+}
+
+
+
+
+
+export default connect(
+  mapStateToProps,
+  null
+)(ChatScreen);
+

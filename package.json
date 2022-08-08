@@ -27,6 +27,7 @@
     "react-native-cards-swipe": "^1.2.1",
     "react-native-date-picker": "^4.2.5",
     "react-native-element-dropdown": "^2.1.0",
+    "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~2.2.1",
     "react-native-mask-input": "^1.2.0",
     "react-native-reanimated": "~2.8.0",
@@ -36,7 +37,8 @@
     "react-native-swipe-cards-deck": "^0.3.0",
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
