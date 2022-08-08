@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
+
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert, ImageBackground} from "react-native";
+
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -15,9 +17,6 @@ export default function searchGames(props) {
     const [gameName, setGameName] = useState([]);
     var header = Header("SignInScreen", props)
     var tunnel = Tunnel(1)
-
-
-console.log("coucou");
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
@@ -45,6 +44,8 @@ useEffect(() => {
     var rawResponse = await fetch('http://192.168.10.130:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
+    console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
+    console.log("coucou")
 }
     dataLoad();
     

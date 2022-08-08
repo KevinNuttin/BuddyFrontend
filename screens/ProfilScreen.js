@@ -1,15 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Title,
-  Button,
-  ImageBackground,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image, SafeAreaView, ScrollView, Pressable } from "react-native";
 
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";

@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-
   },
 
   text2: {
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
     color: "#372C60",
     textAlign: "center",
     marginBottom: 80,
-
   },
 
   input: {
@@ -99,6 +97,5 @@ const styles = StyleSheet.create({
 },
 
 });
-
 
 export default MoodScreen
