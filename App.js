@@ -19,6 +19,7 @@ import AgeScreen from './screens/AgeScreen';
 import DiscoverScreen from './screens/DiscoverScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import MatchScreen from './screens/MatchScreen';
+import EditScreen from './screens/EditScreen';
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -61,7 +62,7 @@ function App(){
       <Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
       <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
       <Stack.Screen name="MatchScreen" component={MatchScreen}/>
-      
+      <Stack.Screen name="EditScreen" component={EditScreen}/>
 
     </Stack.Navigator>
   </NavigationContainer></Provider>
