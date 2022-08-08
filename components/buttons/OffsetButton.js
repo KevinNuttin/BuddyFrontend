@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 // Composant Bouton de redirection pour la HomeScreen
@@ -23,12 +23,16 @@ function OffsetButton(title , redirection, onPress) {
 
     var positionButton
 
-    if(pressed === true ) {
+    if(pressed === true) {
         positionButton = {...styles.rectangle, top: -55, left: 0}
         
     } else {
         positionButton = {...styles.rectangle}
     }
+
+    //     useEffect(() => {
+    //     setPressed(false)
+    // }, []);
 
     return(
 

@@ -2,11 +2,9 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button} from "react-native"
 
 import Header from "../components/cards/Header"
-import Input from "../components/buttons/Input"
+import MaskInput from 'react-native-mask-input'
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
-
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { connect } from 'react-redux';
 
@@ -40,15 +38,14 @@ function BirthdayScreen(props) {
 
         <Text style={styles.text}>Ta date de naissance</Text>
 
-        {/* A remplacer par le composant Input*/}
-        <TextInput
-        style={styles.input}
-                onChangeText={(value) => setText(value)}
-                value={text}
-                keyboardType="phone-pad"
-                placeholder="La vraie bien sûr..."
+        <MaskInput
+          style={styles.input}
+          onChangeText={(value) => setText(value)}
+          value={text}
+          mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
+          keyboardType="phone-pad"
+          placeholder="JJ/MM/AAAA"
         />
-        {/*{birthdayInput}*/}
         
         {confirmer}
       
