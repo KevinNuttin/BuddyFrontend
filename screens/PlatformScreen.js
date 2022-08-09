@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import { StyleSheet, Text, View, ImageBackground} from "react-native"
 
 import Header from "../components/cards/Header"
 import ButtonLeft from "../components/buttons/ButtonLeft"
@@ -10,18 +10,77 @@ import Tunnel from "../components/buttons/Tunnel"
 function PlatformScreen(props) {
 
   var header = Header("MoodScreen", props)
-  var PC = ButtonLeft("PC")
-  var PS4 = ButtonLeft("PS4")
-  var XboxOne = ButtonLeft("XboxOne")
-  var Switch = ButtonRight("Switch")
-  var PS5 = ButtonRight("PS5")
-  var XboxSeries = ButtonRight("XboxSeries")
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
   var tunnel = Tunnel(3)
 
   function goLanguage(redirection){
     props.navigation.navigate(redirection); 
   }
+
+  const [selected1, setSelected1] = useState(false)
+  const [selected2, setSelected2] = useState(false)
+  const [selected3, setSelected3] = useState(false)
+  const [selected4, setSelected4] = useState(false)
+  const [selected5, setSelected5] = useState(false)
+  const [selected6, setSelected6] = useState(false)
+
+  const [platformSelected, setPlatformSelected] = useState([])
+
+  var choosePlatformPC = (platformName) => {
+
+    setSelected1(platformName)
+
+    if(selected1 == true) {
+      setPlatformSelected(...["62e9529a0864ccd30790346a"])
+    }
+  }
+
+  var choosePlatformPS4 = (platformName) => {
+
+    setSelected2(platformName)
+
+    if(selected2 == true) {
+      setPlatformSelected(...["62e952a90864ccd30790346c"])
+    }
+  }
+
+  var choosePlatformXBOXOne = (platformName) => {
+
+    setSelected3(platformName)
+
+    if(selected3 == true) {
+      setPlatformSelected(...["62e952ad0864ccd30790346e"])
+    }
+  }
+
+  var choosePlatformSwitch = (platformName) => {
+
+    setSelected4(platformName)
+
+    if(selected4 == true) {
+      setPlatformSelected(...["62e952ad0864ccd30790346e"])
+    }
+  }
+
+  var choosePlatformPS5 = (platformName) => {
+
+    setSelected5(platformName)
+
+    if(selected5 == true) {
+      setPlatformSelected(...["62e952b10864ccd307903470"])
+    }
+  }
+
+  var choosePlatformXBOXSeries = (platformName) => {
+
+    setSelected6(platformName)
+
+    if(selected6 == true) {
+      setPlatformSelected(...["62e952b60864ccd307903472"])
+    }
+  }
+
+
 
   return (
 
@@ -37,9 +96,12 @@ function PlatformScreen(props) {
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
           <View style={styles.buttons}>
-            {PC}{Switch}
-            {PS4}{PS5}
-            {XboxOne}{XboxSeries}
+            <ButtonLeft title="PC" selected1={selected1} handleClickChoosePlatformParent={choosePlatformPC} />
+            <ButtonRight title="Switch" selected4={selected4} handleClickChoosePlatformParent={choosePlatformSwitch} />
+            <ButtonLeft title="PS4" selected2={selected2} handleClickChoosePlatformParent={choosePlatformPS4} />
+            <ButtonRight title="PS5" selected5={selected5} handleClickChoosePlatformParent={choosePlatformPS5} />
+            <ButtonLeft title="XBOXOne" selected3={selected3} handleClickChoosePlatformParent={choosePlatformXBOXOne} />
+            <ButtonRight title="XBOXSeries" selected6={selected6} handleClickChoosePlatformParent={choosePlatformXBOXSeries} />
           </View>
 
             {confirmer}

@@ -29,7 +29,7 @@ function PasswordScreen(props) {
   async function comfirmation(redirection){
     if(text != null){
       var birthday = new Date("2015-03-26");
-      const data = await fetch('http://192.168.10.150:3000/users/sign-up', {
+      const data = await fetch('http://192.168.10.133:3000/users/sign-up', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `pseudo=${props.user.pseudo}&mail=${props.user.mail}&password=${text}&birthday=${props.user.age}&min=${18}&max=${35}`

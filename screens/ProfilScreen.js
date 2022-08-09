@@ -20,7 +20,7 @@ export default function ProfilScreen(props) {
     async function loadData() {
       
       var rawData = await fetch(
-        "http://192.168.10.130:3000/users/getprofil");
+        "http://192.168.10.133:3000/users/getprofil");
 
       var data = await rawData.json();
       console.log("logggg", data.user.pseudo);

@@ -1,49 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function Toggle(title, title2, onPress) {
+function Toggle(props) {
+    
+    var colorButtonLeft
+    var colorButtonRight
 
-    const [selectedRight, setSelectedRight] = useState(true);
-    const [selectedLeft, setSelectedLeft] = useState(false);
-
-    var onPress = ()=> {
-        if(selectedRight === false) {
-            setSelectedRight(true) 
-            setSelectedLeft(false)
-        } else {
-            setSelectedRight(false)
-            setSelectedLeft(true)
-      }}
-
-    var colorButton
-    var colorButton2
-
-    if(selectedRight === true ){
-        colorButton = {...styles.button, backgroundColor: "#FFA588"}
-    } else {
-        colorButton = {...styles.button}
+    var onPress = (moodName)=> {
+      props.handleClickChooseMoodParent(moodName)
     }
 
-    if(selectedLeft === true ){
+    // if(props.selected1 === true){
+    //     colorButtonLeft = {...styles.button, backgroundColor: "#FFA588"}
+    //     colorButtonRight = {...styles.button}
+    //  } else {
+    //     colorButtonRight = {...styles.button, backgroundColor: "#DDABFE"}
+    //     colorButtonLeft = {...styles.button}
+    // }
 
-        colorButton2 = {...styles.button, backgroundColor: "#DDABFE"}
-    } else {
-        colorButton2 = {...styles.button}
-    }
 
     return(
 
         <View style={styles.container}>
-            <TouchableOpacity  
-                style={colorButton}
-                onPress={onPress}>
-                    <Text style={styles.buttonText}>{title}</Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onPress(true)}>
+                    <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-                style={colorButton2} 
-                onPress={onPress}>
-                    <Text style={styles.buttonText}>{title2}</Text>
+                style={styles.button} 
+                onPress={() => onPress(false)}>
+                    <Text style={styles.buttonText}>{props.title2}</Text>
             </TouchableOpacity>
         </View>
 

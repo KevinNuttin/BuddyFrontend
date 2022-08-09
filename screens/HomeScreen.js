@@ -6,7 +6,7 @@ import OffsetButton from "../components/buttons/OffsetButton";
 export default function Homescreen(props) {
 
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
-  var connexion = OffsetButton("Connexion", "ChatScreen", connexion) //SignInScreen
+  var connexion = OffsetButton("Connexion", "MoodScreen", connexion) //SignInScreen
 
   function inscription(redirection){
     props.navigation.navigate(redirection); 
