@@ -49,10 +49,11 @@ useEffect(() => {
 }
     dataLoad();
     
+    
 }, 
 []);
 
-//* Boucle dans le liste des jeux qui sont stockés dans un tableau, si le jeux est déjà présent dans la wishlist une variable déjà like se met à true
+//* Boucle dans la liste des jeux qui sont stockés dans un tableau, si le jeux est déjà présent dans la wishlist une variable déjà like se met à true
 
     var gamesList = gameList.map((game, i) => {
         var result = wishGame.find(element => element.name == game.name)
@@ -139,7 +140,7 @@ useEffect(() => {
 
    
     <ScrollView style={{marginTop: 20, marginBottom: 20, }}>
-        <View  style ={{flexDirection: 'row', flexWrap: 'wrap',}}>
+        <View  style ={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: "center"}}>
        {gamesList}
         </View>
     </ScrollView>
@@ -198,11 +199,9 @@ useEffect(() => {
           },
           GameCard: { 
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
             width: 180,
             flexWrap: 'wrap',
-            margin: 4,
+       
           },
           CardContainer: { 
             flexDirection: 'row',

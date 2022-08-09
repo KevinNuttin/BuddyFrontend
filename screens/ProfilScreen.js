@@ -10,7 +10,7 @@ export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
   var header = Header2("DiscoverScreen","DiscoverScreen",props)
-  var headerEdit = Header3("DiscoverScreen", "DiscoverScreen", "EditScreen", props)
+ var headerEdit = Header3("DiscoverScreen", "DiscoverScreen", "EditScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);

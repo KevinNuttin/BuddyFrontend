@@ -20,6 +20,7 @@ import DiscoverScreen from './screens/DiscoverScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import MatchScreen from './screens/MatchScreen';
 import EditScreen from './screens/EditScreen';
+import EditPictureScreen from './screens/EditPictureScreen';
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -63,6 +64,7 @@ function App(){
       <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
       <Stack.Screen name="MatchScreen" component={MatchScreen}/>
       <Stack.Screen name="EditScreen" component={EditScreen}/>
+      <Stack.Screen name="EditPictureScreen" component={EditPictureScreen}/>
 
     </Stack.Navigator>
   </NavigationContainer></Provider>

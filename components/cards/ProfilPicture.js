@@ -1,16 +1,16 @@
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 
-function profilPicture(color) {
-  // Le paramètre de changement de couleur doit être ajouté
-  var color1 = "#DDABFE";
-  var color2 = "#FFA588";
+function profilPicture(color,image) {
+
+
+
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.picture}
-        source={require("../../assets/avatars/avatarDefault.png")}
+        source={require(image)}
       />
       <View style={[styles.background, { backgroundColor: { color } }]} />
     </View>
