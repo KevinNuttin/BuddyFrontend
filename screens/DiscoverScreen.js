@@ -5,12 +5,12 @@ import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
 
 const cardsData = [
-  { src: require('../assets/avatars/avatar1.png') },
-  { src: require('../assets/avatars/avatar2.png') },
-  { src: require('../assets/avatars/avatar3.png') },
-  { src: require('../assets/avatars/avatar4.png') },
-  { src: require('../assets/avatars/avatar5.png') },
-  { src: require('../assets/avatars/avatar6.png') },
+  { src: require('../assets/avatars/Group.png') },
+  { src: require('../assets/avatars/Group2.png') },
+  { src: require('../assets/avatars/Group3.png') },
+  { src: require('../assets/avatars/Group4.png') },
+  { src: require('../assets/avatars/Group5.png') },
+  { src: require('../assets/avatars/Group6.png') },
 ];
 
 

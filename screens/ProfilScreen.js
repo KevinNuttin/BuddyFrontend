@@ -60,8 +60,6 @@ export default function ProfilScreen(props) {
   });
 
 
-  function GameSelectColor(name, img) {}
-
   return (
 
     <ImageBackground
