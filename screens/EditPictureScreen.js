@@ -20,30 +20,28 @@ import profilPicture from "../components/cards/ProfilPicture";
 
 
 export default function EditPictureScreen(props) {
+  const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
 
-  var picture = ["../assets/avatars/avatar1.png",
-  "../assets/avatars/avatar2.png",
-  "../assets/avatars/avatar3.png",
-  "../assets/avatars/avatar4.png",
-  "../assets/avatars/avatar5.png",
-  "../assets/avatars/avatar6.png"]
-
-function swap(photo){
-
-setAvatar(photo)
-
-}
-
-
-  var ProfilPic = ProfilPicture(null, avatar);
+  var ProfilPic = ProfilPicture(avatar);
   var header = Header2("EditScreen","EditScreen",props)
+  var pictures = [
+  require("../assets/avatars/Group.png"),
+  require("../assets/avatars/Group2.png"),
+  require("../assets/avatars/Group3.png"),
+  require("../assets/avatars/Group4.png"),
+  require("../assets/avatars/Group5.png"),
+  require("../assets/avatars/Group6.png"),
+  require("../assets/avatars/Group7.png"),
+  require("../assets/avatars/Group8.png"),
+  require("../assets/avatars/Group9.png"),
+  require("../assets/avatars/Group10.png")
+    
+  ]
 
-  var [avatar , setAvatar] = useState("../assets/avatars/avatarDefault.png")
-
-  var onPress = () => {
-    setAvatar("../assets/avatars/avatar1.png")
-  }
-
+  function swap(source){
+    console.log("coucou");
+    setAvatar(source)
+    }
 
   return(
 
@@ -51,36 +49,61 @@ setAvatar(photo)
       resizeMode="cover"
       style={styles.background}
       source={require("../assets/backgrounds/fond_buddy.png")}>
-
       {header}
-  
-
       <View style={styles.container}>
       <Text style={styles.text}>Choisi ton Avatar!</Text>
-      <TouchableOpacity>
+      <TouchableOpacity >
       {ProfilPic}
-      {avatar}
       </TouchableOpacity>
       </View>
-
-
+  
     <ScrollView horizontal={true} style={{marginTop: 250 }}>
         <View  style ={{flexDirection: 'row', flexWrap: 'wrap'}}>
-          
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={uri: ("https://res.cloudinary.com/ducivlnzm/image/upload/v1659973257/avatar6_xzkk0z.png")}
-          onPress={swap(picture[5])}></Image>
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={require("https://res.cloudinary.com/ducivlnzm/image/upload/v1659973257/avatar4_cy4e1b.png")}></Image>
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={require("https://res.cloudinary.com/ducivlnzm/image/upload/v1659973256/avatar2_omfpy8.png")}></Image>
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={require(picture[2])}></Image>
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={require(picture[3])}></Image>
-  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={require(picture[4])}></Image>
+  <Pressable onPress={() => swap(pictures[0])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[0]}></Image>
+  </Pressable>
 
-{/* be able to put the picture as the profil pic if selected*/}
+  <Pressable onPress={() => swap(pictures[1])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[1]}></Image>
+  </Pressable>
 
-        </View>
+  <Pressable onPress={() => swap(pictures[2])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[2]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[3])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[3]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[4])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[4]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[5])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[5]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[6])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[6]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[7])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[7]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[8])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[8]}></Image>
+  </Pressable>
+
+  <Pressable onPress={() => swap(pictures[9])} >
+  <Image  style = {{marginLeft: 10, borderRadius: 360}} source={pictures[9]}></Image>
+  </Pressable>
+  
+     </View>
     </ScrollView>
 
     </ImageBackground>
+    
 )}
 
 const styles = StyleSheet.create({

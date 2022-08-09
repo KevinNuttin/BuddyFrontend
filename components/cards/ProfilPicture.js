@@ -1,18 +1,15 @@
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 
-function profilPicture(color,image) {
-
-
-
+function profilPicture(image) {
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.picture}
-        source={require(image)}
+        source={(image)}
       />
-      <View style={[styles.background, { backgroundColor: { color } }]} />
+      <View />
     </View>
   );
 }

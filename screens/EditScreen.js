@@ -19,7 +19,9 @@ import {
 
   export default function ProfilScreen(props) {
     
-    var ProfilPic = ProfilPicture();
+    const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
+
+    var ProfilPic = ProfilPicture(avatar);
     var header = Header2("DiscoverScreen","DiscoverScreen",props)
     var edit = Edit("EditPictureScreen", onPress)
 

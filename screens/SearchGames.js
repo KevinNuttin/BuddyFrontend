@@ -41,7 +41,7 @@ export default function searchGames(props) {
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.10.136:3000/library/addgames', {
+       const data = await fetch('http://192.168.10.162:3000/library/addgames', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
