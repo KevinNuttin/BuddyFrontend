@@ -1,27 +1,44 @@
 import React, {useState, useEffect} from "react"
-import { StyleSheet, Text, View, ImageBackground, Button, Image } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button, Image, ScrollView } from "react-native";
 
 import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
 
-
 const cardsData = [
-  { src: require('../assets/avatars/avatar1.png') },
-  { src: require('../assets/avatars/avatar2.png') },
-  { src: require('../assets/avatars/avatar3.png') },
-  { src: require('../assets/avatars/avatar4.png') },
-  { src: require('../assets/avatars/avatar5.png') },
-  { src: require('../assets/avatars/avatar6.png') },
+  { src: require('../assets/avatars/Group.png') },
+  { src: require('../assets/avatars/Group2.png') },
+  { src: require('../assets/avatars/Group3.png') },
+  { src: require('../assets/avatars/Group4.png') },
+  { src: require('../assets/avatars/Group5.png') },
+  { src: require('../assets/avatars/Group6.png') },
 ];
 
 
   function Card({ data }) {
+
+    var gamesList = data.games.map((games, i) => {
+      return(games.name)
+     })
+     var gameListImage = data.games.map((games, j) => {
+      return(
+        <Image style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
+     })
+     console.log("data", data)
+     var plateformeList = data.plateformes.map((plateforme, j) => {
+      return(plateforme.plateforme)
+     })
+     
     return (
       <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
         <Text>{data.text}</Text>
-        <Image style={styles.img} source = {data.src}></Image>
+        <Image style={styles.img} source= {{uri :(data.picture)}}></Image>
         <Text style={styles.pseudo}> {data.pseudo}</Text>
-        <Text style={styles.description}>{data.description}</Text>
+        <Text style={styles.description}> {plateformeList}</Text>
+      <View style={styles.plateforme}><Text style={styles.description}>{data.description}</Text></View>
+        <Text style={styles.description}> {gamesList} </Text>
+        <ScrollView style={styles.scroll} horizontal={true}>
+        {gameListImage}
+        </ScrollView>
 
         <View style = {styles.like}>
           <Image source={require('../assets/icons/like_iconbuddy.png')}></Image>
@@ -45,21 +62,50 @@ const cardsData = [
     var header = Header2("ProfilScreen", "DiscoverScreen", props)
     const [cards, setCards] = useState();
 
-  
     // replace with real remote data fetching
     useEffect(() => {
-      setTimeout(() => {
-        setCards([
-        { pseudo: "Michele", backgroundColor: "FDEBE6", description: "Salut c'est Michele, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).", src: require('../assets/avatars/avatar1.png', )},
-        { pseudo: "Jean-Jean", backgroundColor: "FDEBE6", description: "Salut c'est Jean-Jean, j'aime photocopier du sable. Tu connais Pokemon ?", src: require('../assets/avatars/avatar2.png') },
-        { pseudo: "Mimi", backgroundColor: "FDEBE6", description: "Salut c'est Mimi, je suis elleboniste, je teste l'eau des piscines et je dis si elle est bonne", src: require('../assets/avatars/avatar3.png') },
-        { pseudo: "Pedro", backgroundColor: "FDEBE6", description: "Salut c'est Pedro, je mets les pieds où je veux et c'est souvent dans la gueule... ", src: require('../assets/avatars/avatar4.png') },
-        { pseudo: "Sophie_Fonsec", backgroundColor: "FDEBE6", description: "Yo, je suis Végan et j'adore DOOM.s", src: require('../assets/avatars/avatar5.png')},
-        { pseudo: "Polin", backgroundColor: "FDEBE6", description: "Flem de faire ma decription. Je joue à lol c'est normal.", src: require('../assets/avatars/avatar6.png') },
-        ]);
-      }, 3000);
-    }, []);
+
+      async function loadData() {
+      
+        var rawDataProfil = await fetch(
+          "http://192.168.10.138:3000/users/getprofil");
   
+        var dataProfilfetch = await rawDataProfil.json();
+
+        var arraytemp = dataProfilfetch.user.map((profil, i) => {
+          var games = []
+          var likes = []
+           var langues =[]
+
+          for(var i=0; i< profil.games.length; i++){
+            games.push(profil.games[i])
+          }
+          for(var i=0; i< profil.like.length; i++){
+            likes.push(profil.like[i])
+          }
+  
+
+          return {
+            pseudo: profil.pseudo,
+            description : profil.description,
+            picture : profil.picture,
+            token: profil.token,
+            visible: profil.visible,
+            games : profil.games,
+            likes: likes,
+            plateformes: profil.plateforme,
+            moods : profil.mood,
+            langues : langues
+        
+          }
+        })
+        setCards(arraytemp)
+      }
+  
+      loadData();
+      
+    }, []);
+
     function handleYup(card) {
       console.log(`Yup for ${card.text}`);
       props.navigation.navigate("MatchScreen") // force le match pour la demo (à retirer)
@@ -98,8 +144,8 @@ const cardsData = [
               hasMaybeAction={true}
     
               // If you want a stack of cards instead of one-per-one view, activate stack mode
-              // stack={true}
-              // stackDepth={3}
+              stack={true}
+              stackDepth={3}
             />
           ) : (
             <StatusCard text="Loading Buddies..." />
@@ -120,21 +166,17 @@ const cardsData = [
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      
     },
 
     card: {
-
-
       flexDirection: "column",
       justifyContent: "space-evenly",
       alignItems: "center",
-
       width: 320,
       height: 580,
       borderRadius: 40,
       textAlign: "center",
-      padding: 50,
+      padding: 10,
     },
 
     pseudo: {
@@ -143,7 +185,8 @@ const cardsData = [
       fontSize: 26,
       letterSpacing: 0.5,
       color: "#FFFF",
-      marginTop: -60,
+      marginBottom:10
+    
     },
 
     description: {
@@ -154,28 +197,47 @@ const cardsData = [
       letterSpacing: 0.5,
       color: "#FFFF",
       textAlign: "center",
+      marginBottom:10,
     },
 
     img: {
 
       borderWidth: 4,
-
       borderColor: "#FFFF",
       borderRadius: 100,
-      marginTop: -100,
-      marginBottom:40,
+      height: 180,
+      width: 180,
+      marginBottom:10
 
     },
-
+    gameimg: {
+      borderWidth: 4,
+      borderColor: "#FFFF",
+      borderRadius: 100,
+      height: 80,
+      width: 80
+    },
     cardsText: {
       fontSize: 22,
-      marginBottom: 20,
     },
+
     like:{
     flexDirection: "row-reverse",
     justifyContent: "space-evenly",
     width: 450,
-    marginBottom: -70,
+    marginBottom:20
+    },
+    scroll: {
+      flexDirection: "row",  
+    },
+    emoji: {
+      flexDirection: "row", 
+      width: 200,
+      height: 80
+    },
+    plateforme:{
+      width: 200,
+      justifyContent: "space-evenly",
     }
   });
   

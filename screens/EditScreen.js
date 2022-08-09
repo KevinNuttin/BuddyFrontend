@@ -9,19 +9,27 @@ import {
     SafeAreaView,
     ScrollView,
     Pressable,
+    Icon
   } from "react-native";
   
   import React, { useState, useEffect } from "react";
   import ProfilPicture from "../components/cards/ProfilPicture";
-  import CardGame from "../components/cards/CardGame";
   import Header2 from "../components/cards/Header2";
-
+  import Edit from "../components/cards/Edit";
 
   export default function ProfilScreen(props) {
     
-    var ProfilPic = ProfilPicture();
+    const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
+
+    var ProfilPic = ProfilPicture(avatar);
     var header = Header2("DiscoverScreen","DiscoverScreen",props)
-  
+    var edit = Edit("EditPictureScreen", onPress)
+
+    function onPress(redirection){
+        props.navigation.navigate(redirection); 
+    }
+
+      
     const [dataPseudo, setDataPseudo] = useState("..");
     const [dataPlatform, setDataPlatform] = useState([]);
     const [dataGames, setDataGames] = useState([]);
@@ -72,12 +80,14 @@ import {
     
         <View style={styles.container}>
           {ProfilPic}
+          {edit}
   
           <View style={styles.containerText}>
             <Text style={styles.text1}>{dataPseudo}</Text>
             <View style={styles.plateforme}>{test}</View>
             <Text style={styles.text3}>
               Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
+             
             </Text>
           </View>
   
@@ -120,7 +130,7 @@ import {
       flexDirection: "column",
       justifyContent: "flex-start",
       alignItems: "center",
-      marginTop: 40,
+
     },
   
     text1: {
@@ -128,7 +138,7 @@ import {
       fontSize: 26,
       letterSpacing: 0.5,
       color: "#372C60",
-      marginBottom: 10,
+
     },
   
     text2: {
@@ -136,7 +146,7 @@ import {
       fontSize: 16,
       letterSpacing: 0.5,
       color: "#372C60",
-      marginBottom: 20,
+   
     },
   
     text3: {
@@ -145,7 +155,7 @@ import {
       fontStyle: "italic",
       letterSpacing: 0.5,
       color: "#372C60",
-      marginBottom: 40,
+     
       textAlign: "center",
       marginLeft: 40,
       marginRight: 40,
@@ -181,8 +191,7 @@ import {
     },
     plateforme:{
       flexDirection:"row",
-      marginTop:10,
-      marginBottom: 50,
+   
       width: 300,
       justifyContent: "space-evenly"
     }

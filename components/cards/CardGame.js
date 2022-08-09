@@ -11,15 +11,15 @@ const [gameSelected, setGameSelected] = useState(false);
 
 var SelectColor ={...styles.GameCard, borderWidth: 2, borderColor: '#f194ff'}
 
-  function GameSelectColor(name, img) {
+  function GameSelectColor(name, img, slug) {
     console.log("click");
     if(props.GameLike == false) {
-    props.handleClickAddGameParent(name, img)
-    //TODO ajouter la route pour ajouter un jeux en DB
+    props.handleClickAddGameParent(name, img, slug)
+   
     setGameSelected(true)
     } else{
-        props.handleClickDeleteGameParent(name, img)
-        //TODO ajouter la route pour supprimer la clé étrangère du jeux en DB
+        props.handleClickDeleteGameParent(name, img, slug)
+
     setGameSelected(false)
     }
 }
@@ -32,7 +32,7 @@ if(props.GameLike){
 
 
     return(
-        <Pressable onPress={() => GameSelectColor(props.name,props.img)} >
+        <Pressable onPress={() => GameSelectColor(props.name,props.img, props.slug)} >
         <View style= {SelectColor}>
         <Text style={styles.GameName}>{props.name}</Text>
         <Image source={{ uri: `${props.img}`}} style={styles.image }></Image>
