@@ -1,16 +1,25 @@
-import { StyleSheet, Text, View, ImageBackground, Image, SafeAreaView, ScrollView, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Title,
+  Button,
+  ImageBackground,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+} from "react-native";
 
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
 import CardGame from "../components/cards/CardGame";
 import Header2 from "../components/cards/Header2";
-import Header3 from "../components/cards/Header3";
 
 export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
   var header = Header2("DiscoverScreen","DiscoverScreen",props)
-  var headerEdit = Header3("DiscoverScreen", "DiscoverScreen", "EditScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);
@@ -20,7 +29,7 @@ export default function ProfilScreen(props) {
     async function loadData() {
       
       var rawData = await fetch(
-        "http://192.168.10.130:3000/users/getprofil");
+        "http://192.168.10.131:3000/users/getprofil");
 
       var data = await rawData.json();
       console.log("logggg", data.user.pseudo);
@@ -37,7 +46,7 @@ export default function ProfilScreen(props) {
   }, []);
 
   var test = dataPlatform.map((plateforme, i) => {
-    return <Text key={i} style={styles.plateform}>{plateforme.plateforme}</Text>;
+    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
   });
 
   var image = dataGames.map ((image, j ) => {
@@ -60,16 +69,15 @@ export default function ProfilScreen(props) {
       style={styles.background}
       source={require("../assets/backgrounds/fond_buddy.png")}>
 
-      {headerEdit}
-  
+      {header}
 
       <View style={styles.container}>
         {ProfilPic}
 
         <View style={styles.containerText}>
-          <Text style={styles.pseudo}>{dataPseudo}</Text>
+          <Text style={styles.text1}>{dataPseudo}</Text>
           <View style={styles.plateforme}>{test}</View>
-          <Text style={styles.description}>
+          <Text style={styles.text3}>
             Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
           </Text>
         </View>
@@ -116,7 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 
-  pseudo: {
+  text1: {
     fontWeight: "bold",
     fontSize: 26,
     letterSpacing: 0.5,
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  plateform: {
+  text2: {
     fontWeight: "200",
     fontSize: 16,
     letterSpacing: 0.5,
@@ -132,7 +140,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  description: {
+  text3: {
     fontWeight: "400",
     fontSize: 18,
     fontStyle: "italic",
@@ -166,14 +174,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 60,
   },
-
   image:{
     height:100,
     width:100,
     marginRight: 20,
     marginLeft: 20,
   },
-  
   plateforme:{
     flexDirection:"row",
     marginTop:10,
