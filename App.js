@@ -29,12 +29,13 @@ import age from './reducers/age';
 import pseudo from './reducers/pseudo';
 import mail from './reducers/mail';
 import mdp from './reducers/password';
+import token from './reducers/token';
 
 
 import {Provider} from 'react-redux';
 import {createStore, combineReducers}  from 'redux';
 
-const store = createStore(combineReducers({ age, pseudo, mail, mdp}));
+const store = createStore(combineReducers({ age, pseudo, mail, mdp, token}));
 
 const Stack = createStackNavigator();
 

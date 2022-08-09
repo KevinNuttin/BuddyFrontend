@@ -1,11 +1,11 @@
 import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from "../components/cards/Header"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
-
 import { connect } from 'react-redux';
 
 
@@ -13,14 +13,15 @@ function PasswordScreen(props) {
 
   // En attendant le composant Input
   const [text, setText] = useState(props.user.mdp);
+  const [userExists, setUserExists] = useState(false)
+  const [listErrorsSignin, setErrorsSignin] = useState([])
+  const [listErrorsSignup, setErrorsSignup] = useState([])
 
   //var passwordInput = Input("password")
   var header = Header("EmailScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
 
-  //! BOUTON DE DEMO A SUPPRIMER
-  var confirmer2 = OffsetMiniButton("Confirmer", "SearchGames", comfirmation2)
-  async function comfirmation2(redirection){
+  var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
+  async function comfirmation(redirection){
     props.navigation.navigate(redirection)
   }
 
@@ -29,17 +30,33 @@ function PasswordScreen(props) {
   async function comfirmation(redirection){
     if(text != null){
       var birthday = new Date("2015-03-26");
-      const data = await fetch('http://192.168.10.150:3000/users/sign-up', {
+      const data = await fetch('http://192.168.10.136:3000/users/sign-up', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `pseudo=${props.user.pseudo}&mail=${props.user.mail}&password=${text}&birthday=${props.user.age}&min=${18}&max=${35}`
       })
       const body = await data.json()
-      console.log(body);
+      console.log("body",body);
+      console.log("token",body.user.token);
+
+    if(body.result === true){
+      props.addToken(body.user.token)
+      let getUser = body.user.token
+      console.log("getUser",getUser);
+
+      AsyncStorage.setItem('users', getUser)
+
+      setUserExists(true) 
+
+      props.navigation.navigate(redirection)
+
+    } else {
+      setErrorsSignup(body.user.error)
+    }
+
   
-    props.onConfirmer(text,)
-    if(body.result){
-    props.navigation.navigate(redirection);} }
+  
+     }
   }
 
   return (
@@ -65,7 +82,7 @@ function PasswordScreen(props) {
                 placeholder="Tu y es presque..."
         />
         {/*{passwordInput}*/}
-        {confirmer2}
+        {confirmer}
 
        {tunnel}
           
@@ -116,13 +133,16 @@ const styles = StyleSheet.create({
 function mapDispatchToProps(dispatch) {
   return {
     onConfirmer: function (password) {
-      dispatch({ type: 'addMdp', mdp : password  })
+      dispatch({ type: 'addMdp', mdp : password})
+      },
+      addToken: function (token) {
+        dispatch({ type: 'addToken', token: token})
+        }
     }
   }
-}
 
 function mapStateToProps(state) {
-  return { user : state }
+  return { user : state,}
 }
 
 export default connect(
