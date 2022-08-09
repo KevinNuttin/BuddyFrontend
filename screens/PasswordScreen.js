@@ -56,7 +56,9 @@ function PasswordScreen(props) {
 
   
   
-     }
+    props.onConfirmer(text)
+    if(body.result){
+    props.navigation.navigate(redirection);} }
   }
 
   return (

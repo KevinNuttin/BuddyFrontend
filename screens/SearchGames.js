@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
+
 import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert, ImageBackground} from "react-native";
+
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -55,6 +57,8 @@ useEffect(() => {
     var rawResponse = await fetch('http://192.168.10.136:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
+    console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
+    console.log("coucou")
 }
     dataLoad();
     

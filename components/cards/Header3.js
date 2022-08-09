@@ -6,7 +6,7 @@ import OptionIcon from "../icons/OptionIcon";
 import MessageIcon from "../icons/MessageIcon";
 import MessageBadgeIcon from "../icons/MessageBadgeIcon";
 
-function Header2(redirection, redirection2, props) {
+function Header2(redirection,redirection2, redirection3, props) {
 
     return(
         <View style={styles.container}>
@@ -17,9 +17,17 @@ function Header2(redirection, redirection2, props) {
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection2)}}>
-                    <MessageBadgeIcon/>
+                    <MessageIcon/>
             </TouchableOpacity>
+
+            <TouchableOpacity  
+                onPress={() => {props.navigation.navigate(redirection3)}}>
+                    <OptionIcon/>
+            </TouchableOpacity>
+
+
         </View>
+
         
     )
 }
