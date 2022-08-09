@@ -59,6 +59,7 @@ setAvatar(photo)
       <Text style={styles.text}>Choisi ton Avatar!</Text>
       <TouchableOpacity>
       {ProfilPic}
+      {avatar}
       </TouchableOpacity>
       </View>
 

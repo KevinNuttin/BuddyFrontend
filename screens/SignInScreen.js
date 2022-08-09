@@ -20,7 +20,9 @@ function SignInScreen(props) {
 //! ATTENTION bien modifier avec son IP
 
     async function comfirmation(redirection){
-      props.navigation.navigate(redirection);}
+      props.navigation.navigate(redirection);
+      
+    }
       /*
       if(mail != null || mdp != null){
         const data = await fetch('http://172.20.10.3:3000/users/sign-in', {

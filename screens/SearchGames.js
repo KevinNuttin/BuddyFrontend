@@ -10,13 +10,20 @@ import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
 import Header from '../components/cards/Header';
 import Tunnel from '../components/buttons/Tunnel';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function searchGames(props) {
     const [gameList, setGameList] = useState([]);
     const [wishGame, setWishGame] = useState([]);
-    const [gameName, setGameName] = useState([]);
     var header = Header("SignInScreen", props)
     var tunnel = Tunnel(1)
+    var token = ""
+
+    //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
+    AsyncStorage.getItem("users", function(error, data) {
+      console.log(data);
+      token = data
+     });
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
@@ -29,10 +36,16 @@ export default function searchGames(props) {
       ]
     );
 
-    function comfirmation(redirection){
-        console.log(wishGame.length);
+      async function comfirmation(redirection){
         if(wishGame.length > 0){
-       props.navigation.navigate(redirection); 
+        props.navigation.navigate(redirection)
+
+     
+       const data = await fetch('http://192.168.10.136:3000/library/addgames', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
+      }); 
         }else(createTwoButtonAlert())
           
       }
@@ -41,7 +54,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.130:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.136:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
     console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
@@ -64,9 +77,9 @@ useEffect(() => {
        
         //* au clique sur un jeux ajout dans un état du jeux à la wishlist de jeux avec le nom et l'image
 
-        var handleClickAddGame = async (name, img) => {
+        var handleClickAddGame = async (name, img, slug) => {
             if(wishGame.length < 5){
-            setWishGame([...wishGame, {name:name,img:img}])
+            setWishGame([...wishGame, {name:name,img:img, slug:slug}])
         }
           }
 
@@ -79,7 +92,7 @@ useEffect(() => {
 
           //* retourne le composant CardGame qui est un jeu en lui passant via le reversedataflow les infos de nom, img, like pour mettre à jour la couleur de la carde si selection
 
-     return( <CardGame key={i} GameLike={iLike} name={game.name} img={game.img} handleClickAddGameParent={handleClickAddGame} handleClickDeleteGameParent={handleClickDeleteGame}/>)
+     return( <CardGame key={i} GameLike={iLike} name={game.name} img={game.img} slug={game.slug} handleClickAddGameParent={handleClickAddGame} handleClickDeleteGameParent={handleClickDeleteGame}/>)
     })
 
     var gameWishList = wishGame.map((game, i) => {

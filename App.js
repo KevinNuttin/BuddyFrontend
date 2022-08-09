@@ -19,8 +19,10 @@ import AgeScreen from './screens/AgeScreen';
 import DiscoverScreen from './screens/DiscoverScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import MatchScreen from './screens/MatchScreen';
+import ChatScreen from './screens/ChatScreen';
 import EditScreen from './screens/EditScreen';
 import EditPictureScreen from './screens/EditPictureScreen';
+
 
 
 import { StyleSheet, View, Button } from 'react-native';
@@ -31,12 +33,13 @@ import age from './reducers/age';
 import pseudo from './reducers/pseudo';
 import mail from './reducers/mail';
 import mdp from './reducers/password';
+import token from './reducers/token';
 
 
 import {Provider} from 'react-redux';
 import {createStore, combineReducers}  from 'redux';
 
-const store = createStore(combineReducers({ age, pseudo, mail, mdp}));
+const store = createStore(combineReducers({ age, pseudo, mail, mdp, token}));
 
 const Stack = createStackNavigator();
 
@@ -63,6 +66,7 @@ function App(){
       <Stack.Screen name="DiscoverScreen" component={DiscoverScreen}/>
       <Stack.Screen name="ProfilScreen" component={ProfilScreen}/>
       <Stack.Screen name="MatchScreen" component={MatchScreen}/>
+      <Stack.Screen name="ChatScreen" component={ChatScreen}/>
       <Stack.Screen name="EditScreen" component={EditScreen}/>
       <Stack.Screen name="EditPictureScreen" component={EditPictureScreen}/>
 

@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
-import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
@@ -41,13 +40,13 @@ function BirthdayScreen(props) {
 
         {/* A remplacer par le composant Input*/}
         <TextInput
-        style={styles.input}
-                onChangeText={(value) => setText(value)}
-                value={text}
-                keyboardType="default"
-                placeholder="C'est presque fini..."
+          style={styles.input}
+          onChangeText={(value) => setText(value)}
+          value={text}
+          keyboardType="default"
+          placeholder="C'est presque fini..."
         />
-        {/*{emailInput}*/}
+
         {confirmer}
 
         {tunnel}
