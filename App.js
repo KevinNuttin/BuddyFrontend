@@ -21,6 +21,8 @@ import ProfilScreen from './screens/ProfilScreen';
 import MatchScreen from './screens/MatchScreen';
 import ChatScreen from './screens/ChatScreen';
 import EditScreen from './screens/EditScreen';
+import Rooms from './screens/RoomScreen';
+
 
 
 
@@ -68,6 +70,8 @@ function App(){
       <Stack.Screen name="MatchScreen" component={MatchScreen}/>
       <Stack.Screen name="ChatScreen" component={ChatScreen}/>
       <Stack.Screen name="EditScreen" component={EditScreen}/>
+      <Stack.Screen name="RoomScreen" component={Rooms}/>
+
 
     </Stack.Navigator>
   </NavigationContainer></Provider>
