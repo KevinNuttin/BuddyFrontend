@@ -128,8 +128,8 @@ AsyncStorage.getItem("users", function(error, data) {
       loadData(); 
       
     }, []);
-    console.log("cards",cards);
-    console.log("dataMyProfil.user.langue",myProfil); 
+    //console.log("cards",cards);
+    //console.log("dataMyProfil.user.langue",myProfil); 
 
     async function handleYup(card) {
       console.log(`Yup for ${card.text}`);
@@ -138,13 +138,22 @@ AsyncStorage.getItem("users", function(error, data) {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
         })
+        console.log(card.likes.length);
+        console.log("mylike",token);
 
-
-      props.navigation.navigate("MatchScreen") // force le match pour la demo (à retirer)
+        for(var i=0; i< card.likes.length; i++){
+         if(card.likes[i] == token){
+          props.navigation.navigate("MatchScreen") 
+         }
+            console.log("cardlike",card.likes[i]);
+            console.log("cardlike",card.likes[i]);
+          
+        }
+     // force le match pour la demo (à retirer)
       console.log(`Card, ${card.token}` );
 
       //var templike = card.likes.filter(e => e == myProfil.user.token)
-      console.log("templike", card.likes);
+      //console.log("templike", card);
 
       return true; // return false if you wish to cancel the action
     }
