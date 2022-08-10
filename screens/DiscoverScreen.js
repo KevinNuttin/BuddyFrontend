@@ -70,7 +70,9 @@ AsyncStorage.getItem("users", function(error, data) {
   export default function App(props) {
 
     var header = Header2("ProfilScreen", "DiscoverScreen", props)
+    var arraytemp =[]
     const [cards, setCards] = useState();
+    const [myProfil, setMyProfil] = useState();
 
     // replace with real remote data fetching
     useEffect(() => {
@@ -82,10 +84,22 @@ AsyncStorage.getItem("users", function(error, data) {
   
         var dataProfilfetch = await rawDataProfil.json();
 
-        var arraytemp = dataProfilfetch.user.map((profil) => {
+
+        var rawDataMyProfil = await fetch(
+          "http://192.168.10.134:3000/users/getmyprofil",
+          { method: "POST",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          body: `token=${token}`,
+          })
+          
+          var dataMyProfil = await rawDataMyProfil.json();
+          setMyProfil(dataMyProfil)
+          console.log("dataMyProfil",dataMyProfil);
+
+          arraytemp = dataProfilfetch.user.map((profil) => {
           var games = []
           var likes = []
-           var langues =[]
+          var langues =[]
 
           for(var i=0; i< profil.games.length; i++){
             games.push(profil.games[i])
@@ -111,20 +125,32 @@ AsyncStorage.getItem("users", function(error, data) {
         })
         setCards(arraytemp)
       }
-  
-      loadData();
+      loadData(); 
       
     }, []);
+    console.log("cards",cards);
+    console.log("dataMyProfil.user.langue",myProfil); 
 
-    function handleYup(card) {
+    async function handleYup(card) {
       console.log(`Yup for ${card.text}`);
+      const data = await fetch('http://192.168.10.134:3000/match/like', {
+        method: "PUT",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `like=${card.token}&token=${token}`,
+        })
+
+
       props.navigation.navigate("MatchScreen") // force le match pour la demo (à retirer)
       console.log(`Card, ${card.token}` );
+
+      //var templike = card.likes.filter(e => e == myProfil.user.token)
+      console.log("templike", card.likes);
 
       return true; // return false if you wish to cancel the action
     }
     function handleNope(card) {
       console.log(`Nope for ${card.text}`);
+    
       return true;
     }
     function handleMaybe(card) {

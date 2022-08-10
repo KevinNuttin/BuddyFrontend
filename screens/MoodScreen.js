@@ -34,7 +34,7 @@ function MoodScreen(props) {
   var chooseMood1 = (moodName) => {
 
     setSelected1(moodName)
-    if(selected1 == true) {
+    if(moodName) {
       setMood1("62e8fb0755b46687cabb297d") // id BDD pour Chill
     } else {
       setMood1("62e8fb2755b46687cabb297f") // id BDD pour TryHarder

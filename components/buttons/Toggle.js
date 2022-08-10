@@ -45,13 +45,13 @@ function Toggle(props) {
         <View style={styles.container}>
             <TouchableOpacity
                 style={colorButtonLeft}
-                onPress={() => onPress(true)}>
+                onPress={() => onPress(isPressed)}>
                     <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
                 style={colorButtonRight} 
-                onPress={() => onPress(false)}>
+                onPress={() => onPress(isPressed)}>
                     <Text style={styles.buttonText}>{props.title2}</Text>
             </TouchableOpacity>
         </View>

@@ -18,12 +18,12 @@ function LanguageScreen(props) {
   const [selected6, setSelected6] = useState(false)
 
   const [platformSelected, setPlatformSelected] = useState([])
-  const [languageSelected1, setLanguageSelected1] = useState("")
-  const [languageSelected2, setLanguageSelected2] = useState("")
-  const [languageSelected3, setLanguageSelected3] = useState("")
-  const [languageSelected4, setLanguageSelected4] = useState("")
-  const [languageSelected5, setLanguageSelected5] = useState("")
-  const [languageSelected6, setLanguageSelected6] = useState("")
+  const [languageSelected1, setLanguageSelected1] = useState("62e9529a0864ccd30790346a")
+  const [languageSelected2, setLanguageSelected2] = useState("62e9529a0864ccd30790346a")
+  const [languageSelected3, setLanguageSelected3] = useState("62e9529a0864ccd30790346a")
+  const [languageSelected4, setLanguageSelected4] = useState("62e9529a0864ccd30790346a")
+  const [languageSelected5, setLanguageSelected5] = useState("62e9529a0864ccd30790346a")
+  const [languageSelected6, setLanguageSelected6] = useState("62e9529a0864ccd30790346a")
 
   var header = Header("PlatformScreen", props)
   // var FR = ButtonLeft("Français")

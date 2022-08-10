@@ -42,6 +42,8 @@ function PlatformScreen(props) {
 
     if(platformName) {
       setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"])
+    }else{
+      setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"]) // Supprimer élément du tableau
     }
   }
 
