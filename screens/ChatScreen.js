@@ -28,7 +28,7 @@ function ChatScreen(props) {
 
       let table = [];
       async function dataLoad () {
-         var rawData = await fetch(`http://192.168.1.15:3000/message/messagerie?id=${id}`);
+         var rawData = await fetch(`http://192.168.1.14:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
          setRoom(data.message.room)

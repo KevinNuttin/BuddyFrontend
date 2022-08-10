@@ -80,13 +80,13 @@ AsyncStorage.getItem("users", function(error, data) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.169:3000/users/getprofil");
+          "http://192.168.1.14:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.169:3000/users/getmyprofil",
+          "http://192.168.1.14:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -144,7 +144,7 @@ AsyncStorage.getItem("users", function(error, data) {
       console.log(`Yup for ${card.text}`);
       console.log("token",token);
       console.log("like", card.likes.length);
-      const data = await fetch('http://192.168.10.169:3000/match/like', {
+      const data = await fetch('http://192.168.1.14:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,

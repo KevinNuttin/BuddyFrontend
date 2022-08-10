@@ -5,7 +5,6 @@ import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, Fl
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
-import SelectDropdown from 'react-native-select-dropdown';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
 import Header from '../components/cards/Header';
@@ -41,7 +40,7 @@ export default function searchGames(props) {
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.10.169:3000/library/addgames', {
+       const data = await fetch('http://192.168.1.14:3000/library/addgames', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
@@ -54,7 +53,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.169:3000/library/games');
+    var rawResponse = await fetch('http://192.168.1.14:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
     console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
