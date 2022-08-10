@@ -106,7 +106,10 @@ AsyncStorage.getItem("users", function(error, data) {
           for(var i=0; i< profil.like.length; i++){
             likes.push(profil.like[i])
           }
-  
+          for(var i=0; i< profil.langue.length; i++){
+            langues.push(profil.langue[i])
+          }
+
 
           return {
             id: profil._id,
@@ -122,14 +125,20 @@ AsyncStorage.getItem("users", function(error, data) {
             langues : langues
         
           }
+         
         })
+        // corriger le filtre de langue 
+       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && e.langues != dataMyProfil.user.langue)
+
+
+
+       console.log("langue",arraytemp[0].langues );
+
         setCards(arraytemp)
       }
       loadData(); 
 
     }, []);
-    //console.log("cards",cards);
-    //console.log("dataMyProfil.user.langue",myProfil); 
 
     async function handleYup(card) {
       console.log(`Yup for ${card.text}`);
@@ -145,7 +154,6 @@ AsyncStorage.getItem("users", function(error, data) {
          if(card.likes[i] == myProfil.user._id ){
           props.navigation.navigate("MatchScreen") 
          }
-          
         }
      // force le match pour la demo (à retirer)
       console.log(`Card, ${card.token}` );
@@ -187,7 +195,7 @@ AsyncStorage.getItem("users", function(error, data) {
     
               // If you want a stack of cards instead of one-per-one view, activate stack mode
               stack={true}
-              stackDepth={3}
+              stackDepth={2}
             />
           ) : (
             <StatusCard text="Loading Buddies..." />
