@@ -5,7 +5,6 @@ import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, Fl
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
-import SelectDropdown from 'react-native-select-dropdown';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
 import Header from '../components/cards/Header';
