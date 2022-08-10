@@ -18,7 +18,6 @@ function LanguageScreen(props) {
   const [selected6, setSelected6] = useState(false)
 
   const [languageSelected, setLanguageSelected] = useState([])
-  console.log("🚀 ~ file: LanguageScreen.js ~ line 21 ~ LanguageScreen ~ languageSelected", languageSelected)
 
   var header = Header("PlatformScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
