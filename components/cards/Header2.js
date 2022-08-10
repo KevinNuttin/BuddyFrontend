@@ -8,6 +8,8 @@ import MessageBadgeIcon from "../icons/MessageBadgeIcon";
 
 function Header2(redirection, redirection2, props) {
 
+
+
     return(
         <View style={styles.container}>
             <TouchableOpacity  
