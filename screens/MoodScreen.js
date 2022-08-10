@@ -5,6 +5,7 @@ import Header from "../components/cards/Header"
 import Toggle from "../components/buttons/Toggle"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function MoodScreen(props) {
 
@@ -13,14 +14,22 @@ function MoodScreen(props) {
   const [selected3, setSelected3] = useState(false)
   const [selected4, setSelected4] = useState(false)
 
-  const [mood1, setMood1] = useState("")
-  const [mood2, setMood2] = useState("")
-  const [mood3, setMood3] = useState("")
-  const [mood4, setMood4] = useState("")
+  const [mood1, setMood1] = useState("62e8fb0755b46687cabb297d")
+  const [mood2, setMood2] = useState("62e8fb2f55b46687cabb2981")
+  const [mood3, setMood3] = useState("62e8fb3d55b46687cabb2985")
+  const [mood4, setMood4] = useState("62e8fb4f55b46687cabb2989")
 
   var header = Header("SearchGames", props)
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
   var tunnel = Tunnel(2)
+
+  var token = ""
+
+    //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
+    AsyncStorage.getItem("users", function(error, data) {
+      console.log(data);
+      token = data
+     });
 
   var chooseMood1 = (moodName) => {
 
@@ -63,12 +72,13 @@ function MoodScreen(props) {
   }
 
   async function goPlatform(redirection){
+
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.133:3000/users/mood', {
+    const data = await fetch('http://192.168.1.14:3000/users/mood', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    // body: wishgame=${JSON.stringify(wishGame)}&token=${token},
+    body: `mood1=${mood1}&mood2=${mood2}&mood3=${mood3}&mood4=${mood4}&token=${token}`,
     })
 
   }

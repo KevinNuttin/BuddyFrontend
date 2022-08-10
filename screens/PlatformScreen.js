@@ -6,16 +6,9 @@ import ButtonLeft from "../components/buttons/ButtonLeft"
 import ButtonRight from "../components/buttons/ButtonRight"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function PlatformScreen(props) {
-
-  var header = Header("MoodScreen", props)
-  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
-  var tunnel = Tunnel(3)
-
-  function goLanguage(redirection){
-    props.navigation.navigate(redirection); 
-  }
 
   const [selected1, setSelected1] = useState(false)
   const [selected2, setSelected2] = useState(false)
@@ -25,13 +18,32 @@ function PlatformScreen(props) {
   const [selected6, setSelected6] = useState(false)
 
   const [platformSelected, setPlatformSelected] = useState([])
+  const [platformSelected1, setPlatformSelected1] = useState("")
+  const [platformSelected2, setPlatformSelected2] = useState("")
+  const [platformSelected3, setPlatformSelected3] = useState("")
+  const [platformSelected4, setPlatformSelected4] = useState("")
+  const [platformSelected5, setPlatformSelected5] = useState("")
+  const [platformSelected6, setPlatformSelected6] = useState("")
+
+  var header = Header("MoodScreen", props)
+  var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
+  var tunnel = Tunnel(3)
+
+  var token = ""
+
+  //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
+  AsyncStorage.getItem("users", function(error, data) {
+    console.log(data);
+    token = data
+   });
 
   var choosePlatformPC = (platformName) => {
 
     setSelected1(platformName)
 
     if(selected1 == true) {
-      setPlatformSelected(...["62e9529a0864ccd30790346a"])
+      setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"])
+      setPlatformSelected1("62e9529a0864ccd30790346a")
     }
   }
 
@@ -40,7 +52,8 @@ function PlatformScreen(props) {
     setSelected2(platformName)
 
     if(selected2 == true) {
-      setPlatformSelected(...["62e952a90864ccd30790346c"])
+      setPlatformSelected([...platformSelected, "62e952a90864ccd30790346c"])
+      setPlatformSelected2( "62e952a90864ccd30790346c")
     }
   }
 
@@ -49,7 +62,8 @@ function PlatformScreen(props) {
     setSelected3(platformName)
 
     if(selected3 == true) {
-      setPlatformSelected(...["62e952ad0864ccd30790346e"])
+      setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
+      setPlatformSelected3("62e952ad0864ccd30790346e")
     }
   }
 
@@ -58,7 +72,8 @@ function PlatformScreen(props) {
     setSelected4(platformName)
 
     if(selected4 == true) {
-      setPlatformSelected(...["62e952ad0864ccd30790346e"])
+      setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
+      setPlatformSelected4( "62e952ad0864ccd30790346e")
     }
   }
 
@@ -67,7 +82,8 @@ function PlatformScreen(props) {
     setSelected5(platformName)
 
     if(selected5 == true) {
-      setPlatformSelected(...["62e952b10864ccd307903470"])
+      setPlatformSelected([...platformSelected, "62e952b10864ccd307903470"])
+      setPlatformSelected5("62e952b10864ccd307903470")
     }
   }
 
@@ -76,11 +92,22 @@ function PlatformScreen(props) {
     setSelected6(platformName)
 
     if(selected6 == true) {
-      setPlatformSelected(...["62e952b60864ccd307903472"])
+      setPlatformSelected([...platformSelected,"62e952b60864ccd307903472"])
+      setPlatformSelected6("62e952b60864ccd307903472")
     }
   }
+ 
+  
+  async function goLanguage(redirection){
+    props.navigation.navigate(redirection); 
 
-
+    const data = await fetch('http://192.168.1.14:3000/users/plateforme', {
+      method: "PUT",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `plateforme=${platformSelected}&plateforme1=${platformSelected1}&plateforme2=${platformSelected2}&plateforme3=${platformSelected3}&plateforme4=${platformSelected4}&plateforme5=${platformSelected5}&plateforme6=${platformSelected6}&token=${token}`,
+      })
+      console.log(platformSelected1);
+  }
 
   return (
 
