@@ -19,7 +19,7 @@ var token = ""
 //* récupération du token du users pour pouvoir utiliser la comparaison de match
 
 AsyncStorage.getItem("users", function(error, data) {
-  console.log(data);
+  console.log("data", data);
   token = data
  });
 
@@ -87,14 +87,13 @@ AsyncStorage.getItem("users", function(error, data) {
 
         var rawDataMyProfil = await fetch(
           "http://192.168.10.134:3000/users/getmyprofil",
-          { method: "POST",
+          { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
           })
           
           var dataMyProfil = await rawDataMyProfil.json();
           setMyProfil(dataMyProfil)
-          console.log("dataMyProfil",dataMyProfil);
 
           arraytemp = dataProfilfetch.user.map((profil) => {
           var games = []
@@ -110,6 +109,7 @@ AsyncStorage.getItem("users", function(error, data) {
   
 
           return {
+            id: profil._id,
             pseudo: profil.pseudo,
             description : profil.description,
             picture : profil.picture,
@@ -126,34 +126,29 @@ AsyncStorage.getItem("users", function(error, data) {
         setCards(arraytemp)
       }
       loadData(); 
-      
+
     }, []);
     //console.log("cards",cards);
     //console.log("dataMyProfil.user.langue",myProfil); 
 
     async function handleYup(card) {
       console.log(`Yup for ${card.text}`);
+      console.log("token",token);
+      console.log("like", card.likes.length);
       const data = await fetch('http://192.168.10.134:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
         })
-        console.log(card.likes.length);
-        console.log("mylike",token);
-
+      
         for(var i=0; i< card.likes.length; i++){
-         if(card.likes[i] == token){
+         if(card.likes[i] == myProfil.user._id ){
           props.navigation.navigate("MatchScreen") 
          }
-            console.log("cardlike",card.likes[i]);
-            console.log("cardlike",card.likes[i]);
           
         }
      // force le match pour la demo (à retirer)
       console.log(`Card, ${card.token}` );
-
-      //var templike = card.likes.filter(e => e == myProfil.user.token)
-      //console.log("templike", card);
 
       return true; // return false if you wish to cancel the action
     }
