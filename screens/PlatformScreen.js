@@ -38,22 +38,18 @@ function PlatformScreen(props) {
    });
 
   var choosePlatformPC = (platformName) => {
-
     setSelected1(platformName)
 
-    if(selected1 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"])
-      setPlatformSelected1("62e9529a0864ccd30790346a")
     }
   }
 
   var choosePlatformPS4 = (platformName) => {
-
     setSelected2(platformName)
 
-    if(selected2 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected, "62e952a90864ccd30790346c"])
-      setPlatformSelected2( "62e952a90864ccd30790346c")
     }
   }
 
@@ -61,9 +57,8 @@ function PlatformScreen(props) {
 
     setSelected3(platformName)
 
-    if(selected3 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
-      setPlatformSelected3("62e952ad0864ccd30790346e")
     }
   }
 
@@ -71,19 +66,16 @@ function PlatformScreen(props) {
 
     setSelected4(platformName)
 
-    if(selected4 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
-      setPlatformSelected4( "62e952ad0864ccd30790346e")
     }
   }
 
   var choosePlatformPS5 = (platformName) => {
-
     setSelected5(platformName)
 
-    if(selected5 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected, "62e952b10864ccd307903470"])
-      setPlatformSelected5("62e952b10864ccd307903470")
     }
   }
 
@@ -91,7 +83,7 @@ function PlatformScreen(props) {
 
     setSelected6(platformName)
 
-    if(selected6 == true) {
+    if(platformName) {
       setPlatformSelected([...platformSelected,"62e952b60864ccd307903472"])
       setPlatformSelected6("62e952b60864ccd307903472")
     }
@@ -101,12 +93,12 @@ function PlatformScreen(props) {
   async function goLanguage(redirection){
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.1.14:3000/users/plateforme', {
+    const data = await fetch('http://192.168.10.134:3000/users/plateforme', {
       method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `plateforme=${platformSelected}&plateforme1=${platformSelected1}&plateforme2=${platformSelected2}&plateforme3=${platformSelected3}&plateforme4=${platformSelected4}&plateforme5=${platformSelected5}&plateforme6=${platformSelected6}&token=${token}`,
+      body: `plateforme=${JSON.stringify(platformSelected)}&token=${token}`,
       })
-      console.log(platformSelected1);
+      console.log(platformSelected);
   }
 
   return (

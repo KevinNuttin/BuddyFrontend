@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ImageBackground, Button, Image, ScrollView } fr
 
 import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const cardsData = [
   { src: require('../assets/avatars/Group.png') },
@@ -13,20 +14,29 @@ const cardsData = [
   { src: require('../assets/avatars/Group6.png') },
 ];
 
+var token = ""
+
+//* récupération du token du users pour pouvoir utiliser la comparaison de match
+
+AsyncStorage.getItem("users", function(error, data) {
+  console.log(data);
+  token = data
+ });
+
 
   function Card({ data }) {
 
-    var gamesList = data.games.map((games, i) => {
+    var gamesList = data.games.map((games) => {
       return(games.name)
      })
      var gameListImage = data.games.map((games, j) => {
       return(
-        <Image style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
+        <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
      })
-     console.log("data", data)
-     var plateformeList = data.plateformes.map((plateforme, j) => {
+     var plateformeList = data.plateformes.map((plateforme) => {
       return(plateforme.plateforme)
      })
+     
      
     return (
       <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
@@ -36,7 +46,7 @@ const cardsData = [
         <Text style={styles.description}> {plateformeList}</Text>
       <View style={styles.plateforme}><Text style={styles.description}>{data.description}</Text></View>
         <Text style={styles.description}> {gamesList} </Text>
-        <ScrollView style={styles.scroll} horizontal={true}>
+        <ScrollView  style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
 
@@ -68,11 +78,11 @@ const cardsData = [
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.97:3000/users/getprofil");
+          "http://192.168.10.134:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
-        var arraytemp = dataProfilfetch.user.map((profil, i) => {
+        var arraytemp = dataProfilfetch.user.map((profil) => {
           var games = []
           var likes = []
            var langues =[]
@@ -109,6 +119,8 @@ const cardsData = [
     function handleYup(card) {
       console.log(`Yup for ${card.text}`);
       props.navigation.navigate("MatchScreen") // force le match pour la demo (à retirer)
+      console.log(`Card, ${card.token}` );
+
       return true; // return false if you wish to cancel the action
     }
     function handleNope(card) {

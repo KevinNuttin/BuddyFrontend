@@ -47,7 +47,7 @@ function LanguageScreen(props) {
     props.navigation.navigate(redirection); 
 
 
-    const data = await fetch('http://192.168.1.14:3000/users/langues', {
+    const data = await fetch('http://192.168.10.134:3000/users/langues', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `languages=${platformSelected}&langue1=${languageSelected1}&langue2=${languageSelected2}&langue4=${languageSelected4}&langue5=${languageSelected5}&token=${token}`,
