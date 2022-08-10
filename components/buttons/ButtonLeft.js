@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Text} from "react-native";
 
 function ButtonLeft(props) {
 
-    const [isPress, setIsPress] = useState(false)
+    const [isPress, setIsPress] = useState(true)
 
     var onPress = (platformName) => {
 
@@ -22,7 +22,7 @@ function ButtonLeft(props) {
 
     var colorButton
 
-    if(isPress === true ) {
+    if(isPress === false ) {
         colorButton = {...styles.button, backgroundColor: "#FFA588"}
     } else {
         colorButton = {...styles.button}
@@ -32,7 +32,7 @@ function ButtonLeft(props) {
     return(
             <TouchableOpacity 
                 style={colorButton} 
-                onPress={() => onPress(true)}>
+                onPress={() => onPress(isPress)}>
                     <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
     )
