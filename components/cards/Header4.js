@@ -5,23 +5,30 @@ import UserIcon from "../icons/UserIcon";
 import OptionIcon from "../icons/OptionIcon";
 import MessageIcon from "../icons/MessageIcon";
 import MessageBadgeIcon from "../icons/MessageBadgeIcon";
+import BackIcon from "../icons/BackIcon";
 
-function Header2(redirection, redirection2, props) {
-
-
+function Header3(redirection,redirection2, redirection3, props) {
 
     return(
         <View style={styles.container}>
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection)}}>
-                    <UserIcon/>
+                 <BackIcon/>
             </TouchableOpacity>
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection2)}}>
-                    <MessageBadgeIcon/>
+                    <MessageIcon/>
             </TouchableOpacity>
+
+            <TouchableOpacity  
+                onPress={() => {props.navigation.navigate(redirection3)}}>
+                    <OptionIcon/>
+            </TouchableOpacity>
+
+
         </View>
+
         
     )
 }
@@ -40,4 +47,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Header2
+export default Header3

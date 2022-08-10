@@ -1,9 +1,13 @@
-import React from "react";
+
+import React, { useEffect, useState } from 'react';
 import {StyleSheet, View, ImageBackground, Image} from "react-native";
 
 import OffsetButton from "../components/buttons/OffsetButton";
 
-export default function Homescreen(props) {
+import socketIOClient from 'socket.io-client';
+import { connect } from 'react-redux';
+
+ function Homescreen(props) {
 
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
@@ -14,6 +18,20 @@ export default function Homescreen(props) {
   function connexion(redirection){
     props.navigation.navigate(redirection); 
   }
+
+
+
+  useEffect(() => { 
+    var socket = socketIOClient("http://192.168.1.15:3000");
+
+    props.saveSocket(socket);
+
+
+ 
+
+  }, []);
+
+
 
   return (
     <ImageBackground
@@ -34,6 +52,27 @@ export default function Homescreen(props) {
     </ImageBackground>
   );
 }
+
+function mapStateToProps(state) {
+  return { socket: state.socket };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    saveSocket: function (socket) {
+      dispatch({ type: 'saveSocket', socket });
+    },
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Homescreen);
+
+
+
+
 
 const styles = StyleSheet.create({
 
