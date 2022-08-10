@@ -68,7 +68,7 @@ const cardsData = [
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.138:3000/users/getprofil");
+          "http://192.168.10.97:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 

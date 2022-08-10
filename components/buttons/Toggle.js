@@ -1,14 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
 function Toggle(props) {
     
+    const [isPressed, setIsPressed] = useState(false)
+
+    var onPress = (moodName)=> {
+
+        props.handleClickChooseMoodParent(moodName)
+
+        if( isPressed === false ){
+
+            setIsPressed(true)
+
+        } else {
+
+            setIsPressed(false)
+        }
+    }
+
     var colorButtonLeft
     var colorButtonRight
 
-    var onPress = (moodName)=> {
-      props.handleClickChooseMoodParent(moodName)
+    if(isPressed === true){
+        colorButtonLeft = {...styles.button, backgroundColor: "#FFA588"}
+        colorButtonRight = {...styles.button}
+    } else {
+        colorButtonRight = {...styles.button, backgroundColor: "#DDABFE"}
+        colorButtonLeft = {...styles.button}
     }
+
 
     // if(props.selected1 === true){
     //     colorButtonLeft = {...styles.button, backgroundColor: "#FFA588"}
@@ -23,13 +44,13 @@ function Toggle(props) {
 
         <View style={styles.container}>
             <TouchableOpacity
-                style={styles.button}
+                style={colorButtonLeft}
                 onPress={() => onPress(true)}>
                     <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-                style={styles.button} 
+                style={colorButtonRight} 
                 onPress={() => onPress(false)}>
                     <Text style={styles.buttonText}>{props.title2}</Text>
             </TouchableOpacity>

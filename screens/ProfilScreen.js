@@ -28,7 +28,7 @@ export default function ProfilScreen(props) {
   useEffect(() => {
     async function loadData() {
       
-      var rawData = await fetch("http://192.168.10.131:3000/users/getprofil");
+      var rawData = await fetch("http://192.168.10.97:3000/users/getprofil");
       var data = await rawData.json();
       console.log("logggg", data.user.pseudo);
       setDataPseudo(data.user.pseudo);
