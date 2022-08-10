@@ -18,12 +18,6 @@ function PlatformScreen(props) {
   const [selected6, setSelected6] = useState(false)
 
   const [platformSelected, setPlatformSelected] = useState([])
-  const [platformSelected1, setPlatformSelected1] = useState("")
-  const [platformSelected2, setPlatformSelected2] = useState("")
-  const [platformSelected3, setPlatformSelected3] = useState("")
-  const [platformSelected4, setPlatformSelected4] = useState("")
-  const [platformSelected5, setPlatformSelected5] = useState("")
-  const [platformSelected6, setPlatformSelected6] = useState("")
 
   var header = Header("MoodScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
@@ -42,7 +36,9 @@ function PlatformScreen(props) {
 
     if(platformName) {
       setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"])
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e9529a0864ccd30790346a")])
+      }
   }
 
   var choosePlatformPS4 = (platformName) => {
@@ -50,25 +46,29 @@ function PlatformScreen(props) {
 
     if(platformName) {
       setPlatformSelected([...platformSelected, "62e952a90864ccd30790346c"])
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e952a90864ccd30790346c")])
+      }
   }
 
   var choosePlatformXBOXOne = (platformName) => {
-
     setSelected3(platformName)
 
     if(platformName) {
       setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e952ad0864ccd30790346e")])
+     }
   }
 
   var choosePlatformSwitch = (platformName) => {
-
     setSelected4(platformName)
 
     if(platformName) {
       setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e952ad0864ccd30790346e")])
+     }
   }
 
   var choosePlatformPS5 = (platformName) => {
@@ -76,17 +76,19 @@ function PlatformScreen(props) {
 
     if(platformName) {
       setPlatformSelected([...platformSelected, "62e952b10864ccd307903470"])
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e952b10864ccd307903470")])
+     }
   }
 
   var choosePlatformXBOXSeries = (platformName) => {
-
     setSelected6(platformName)
 
     if(platformName) {
       setPlatformSelected([...platformSelected,"62e952b60864ccd307903472"])
-      setPlatformSelected6("62e952b60864ccd307903472")
-    }
+    } else {
+      setPlatformSelected([...platformSelected.filter(id => id !== "62e952b60864ccd307903472")])
+      }
   }
  
   

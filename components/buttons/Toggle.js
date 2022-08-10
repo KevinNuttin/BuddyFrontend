@@ -3,26 +3,26 @@ import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
 function Toggle(props) {
     
-    const [isPressed, setIsPressed] = useState(false)
+    const [isPress, setIsPress] = useState(true)
 
     var onPress = (moodName)=> {
 
         props.handleClickChooseMoodParent(moodName)
 
-        if( isPressed === false ){
+        if( isPress === false ){
 
-            setIsPressed(true)
+            setIsPress(true)
 
         } else {
 
-            setIsPressed(false)
+            setIsPress(false)
         }
     }
 
     var colorButtonLeft
     var colorButtonRight
 
-    if(isPressed === true){
+    if(isPress === true){
         colorButtonLeft = {...styles.button, backgroundColor: "#FFA588"}
         colorButtonRight = {...styles.button}
     } else {
@@ -45,13 +45,13 @@ function Toggle(props) {
         <View style={styles.container}>
             <TouchableOpacity
                 style={colorButtonLeft}
-                onPress={() => onPress(true)}>
+                onPress={() => onPress(isPress)}>
                     <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
                 style={colorButtonRight} 
-                onPress={() => onPress(false)}>
+                onPress={() => onPress(isPress)}>
                     <Text style={styles.buttonText}>{props.title2}</Text>
             </TouchableOpacity>
         </View>
