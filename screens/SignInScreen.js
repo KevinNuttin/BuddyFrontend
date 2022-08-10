@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ImageBackground, TextInput } from 'react-native
 import Header from "../components/cards/Header"
 import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function SignInScreen(props) {
@@ -20,21 +21,26 @@ function SignInScreen(props) {
 //! ATTENTION bien modifier avec son IP
 
     async function comfirmation(redirection){
-      props.navigation.navigate(redirection);
-      
-    }
-      /*
       if(mail != null || mdp != null){
-        const data = await fetch('http://192.168.1.15:3000/users/sign-in', {
+        const data = await fetch('http://192.168.10.134:3000/users/sign-in', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`
         })
         const body = await data.json()
         console.log(body);
+
+      let getUser = body.user.token   
+      console.log("getUser",getUser);
+      AsyncStorage.setItem('users', getUser)
+
       if(body.result){
       props.navigation.navigate(redirection);} }
-    }*/
+
+     // props.navigation.navigate(redirection);
+      
+    }
+      
 
   return (
 
