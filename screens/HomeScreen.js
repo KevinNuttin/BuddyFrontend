@@ -22,11 +22,11 @@ import { connect } from 'react-redux';
 
 
   useEffect(() => { 
-    var socket = socketIOClient("http://192.168.10.144:3000");
-    var currentRoom = "MnMS"
+    var socket = socketIOClient("http://192.168.1.15:3000");
+
     props.saveSocket(socket);
 
-    socket.emit('connected', currentRoom )
+
  
 
   }, []);

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
+import { StyleSheet, TouchableOpacity, Text} from "react-native";
 
-function ButtonRight(title, onPress) {
+function ButtonRight(props) {
 
     const [isPress, setIsPress] = useState(false)
 
-    var onPress = () => {
+    var onPress = (platformName) => {
+
+        props.handleClickChoosePlatformParent(platformName)
+
 
         if(isPress === false){
             
@@ -29,8 +32,8 @@ function ButtonRight(title, onPress) {
     return(
             <TouchableOpacity 
                 style={colorButton} 
-                onPress={onPress}>
-                    <Text style={styles.buttonText}>{title}</Text>
+                onPress={() => onPress(true)}>
+                    <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
     )
 }

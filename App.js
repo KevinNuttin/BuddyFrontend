@@ -23,6 +23,7 @@ import ChatScreen from './screens/ChatScreen';
 import EditScreen from './screens/EditScreen';
 import Rooms from './screens/RoomScreen';
 
+import EditPictureScreen from './screens/EditPictureScreen';
 
 
 
@@ -34,6 +35,9 @@ import age from './reducers/age';
 import pseudo from './reducers/pseudo';
 import mail from './reducers/mail';
 import mdp from './reducers/password';
+import token from './reducers/token';
+import room from './reducers/room';
+
 
 
 import {Provider} from 'react-redux';
@@ -41,7 +45,7 @@ import {createStore, combineReducers}  from 'redux';
 
 import socket from './reducers/socket';
 
-const store = createStore(combineReducers({ age, pseudo, mail, mdp,socket}));
+const store = createStore(combineReducers({ age, pseudo, mail, mdp,socket,room}));
 
 const Stack = createStackNavigator();
 
@@ -72,6 +76,7 @@ function App(){
       <Stack.Screen name="EditScreen" component={EditScreen}/>
       <Stack.Screen name="RoomScreen" component={Rooms}/>
 
+      <Stack.Screen name="EditPictureScreen" component={EditPictureScreen}/>
 
     </Stack.Navigator>
   </NavigationContainer></Provider>

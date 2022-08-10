@@ -1,26 +1,106 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import { StyleSheet, Text, View, ImageBackground} from "react-native"
 
 import Header from "../components/cards/Header"
 import ButtonLeft from "../components/buttons/ButtonLeft"
 import ButtonRight from "../components/buttons/ButtonRight"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function PlatformScreen(props) {
 
+  const [selected1, setSelected1] = useState(false)
+  const [selected2, setSelected2] = useState(false)
+  const [selected3, setSelected3] = useState(false)
+  const [selected4, setSelected4] = useState(false)
+  const [selected5, setSelected5] = useState(false)
+  const [selected6, setSelected6] = useState(false)
+
+  const [platformSelected, setPlatformSelected] = useState([])
+  const [platformSelected1, setPlatformSelected1] = useState("")
+  const [platformSelected2, setPlatformSelected2] = useState("")
+  const [platformSelected3, setPlatformSelected3] = useState("")
+  const [platformSelected4, setPlatformSelected4] = useState("")
+  const [platformSelected5, setPlatformSelected5] = useState("")
+  const [platformSelected6, setPlatformSelected6] = useState("")
+
   var header = Header("MoodScreen", props)
-  var PC = ButtonLeft("PC")
-  var PS4 = ButtonLeft("PS4")
-  var XboxOne = ButtonLeft("XboxOne")
-  var Switch = ButtonRight("Switch")
-  var PS5 = ButtonRight("PS5")
-  var XboxSeries = ButtonRight("XboxSeries")
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
   var tunnel = Tunnel(3)
 
-  function goLanguage(redirection){
+  var token = ""
+
+  //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
+  AsyncStorage.getItem("users", function(error, data) {
+    console.log(data);
+    token = data
+   });
+
+  var choosePlatformPC = (platformName) => {
+    setSelected1(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"])
+    }else{
+      setPlatformSelected([...platformSelected,"62e9529a0864ccd30790346a"]) // Supprimer élément du tableau
+    }
+  }
+
+  var choosePlatformPS4 = (platformName) => {
+    setSelected2(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected, "62e952a90864ccd30790346c"])
+    }
+  }
+
+  var choosePlatformXBOXOne = (platformName) => {
+
+    setSelected3(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
+    }
+  }
+
+  var choosePlatformSwitch = (platformName) => {
+
+    setSelected4(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected, "62e952ad0864ccd30790346e"])
+    }
+  }
+
+  var choosePlatformPS5 = (platformName) => {
+    setSelected5(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected, "62e952b10864ccd307903470"])
+    }
+  }
+
+  var choosePlatformXBOXSeries = (platformName) => {
+
+    setSelected6(platformName)
+
+    if(platformName) {
+      setPlatformSelected([...platformSelected,"62e952b60864ccd307903472"])
+      setPlatformSelected6("62e952b60864ccd307903472")
+    }
+  }
+ 
+  
+  async function goLanguage(redirection){
     props.navigation.navigate(redirection); 
+
+    const data = await fetch('http://192.168.1.15:3000/users/plateforme', {
+      method: "PUT",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `plateforme=${JSON.stringify(platformSelected)}&token=${token}`,
+      })
+      console.log(platformSelected);
   }
 
   return (
@@ -37,9 +117,12 @@ function PlatformScreen(props) {
         <Text style={styles.text}>Sur quelle plateforme ?</Text>
 
           <View style={styles.buttons}>
-            {PC}{Switch}
-            {PS4}{PS5}
-            {XboxOne}{XboxSeries}
+            <ButtonLeft title="PC" selected1={selected1} handleClickChoosePlatformParent={choosePlatformPC} />
+            <ButtonRight title="Switch" selected4={selected4} handleClickChoosePlatformParent={choosePlatformSwitch} />
+            <ButtonLeft title="PS4" selected2={selected2} handleClickChoosePlatformParent={choosePlatformPS4} />
+            <ButtonRight title="PS5" selected5={selected5} handleClickChoosePlatformParent={choosePlatformPS5} />
+            <ButtonLeft title="XBOXOne" selected3={selected3} handleClickChoosePlatformParent={choosePlatformXBOXOne} />
+            <ButtonRight title="XBOXSeries" selected6={selected6} handleClickChoosePlatformParent={choosePlatformXBOXSeries} />
           </View>
 
             {confirmer}

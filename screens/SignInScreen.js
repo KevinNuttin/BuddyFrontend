@@ -20,10 +20,12 @@ function SignInScreen(props) {
 //! ATTENTION bien modifier avec son IP
 
     async function comfirmation(redirection){
-      props.navigation.navigate(redirection);}
+      props.navigation.navigate(redirection);
+      
+    }
       /*
       if(mail != null || mdp != null){
-        const data = await fetch('http://192.168.10.144:3000/users/sign-in', {
+        const data = await fetch('http://192.168.1.15:3000/users/sign-in', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`

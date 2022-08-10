@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
+import { StyleSheet, TouchableOpacity, Text} from "react-native";
 
-function ButtonLeft(title, onPress) {
+function ButtonLeft(props) {
 
-    const [isPress, setIsPress] = useState(false)
+    const [isPress, setIsPress] = useState(true)
 
-    var onPress = () => {
+    var onPress = (platformName) => {
+
+        props.handleClickChoosePlatformParent(platformName)
 
         if(isPress === false){
             
@@ -20,7 +22,7 @@ function ButtonLeft(title, onPress) {
 
     var colorButton
 
-    if(isPress === true ) {
+    if(isPress === false ) {
         colorButton = {...styles.button, backgroundColor: "#FFA588"}
     } else {
         colorButton = {...styles.button}
@@ -30,8 +32,8 @@ function ButtonLeft(title, onPress) {
     return(
             <TouchableOpacity 
                 style={colorButton} 
-                onPress={onPress}>
-                    <Text style={styles.buttonText}>{title}</Text>
+                onPress={() => onPress(isPress)}>
+                    <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
     )
 }
