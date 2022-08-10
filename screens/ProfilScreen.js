@@ -14,35 +14,47 @@ import {
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
 import CardGame from "../components/cards/CardGame";
-import Header2 from "../components/cards/Header2";
+import Header4 from "../components/cards/Header4";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfilScreen(props) {
   
   var ProfilPic = ProfilPicture();
-  var header = Header2("DiscoverScreen","DiscoverScreen",props)
+  var header = Header4("DiscoverScreen","ChatScreen", "EditScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);
   const [dataGames, setDataGames] = useState([]);
 
+  var token = ""
+
+//* récupération du token du users pour pouvoir utiliser la comparaison de match
+
+AsyncStorage.getItem("users", function(error, data) {
+  console.log("data", data);
+  token = data
+ });
+
+
   useEffect(() => {
     async function loadData() {
       
-      var rawData = await fetch("http://192.168.10.134:3000/users/getprofil");
-      var data = await rawData.json();
-      console.log("logggg", data.user.pseudo);
-      setDataPseudo(data.user.pseudo);
+    var rawDataMyProfil = await fetch(
+      "http://192.168.10.169:3000/users/getmyprofil",
+      { method: "PUT",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `token=${token}`,
+      })
+      
+      var dataMyProfil = await rawDataMyProfil.json();
+      setMyProfil(dataMyProfil)
 
-      console.log("logggg", data.user.plateforme);
-      setDataPlatform(data.user.plateforme);
-
-      console.log("ahhhhh", data.user.games);
-      setDataGames(data.user.games);
     }
+    loadData(); 
 
-    loadData();
   }, []);
 
+console.log(dataPlatform);
   var test = dataPlatform.map((plateforme, i) => {
     return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
   });

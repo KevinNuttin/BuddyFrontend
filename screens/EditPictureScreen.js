@@ -23,7 +23,7 @@ export default function EditPictureScreen(props) {
   const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
 
   var ProfilPic = ProfilPicture(avatar);
-  var header = Header2("EditScreen","EditScreen",props)
+  var header = Header2("EditScreen","ChatScreen",props)
   var pictures = [
   require("../assets/avatars/Group.png"),
   require("../assets/avatars/Group2.png"),

@@ -16,13 +16,15 @@ import {
   import ProfilPicture from "../components/cards/ProfilPicture";
   import Header2 from "../components/cards/Header2";
   import Edit from "../components/cards/Edit";
+  import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
   export default function ProfilScreen(props) {
     
     const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
 
     var ProfilPic = ProfilPicture(avatar);
-    var header = Header2("DiscoverScreen","DiscoverScreen",props)
+    var header = Header2("DiscoverScreen","ChatScreen",props)
     var edit = Edit("EditPictureScreen", onPress)
 
     function onPress(redirection){
@@ -34,25 +36,32 @@ import {
     const [dataPlatform, setDataPlatform] = useState([]);
     const [dataGames, setDataGames] = useState([]);
   
-    useEffect(() => {
-      async function loadData() {
-        
-        var rawData = await fetch(
-          "http://192.168.10.97:3000/users/getprofil");
+    var token = ""
+
+  //* récupération du token du users pour pouvoir utiliser la comparaison de match
   
-        var data = await rawData.json();
-        console.log("logggg", data.user.pseudo);
-        setDataPseudo(data.user.pseudo);
-  
-        console.log("logggg", data.user.plateforme);
-        setDataPlatform(data.user.plateforme);
-  
-        console.log("ahhhhh", data.user.games);
-        setDataGames(data.user.games);
-      }
-  
-      loadData();
-    }, []);
+  AsyncStorage.getItem("users", function(error, data) {
+    console.log("data", data);
+    token = data
+   });
+   
+   useEffect(() => {
+    async function loadData() {
+      
+    var rawDataMyProfil = await fetch(
+      "http://192.168.10.169:3000/users/getmyprofil",
+      { method: "PUT",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `token=${token}`,
+      })
+      
+      var dataMyProfil = await rawDataMyProfil.json();
+      setMyProfil(dataMyProfil)
+
+    }
+    loadData(); 
+
+  }, []);
   
     var test = dataPlatform.map((plateforme, i) => {
       return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
