@@ -146,6 +146,7 @@ AsyncStorage.getItem("users", function(error, data) {
           props.navigation.navigate("MatchScreen") 
          }
             console.log("cardlike",card.likes[i]);
+            console.log("cardlike",card.likes[i]);
           
         }
      // force le match pour la demo (à retirer)
