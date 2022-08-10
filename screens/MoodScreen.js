@@ -65,7 +65,7 @@ function MoodScreen(props) {
   async function goPlatform(redirection){
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.133:3000/users/mood', {
+    const data = await fetch('http://192.168.10.97:3000/users/mood', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     // body: wishgame=${JSON.stringify(wishGame)}&token=${token},
