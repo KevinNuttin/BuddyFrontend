@@ -1,19 +1,21 @@
 import React, { useState} from "react"
-import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
+import { StyleSheet, Text, View, ImageBackground, TextInput, ScrollView, FlatList} from "react-native"
 
+import Header from "../components/cards/Header"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
 
 
 function ChatScreen(props) {
 
-    const [ message, setMessage] = useState("")
+  const [ message, setMessage] = useState("")
 
-    var send = OffsetMiniButton("Envoyer", sendMessage)
+  var header = Header("HomeScreen", props) // changer la redirection pour page des conversations
+  var send = OffsetMiniButton("Envoyer", sendMessage)
 
-    function sendMessage(){
+  function sendMessage(){
 
-    }
+  }
 
   return (
 
@@ -22,16 +24,23 @@ function ChatScreen(props) {
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
 
-      <View style={styles.container}>
-      </View>
+      {header}
+
+        <ScrollView style={styles.chat}>
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        </ScrollView>
 
       <View style={styles.sender}>
         <TextInput
-        style={styles.input}
-            onChangeText={(message) => setMessage(message)}
-            value={message}
-            keyboardType="default"
-            placeholder=""
+          style={styles.input}
+              onChangeText={(message) => setMessage(message)}
+              value={message}
+              keyboardType="default"
+              placeholder=""
         />
         {send}
       </View>
@@ -46,11 +55,13 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
-  container: {
+  chat: {
 
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    textAlign: "center",
+    borderWidth: 1,
+
     backgroundColor : "DADADA",
   },
 
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    borderTopWidth : 2,
+    borderTopWidth : 1,
     borderBottomColor: "#372C60",
     marginTop: 300,
 
@@ -68,12 +79,13 @@ const styles = StyleSheet.create({
 
   input: {
 
-    width : 200,
+    width : 300,
     height: 60,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 24,
 },
 
 });

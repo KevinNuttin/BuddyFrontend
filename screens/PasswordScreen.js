@@ -21,6 +21,7 @@ function PasswordScreen(props) {
   var header = Header("EmailScreen", props)
 
   var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
+  
   async function comfirmation(redirection){
     props.navigation.navigate(redirection)
   }
