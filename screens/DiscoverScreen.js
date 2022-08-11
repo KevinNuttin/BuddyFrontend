@@ -19,7 +19,7 @@ var token = ""
 //* récupération du token du users pour pouvoir utiliser la comparaison de match
 
 AsyncStorage.getItem("users", function(error, data) {
-  console.log("data", data);
+  console.log("data hello", data);
   token = data
  });
 
@@ -69,7 +69,7 @@ AsyncStorage.getItem("users", function(error, data) {
   
   export default function App(props) {
 
-    var header = Header2("ProfilScreen", "ChatScreen", props)
+    var header = Header2("ProfilScreen", "RoomScreen", props)
     var arraytemp =[]
     const [cards, setCards] = useState();
     const [myProfil, setMyProfil] = useState();
@@ -80,13 +80,13 @@ AsyncStorage.getItem("users", function(error, data) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.169:3000/users/getprofil");
+          "http://192.168.10.132:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.169:3000/users/getmyprofil",
+          "http://192.168.10.132:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -144,7 +144,7 @@ AsyncStorage.getItem("users", function(error, data) {
       console.log(`Yup for ${card.text}`);
       console.log("token",token);
       console.log("like", card.likes.length);
-      const data = await fetch('http://192.168.10.169:3000/match/like', {
+      const data = await fetch('http://192.168.10.132:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -152,6 +152,17 @@ AsyncStorage.getItem("users", function(error, data) {
       
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
+
+          
+           //                                                                      ///////////////////////////////////////////////////////////
+           const data = await fetch('http://192.168.10.132:3000/message/new', {
+        method: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `user1=${card.likes[i]}&user2=${myProfil.user._id}`,
+        })
+
+
+           
           props.navigation.navigate("MatchScreen") 
          }
         }

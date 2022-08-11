@@ -7,7 +7,16 @@ import Header from "../components/cards/Header"
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+
+let token='';
+
+AsyncStorage.getItem("users", function(error, data) {
+    console.log("data", data);
+    token = data
+   });
 
 
 function ChatScreen(props) {
@@ -17,14 +26,15 @@ function ChatScreen(props) {
     const header =  Header("DiscoverScreen",props)
     let rooms
 
-    let  token = '-pJ9drXw5U9WgxOrQ_vuR2GYFMXfIwFU'
+
+    
 
     let pseudo = "CowBeez"
 
     useEffect(() => { 
 
       async function dataLoad () {
-        var rawData = await fetch(`http://192.168.1.15:3000/message/historique?token=${token}`);
+        var rawData = await fetch(`http://192.168.10.132:3000/message/historique?token=${token}`);
          rooms = await rawData.json()
        console.log(rooms);
         setRoom(rooms.message)
