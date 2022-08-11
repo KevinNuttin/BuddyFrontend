@@ -5,6 +5,8 @@ import { StyleSheet, Text, View, ImageBackground} from "react-native"
 import Header2 from "../components/cards/Header2"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
+import { connect } from 'react-redux';
+
 
 
 function MoodScreen(props) {
@@ -34,7 +36,7 @@ function MoodScreen(props) {
         </View>
 
         <Text style={styles.text1}>I'ts a MATCH !</Text>
-        <Text style={styles.text2}>With Sophie_Fonsec{"\n\n\n"}╰(*°▽°*)╯</Text>
+        <Text style={styles.text2}>With {props.match}{"\n\n\n"}╰(*°▽°*)╯</Text>
 
         {message}
         {swipe}
@@ -98,4 +100,16 @@ const styles = StyleSheet.create({
 
 });
 
-export default MoodScreen
+
+
+
+function mapStateToProps(state) {
+  return { match: state.match };
+}
+
+
+
+export default connect(
+  mapStateToProps,
+  null
+)(MoodScreen);

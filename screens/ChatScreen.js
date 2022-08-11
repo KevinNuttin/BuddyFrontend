@@ -25,7 +25,7 @@ function ChatScreen(props) {
 
       let table = [];
       async function dataLoad () {
-         var rawData = await fetch(`http://192.168.10.129:3000/message/messagerie?id=${id}`);
+         var rawData = await fetch(`http://192.168.10.132:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
          setRoom(data.message.room)
@@ -51,7 +51,7 @@ function ChatScreen(props) {
     async function sendMessage(){
       var date = new Date();
       socket.emit("message", currentRoom, text, pseudo);
-       const data = await fetch('http://192.168.10.129:3000/message/send', {
+       const data = await fetch('http://192.168.10.132:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${text}`

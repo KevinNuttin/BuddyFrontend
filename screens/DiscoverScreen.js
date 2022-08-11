@@ -5,6 +5,9 @@ import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { connect } from 'react-redux';
+
+
 const cardsData = [
   { src: require('../assets/avatars/Group.png') },
   { src: require('../assets/avatars/Group2.png') },
@@ -28,6 +31,8 @@ AsyncStorage.getItem("users", function(error, data) {
 
 
 function Card({ data }) {
+
+let pseudo = data.pseudo
 
   var gamesList = data.games.map((games) => {
     return(games.name)
@@ -81,7 +86,7 @@ function Card({ data }) {
     );
   }
   
-  export default function App(props) {
+   function App(props) {
 
     var header = Header2("ProfilScreen", "RoomScreen", props)
     var arraytemp =[]
@@ -94,13 +99,13 @@ function Card({ data }) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.129:3000/users/getprofil");
+          "http://192.168.10.132:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.129:3000/users/getmyprofil",
+          "http://192.168.10.132:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -191,7 +196,7 @@ function Card({ data }) {
     async function handleYup(card) {
 
       console.log(`Yup for ${card.text}`);
-      const data = await fetch('http://192.168.10.129:3000/match/like', {
+      const data = await fetch('http://192.168.10.132:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -208,6 +213,7 @@ function Card({ data }) {
         body: `user1=${card.likes[i]}&user2=${myProfil.user._id}`,
         })
 
+          props.onMatch(card.pseudo)
 
            
           props.navigation.navigate("MatchScreen") 
@@ -375,4 +381,20 @@ function Card({ data }) {
     },
 
   });
+
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      onMatch: function (pseudo) {
+        dispatch({ type: 'addPseudo', pseudo : pseudo  })
+      }
+    }
+  }
+ 
+  
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(App);
+  
   
