@@ -201,23 +201,28 @@ let pseudo = data.pseudo
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
         })
-      
+        
+        let pourLeFetch = false;
+
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
 
-          
-           //                                                                      ///////////////////////////////////////////////////////////
-           const data = await fetch('http://192.168.10.129:3000/message/new', {
-        method: "POST",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `user1=${card.likes[i]}&user2=${myProfil.user._id}`,
-        })
-
-          props.onMatch(card.pseudo)
-
+          pourLeFetch = true;
            
-          props.navigation.navigate("MatchScreen") 
+         
          }
+        }
+        if(pourLeFetch == true){
+          const message = await fetch('http://192.168.10.132:3000/message/new', {
+            method: "POST",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `user1=${card.id}&user2=${myProfil.user._id}`,  
+          })
+    
+              props.onMatch(card.pseudo)
+    
+               
+              props.navigation.navigate("MatchScreen") 
         }
      // force le match pour la demo (à retirer)
       console.log(`Card, ${card.token}` );
@@ -386,7 +391,7 @@ let pseudo = data.pseudo
   function mapDispatchToProps(dispatch) {
     return {
       onMatch: function (pseudo) {
-        dispatch({ type: 'addPseudo', pseudo : pseudo  })
+        dispatch({ type: 'addMatch', pseudo : pseudo  })
       }
     }
   }
