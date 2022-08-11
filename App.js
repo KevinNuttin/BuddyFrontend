@@ -37,6 +37,8 @@ import mail from './reducers/mail';
 import mdp from './reducers/password';
 import token from './reducers/token';
 import room from './reducers/room';
+import match from './reducers/match';
+
 
 
 
@@ -45,7 +47,7 @@ import {createStore, combineReducers}  from 'redux';
 
 import socket from './reducers/socket';
 
-const store = createStore(combineReducers({ age, pseudo, mail, mdp,socket,room}));
+const store = createStore(combineReducers({ age, pseudo, mail, mdp,socket,room, match}));
 
 const Stack = createStackNavigator();
 
