@@ -40,7 +40,7 @@ export default function searchGames(props) {
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.10.129:3000/library/addgames', {
+       const data = await fetch('http://192.168.10.132:3000/library/addgames', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
@@ -53,7 +53,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.129:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.132:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }
