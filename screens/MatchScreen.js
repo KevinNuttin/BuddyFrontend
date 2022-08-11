@@ -10,7 +10,7 @@ import ProfilPicture from "../components/cards/ProfilPicture"
 function MoodScreen(props) {
 
   var header = Header2("DiscoverScreen", props)
-  var message = OffsetMiniButton("Message", "DiscoverScreen", goDiscover)
+  var message = OffsetMiniButton("Message", "RoomScreen", goDiscover)
   var swipe = OffsetMiniButton("swipe", "DiscoverScreen", goDiscover)
 
   function goDiscover(redirection){
