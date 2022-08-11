@@ -294,9 +294,9 @@ let pseudo = data.pseudo
       borderWidth: 2,
       borderColor: "#372C60",
 
-      width: 320,
-      height: 580,
-      borderRadius: 40,
+      width: 370,
+      height: 640,
+      borderRadius: 50,
       padding: 10,
       borderWidth: 1,
       borderColor: "#372C60",
