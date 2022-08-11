@@ -52,16 +52,17 @@ function Card({ data }) {
      
      
     return (
-      <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
+      <View style={[styles.card, { backgroundColor: "#8469E1" }]}>
 
           <Image style={styles.image} source= {{uri :(data.picture)}}></Image>
             <Text style={styles.pseudo}> {data.pseudo}</Text>
-            <Text style={styles.plateforme}> {plateformeList}</Text>
+            <Text style={styles.plateforme}> {plateformeList} </Text>
             <Text style={styles.description}>{data.description}</Text>
 
+          <View style={styles.moods}>
+          {moodListImage}
+          </View>
 
-        {moodListImage}
-        <Text style={styles.description}> {gamesList} </Text>
         <ScrollView  style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
@@ -85,7 +86,7 @@ function Card({ data }) {
   
   export default function App(props) {
 
-    var header = Header2("ProfilScreen", "ChatScreen", props)
+    var header = Header2("ProfilScreen", "RoomScreen", props)
     var arraytemp =[]
     const [cards, setCards] = useState();
     const [myProfil, setMyProfil] = useState();
@@ -266,35 +267,39 @@ function Card({ data }) {
     },
 
     card: {
+
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center",
+      borderWidth: 2,
+      borderColor: "#372C60",
 
       width: 320,
       height: 580,
-      backgroundColor: "#866FD3",
       borderRadius: 40,
       padding: 10,
     },
 
     image: {
 
-      borderWidth: 4,
-      borderColor: "#FFFF",
+      borderWidth: 2,
+      borderColor: "#372C60",
       borderRadius: 100,
       height: 160,
       width: 160,
-      marginBottom:10
+      marginTop: 20,
+      marginBottom:10,
     },
 
     pseudo: {
 
-      fontWeight: "400",
+      fontWeight: "700",
       fontSize: 26,
       letterSpacing: 0.5,
-      color: "#FFFF",
-      marginBottom:10
+      color: "#FFBCA6",
+      textAlign: "center",
+      marginBottom: 2,
     },
 
     plateforme:{
@@ -302,7 +307,7 @@ function Card({ data }) {
       fontWeight: "400",
       fontSize: 12,
       letterSpacing: 0.5,
-      color: "#FFFF",
+      color: "#E8C6FF",
       textAlign: "center",
       marginBottom:10,
     },
@@ -315,21 +320,26 @@ function Card({ data }) {
       letterSpacing: 0.5,
       color: "#FFFF",
       textAlign: "center",
-      marginBottom:10,
+      marginBottom:20,
     },
 
     moods: {
 
       flexDirection: "row",
+      marginRight: 2,
+      marginLeft: 2,
+      marginBottom:10,
+
     },
 
     gameimg: {
 
-      borderWidth: 4,
-      borderColor: "#FFFF",
+      borderWidth: 1,
+      borderColor: "#DDABFE",
       borderRadius: 100,
-      height: 80,
-      width: 80
+      height: 65,
+      width: 65,
+      margin: 2,
     },
 
     cardsText: {
