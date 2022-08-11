@@ -4,11 +4,8 @@ import { Button, ListItem,  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Header from "../components/cards/Header"
 
-
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
-
-
 
 function ChatScreen(props) { 
 
@@ -76,12 +73,9 @@ function chat(item){
    return(
    
     <View style={styles.bubbleUser}>
-      <Text style={{
-    fontSize: 15, textAlign: "right"}}>{item.pseudo}</Text>
-      <Text style={{
-    fontSize: 20, textAlign: "right"}}>{item.message}</Text>
-      <Text style={{
-    fontSize: 10, textAlign: "right"}}>{dateFormat(item.date)}</Text>
+      <Text style={styles.pseudo}>{item.pseudo}</Text>
+      <Text style={styles.message}>{item.message}</Text>
+      <Text style={styles.date}>{item.date}</Text>
     </View>
    )
   }else{
@@ -89,9 +83,9 @@ function chat(item){
     return(
 
       <View style={styles.bubbleMatch}>
-        <Text>{item.pseudo}</Text>
-        <Text>{item.message}</Text>
-        <Text>{dateFormat(item.date)}</Text>
+        <Text style={styles.pseudo}>{item.pseudo}</Text>
+        <Text style={styles.message}>{item.message}</Text>
+        <Text style={styles.date}>{dateFormat(item.date)}</Text>
       </View>
     )
     }
@@ -132,15 +126,20 @@ function chat(item){
 
 const styles = StyleSheet.create({
   background: {
+
     height: "100%",
   },
+
   chat: {
+
     flex: 1,
-    flexWrap: "wrap-reverse",
-    marginRight: "-15%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
+
   bubbleUser: {
-    width: 350,
+
     backgroundColor: "#DDABFE",
     marginTop: 20,
     marginBottom: 20,
@@ -148,10 +147,13 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginRight:80
+    marginLeft: "40%",
+
   },
+
   bubbleMatch: {
-    width: 300,
+
+    width:"60%",
     backgroundColor: "#FFA588",
     marginTop: 20,
     marginBottom: 20,
@@ -159,16 +161,44 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginRight: 0,
-  
   },
+
+  pseudo: {
+
+    fontWeight: "600",
+    fontSize: 12,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    marginBottom: 4,
+  },
+
+  message: {
+
+    fontWeight: "400",
+    fontSize: 16,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    marginBottom: 4,
+  },
+
+  date: {
+
+    fontWeight: "300",
+    fontSize: 10,
+    letterSpacing: 0.5,
+    color: "#372C60",
+  },
+
   sender: {
+
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth : 1,
     borderBottomColor: "#372C60",
   },
+
   input: {
+
     width : 300,
     height: 60,
     margin: 12,
@@ -177,11 +207,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 24,
 },
+
 ButtonSender: {
+
   flexDirection: "row",
 },
+
 icon: {
-  marginLeft: 40,
+
+  marginLeft: "15%",
 },
 
 });
