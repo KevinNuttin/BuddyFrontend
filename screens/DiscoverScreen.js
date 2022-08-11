@@ -60,7 +60,6 @@ function Card({ data }) {
             <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.moods}>{moodListImage}</View>
-        <Text style={styles.description}> {gamesList} </Text>
         <ScrollView  style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
