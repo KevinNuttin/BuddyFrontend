@@ -99,7 +99,7 @@ function chat(item){
       source={require('../assets/backgrounds/fond_buddy.png')}>
       {header}
       <View style={styles.chat}>
-          <FlatList                            // <= à déjà une ScrollView
+          <FlatList showsVerticalScrollIndicator={false}                       // <= à déjà une ScrollView
             data={message}                    // <= array requis
                 // <= Key is used for caching and as the react key to track item re-ordering
             renderItem={({item}) => (          // <= Takes an item from data and renders it into the list
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+
   },
 
   bubbleUser: {
@@ -147,13 +148,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginLeft: "40%",
+    marginLeft: "20%",
+    width:300,
 
   },
 
   bubbleMatch: {
 
-    width:"60%",
+    width:300,
     backgroundColor: "#FFA588",
     marginTop: 20,
     marginBottom: 20,

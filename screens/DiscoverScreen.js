@@ -65,7 +65,7 @@ let pseudo = data.pseudo
             <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.moods}>{moodListImage}</View>
-        <ScrollView  style={styles.scroll} horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
 

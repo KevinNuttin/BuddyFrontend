@@ -75,7 +75,7 @@ function ChatScreen(props) {
 
       <View style={styles.container}>
         <Text style={styles.text}>Liste des matchs</Text>
-        <ScrollView style={{ width : 350}}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ width : 350, height: 500, }}>
       <View>
 
       {
