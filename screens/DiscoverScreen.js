@@ -45,7 +45,6 @@ AsyncStorage.getItem("users", function(error, data) {
         <Text style={styles.pseudo}> {data.pseudo}</Text>
         <Text style={styles.description}> {plateformeList}</Text>
       <View style={styles.plateforme}><Text style={styles.description}>{data.description}</Text></View>
-        <Text style={styles.description}> {gamesList} </Text>
         <ScrollView  style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
@@ -80,13 +79,13 @@ AsyncStorage.getItem("users", function(error, data) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.1.14:3000/users/getprofil");
+          "http://192.168.10.138:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.1.14:3000/users/getmyprofil",
+          "http://192.168.10.138:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -110,6 +109,12 @@ AsyncStorage.getItem("users", function(error, data) {
             langues.push(profil.langue[i])
           }
 
+          var gametrue= false
+        
+          for(var i =0; i < games.length; i++){
+            gametrue = arraytemp.includes(games[i])
+           }
+           console.log(gametrue);
 
           return {
             id: profil._id,
@@ -122,15 +127,18 @@ AsyncStorage.getItem("users", function(error, data) {
             likes: likes,
             plateformes: profil.plateforme,
             moods : profil.mood,
-            langues : langues
+            langues : langues,
+            samegames: gametrue
         
           }
          
         })
+
+
         // corriger le filtre de langue 
-       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && e.langues != dataMyProfil.user.langue)
-
-
+       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && e.langues != dataMyProfil.user.langue && samegames == true)
+    
+  
 
        console.log("langue",arraytemp[0].langues );
 
@@ -141,10 +149,9 @@ AsyncStorage.getItem("users", function(error, data) {
     }, []);
 
     async function handleYup(card) {
+
       console.log(`Yup for ${card.text}`);
-      console.log("token",token);
-      console.log("like", card.likes.length);
-      const data = await fetch('http://192.168.1.14:3000/match/like', {
+      const data = await fetch('http://192.168.10.138:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -152,6 +159,7 @@ AsyncStorage.getItem("users", function(error, data) {
       
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
+
           props.navigation.navigate("MatchScreen") 
          }
         }
@@ -227,7 +235,10 @@ AsyncStorage.getItem("users", function(error, data) {
       borderRadius: 40,
       textAlign: "center",
       padding: 10,
+      borderWidth: 1,
+      borderColor: "#372C60",
     },
+
 
     pseudo: {
 
@@ -288,6 +299,7 @@ AsyncStorage.getItem("users", function(error, data) {
     plateforme:{
       width: 200,
       justifyContent: "space-evenly",
-    }
+    },
+
   });
   
