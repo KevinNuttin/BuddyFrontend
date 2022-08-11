@@ -31,10 +31,20 @@ export default function ProfilScreen(props) {
 
   var header = Header4("DiscoverScreen","ChatScreen", "EditScreen", props)
 
-  const [dataPseudo, setDataPseudo] = useState("..");
+  const [dataPseudo, setDataPseudo] = useState(null);
   const [dataPlatform, setDataPlatform] = useState([]);
   const [dataGames, setDataGames] = useState([]);
+
   const [picture, setPicture] = useState('');
+  const [description, setDesc] = useState('');
+  const [mood, setMood] = useState([]);
+  const [pseudo, setPseudo] = useState('');
+  const [plat, setPlat] = useState([]);
+  const [games, setGames] = useState([]);
+
+
+
+
 
 
 
@@ -52,33 +62,84 @@ let profil;
       })
     
        var json = await rawDataMyProfil.json(); 
-       console.log(json);
+       
 
       setPicture(json.user.picture)
+      setDesc(json.user.description)
+      setPseudo(json.user.pseudo)
+      setMood(json.user.mood)
+      setPlat(json.user.plateforme)
+      setGames(json.user.games)
 
     }
   loadData(); 
-   
 
 
   }, []);
 
   var  ProfilPic = ProfilPicture(picture);
 
-  var test = dataPlatform.map((plateforme, i) => {
-    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
-  });
 
-  var image = dataGames.map ((image, j ) => {
-    return   <Image key={j}
-              source={{
-                uri: image.image,
-              }}
-              style={styles.image}
-            ></Image>
-         
-  });
 
+
+  function emoji(data){
+    let moodsImage = [];
+    for(var i=0; i< data.length; i++){
+      // moods.push(profil.mood[i]._id)
+
+      if(data[i]._id == "62e8fb0755b46687cabb297d") {
+         moodsImage.push(require("../assets/emojis/chill.png"))
+      } if (data[i]._id == "62e8fb2755b46687cabb297f") {
+         moodsImage.push(require("../assets/emojis/tryharder.png"))
+      } if (data[i]._id == "62e8fb2f55b46687cabb2981") {
+          moodsImage.push(require("../assets/emojis/normal.png"))
+      } if (data[i]._id == "62e8fb3855b46687cabb2983") {
+          moodsImage.push(require("../assets/emojis/competitif.png"))
+      } if (data[i]._id == "62e8fb3d55b46687cabb2985") {
+          moodsImage.push(require("../assets/emojis/zen.png"))
+      } if (data[i]._id == "62e8fb4655b46687cabb2987") {
+          moodsImage.push(require("../assets/emojis/rageux.png"))
+      } if (data[i]._id == "62e8fb4f55b46687cabb2989") {
+          moodsImage.push(require("../assets/emojis/civilise.png"))
+      } if (data[i]._id == "62e8fb5655b46687cabb298b") {
+         moodsImage.push(require("../assets/emojis/toxique.png"))
+      }
+    }
+return(
+  <View style={styles.mood}>
+  <Image source={moodsImage[0]} style ={styles.emoji}></Image>
+  <Image source={moodsImage[1]}  style ={styles.emoji}></Image>
+  <Image source={moodsImage[2]}  style ={styles.emoji}></Image>
+  <Image source={moodsImage[3]}   style ={styles.emoji}></Image>
+  </View>
+)
+  }
+
+function terrePlate(data){
+
+let marie = '';
+if(data){
+  for(var i=0; i< data.length; i++){
+    marie = marie+' '+data[i].plateforme
+
+
+}
+}
+return marie
+}
+
+var plateformes =  terrePlate(plat)
+
+  var emoJ = emoji(mood)
+
+
+  var gameListImage = games.map((games, j) => {
+
+    return(
+    <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
+  })
+
+  console.log(gameListImage);
 
   return (
 
@@ -93,26 +154,21 @@ let profil;
         {ProfilPic}
 
         <View style={styles.containerText}>
-          <Text style={styles.text1}>{dataPseudo}</Text>
-          <View style={styles.plateforme}>{test}</View>
+          <Text style={styles.text1}>{pseudo}</Text>
+          <View style={styles.plateforme}><Text>{plateformes}</Text></View>
           <Text style={styles.text3}>
-            Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
+            {description}
           </Text>
         </View>
 
         {/* View pour les images de mood --> les mettre en ligne  */}
-        <View style={styles.emoji}>
-          <Image source={require("../assets/emojis/chill.png")}></Image>
-          <Image source={require("../assets/emojis/civilise.png")}></Image>
-          <Image source={require("../assets/emojis/competitif.png")}></Image>
-          <Image source={require("../assets/emojis/normal.png")}></Image>
-          <Image source={require("../assets/emojis/rageux.png")}></Image>
-        </View>
+{emoJ}
 
         {/* View pour les images de jeux / les mettre en lignes --> envisager un caroussel */}
         <ScrollView style={styles.scroll} horizontal={true}>
-          {image}
+          {gameListImage}
         </ScrollView>
+        
       </View>
     </ImageBackground>
   );
@@ -170,15 +226,22 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
 
-  emoji: {
+  mood: {
 
     flexDirection: "row",
     marginTop: 150,
     marginBottom:50,
+
+  },
+  
+  emoji:{
+
+    marginLeft : 10,
+    marginRight : 10
   },
 
   scroll: {
-    marginRight: 10,
+    marginRight: 20,
     marginLeft: 20,
   },
 
@@ -192,18 +255,31 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 60,
   },
+
   image:{
+
     height:100,
     width:100,
     marginRight: 20,
     marginLeft: 20,
   },
+
   plateforme:{
+
     flexDirection:"row",
     marginTop:10,
     marginBottom: 50,
     width: 300,
     justifyContent: "space-evenly"
-  }
+  },
+  
+  gameimg: {
+
+    borderWidth: 1,
+    borderRadius: 100,
+    height: 55,
+    width: 55,
+    margin: 6,
+  },
 
 });
