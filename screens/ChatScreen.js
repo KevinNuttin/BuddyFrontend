@@ -4,11 +4,8 @@ import { Button, ListItem,  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Header from "../components/cards/Header"
 
-
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
-
-
 
 function ChatScreen(props) { 
 
@@ -28,7 +25,7 @@ function ChatScreen(props) {
 
       let table = [];
       async function dataLoad () {
-         var rawData = await fetch(`http://192.168.10.138:3000/message/messagerie?id=${id}`);
+         var rawData = await fetch(`http://192.168.10.129:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
          setRoom(data.message.room)
@@ -41,9 +38,10 @@ function ChatScreen(props) {
        }, []);
 
        useEffect(() => {
-        socket.on('messageFromBack', (newMessage, userPseudo, date) => {
-          
-          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) 
+
+        socket.on('messageFromBack', (newMessage, userPseudo, date,room) => {
+          if(room == currentRoom){
+          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) }
         });
         return()=>{
         socket.off('message')
@@ -53,7 +51,7 @@ function ChatScreen(props) {
     async function sendMessage(){
       var date = new Date();
       socket.emit("message", currentRoom, text, pseudo);
-       const data = await fetch('http://192.168.10.138:3000/message/send', {
+       const data = await fetch('http://192.168.10.129:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${text}`
@@ -61,26 +59,33 @@ function ChatScreen(props) {
        setText('')
     }
 
-console.log(message);
+
+    function dateFormat(date){
+      var newDate = new Date(date);
+      var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear()+'  '+newDate.getHours()+':'+newDate.getMinutes();
+      return format;
+    }
 
 function chat(item){
 
   if(item.pseudo == pseudo){
 
    return(
+   
     <View style={styles.bubbleUser}>
-      <Text>{item.pseudo}</Text>
-      <Text>{item.message}</Text>
-      <Text>{item.date}</Text>
+      <Text style={styles.pseudo}>{item.pseudo}</Text>
+      <Text style={styles.message}>{item.message}</Text>
+      <Text style={styles.date}>{item.date}</Text>
     </View>
    )
   }else{
 
     return(
+
       <View style={styles.bubbleMatch}>
-        <Text>{item.pseudo}</Text>
-        <Text>{item.message}</Text>
-        <Text>{item.date}</Text>
+        <Text style={styles.pseudo}>{item.pseudo}</Text>
+        <Text style={styles.message}>{item.message}</Text>
+        <Text style={styles.date}>{dateFormat(item.date)}</Text>
       </View>
     )
     }
@@ -121,15 +126,20 @@ function chat(item){
 
 const styles = StyleSheet.create({
   background: {
+
     height: "100%",
   },
+
   chat: {
+
     flex: 1,
-    flexWrap: "wrap-reverse",
-    marginRight: "-15%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
+
   bubbleUser: {
-    width: "80%",
+
     backgroundColor: "#DDABFE",
     marginTop: 20,
     marginBottom: 20,
@@ -137,10 +147,13 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginRight:230
+    marginLeft: "40%",
+
   },
+
   bubbleMatch: {
-    width: "80%",
+
+    width:"60%",
     backgroundColor: "#FFA588",
     marginTop: 20,
     marginBottom: 20,
@@ -148,15 +161,44 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginRight: 10
   },
+
+  pseudo: {
+
+    fontWeight: "600",
+    fontSize: 12,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    marginBottom: 4,
+  },
+
+  message: {
+
+    fontWeight: "400",
+    fontSize: 16,
+    letterSpacing: 0.5,
+    color: "#372C60",
+    marginBottom: 4,
+  },
+
+  date: {
+
+    fontWeight: "300",
+    fontSize: 10,
+    letterSpacing: 0.5,
+    color: "#372C60",
+  },
+
   sender: {
+
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth : 1,
     borderBottomColor: "#372C60",
   },
+
   input: {
+
     width : 300,
     height: 60,
     margin: 12,
@@ -165,11 +207,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 24,
 },
+
 ButtonSender: {
+
   flexDirection: "row",
 },
+
 icon: {
-  marginLeft: 40,
+
+  marginLeft: "15%",
 },
 
 });

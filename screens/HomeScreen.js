@@ -22,7 +22,7 @@ import { connect } from 'react-redux';
 
 
   useEffect(() => { 
-    var socket = socketIOClient("http://192.168.10.138:3000");
+    var socket = socketIOClient("http://192.168.10.129:3000");
 
     props.saveSocket(socket);
 

@@ -26,21 +26,21 @@ export default function searchGames(props) {
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
-    createTwoButtonAlert = () =>
+   function createTwoButtonAlert  (){
     Alert.alert(
       "Tu n'as pas de jeux...",
       "Merci d'ajouter au moins un jeux  wesh!",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
-    );
+    );}
 
       async function comfirmation(redirection){
         if(wishGame.length > 0){
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.10.138:3000/library/addgames', {
+       const data = await fetch('http://192.168.10.129:3000/library/addgames', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
@@ -53,7 +53,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.138:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.129:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }

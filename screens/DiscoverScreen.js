@@ -22,7 +22,7 @@ var token = ""
 
 
 AsyncStorage.getItem("users", function(error, data) {
-  console.log("data", data);
+  console.log("data hello", data);
   token = data
  });
 
@@ -52,13 +52,12 @@ function Card({ data }) {
      
      
     return (
-      <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
+      <View style={[styles.card, { backgroundColor: "#8469E1" }]}>
 
           <Image style={styles.image} source= {{uri :(data.picture)}}></Image>
             <Text style={styles.pseudo}> {data.pseudo}</Text>
-            <Text style={styles.plateforme}> {plateformeList}</Text>
+            <Text style={styles.plateforme}> {plateformeList} </Text>
             <Text style={styles.description}>{data.description}</Text>
-
 
         <View style={styles.moods}>{moodListImage}</View>
         <Text style={styles.description}> {gamesList} </Text>
@@ -85,7 +84,7 @@ function Card({ data }) {
   
   export default function App(props) {
 
-    var header = Header2("ProfilScreen", "ChatScreen", props)
+    var header = Header2("ProfilScreen", "RoomScreen", props)
     var arraytemp =[]
     const [cards, setCards] = useState();
     const [myProfil, setMyProfil] = useState();
@@ -96,13 +95,13 @@ function Card({ data }) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.138:3000/users/getprofil");
+          "http://192.168.10.129:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.138:3000/users/getmyprofil",
+          "http://192.168.10.129:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -193,7 +192,7 @@ function Card({ data }) {
     async function handleYup(card) {
 
       console.log(`Yup for ${card.text}`);
-      const data = await fetch('http://192.168.10.138:3000/match/like', {
+      const data = await fetch('http://192.168.10.129:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -202,6 +201,16 @@ function Card({ data }) {
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
 
+          
+           //                                                                      ///////////////////////////////////////////////////////////
+           const data = await fetch('http://192.168.10.129:3000/message/new', {
+        method: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `user1=${card.likes[i]}&user2=${myProfil.user._id}`,
+        })
+
+
+           
           props.navigation.navigate("MatchScreen") 
          }
         }
@@ -272,14 +281,16 @@ function Card({ data }) {
     },
 
     card: {
+
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center",
+      borderWidth: 2,
+      borderColor: "#372C60",
 
       width: 320,
       height: 580,
-      backgroundColor: "#866FD3",
       borderRadius: 40,
       padding: 10,
       borderWidth: 1,
@@ -287,21 +298,24 @@ function Card({ data }) {
     },
 
     image: {
-      borderWidth: 4,
-      borderColor: "#FFFF",
+
+      borderWidth: 2,
+      borderColor: "#372C60",
       borderRadius: 100,
       height: 160,
       width: 160,
-      marginBottom:10
+      marginTop: 20,
+      marginBottom:10,
     },
 
     pseudo: {
 
-      fontWeight: "400",
+      fontWeight: "700",
       fontSize: 26,
       letterSpacing: 0.5,
-      color: "#FFFF",
-      marginBottom:10
+      color: "#FFBCA6",
+      textAlign: "center",
+      marginBottom: 2,
     },
 
     plateforme:{
@@ -309,7 +323,7 @@ function Card({ data }) {
       fontWeight: "400",
       fontSize: 12,
       letterSpacing: 0.5,
-      color: "#FFFF",
+      color: "#E8C6FF",
       textAlign: "center",
       marginBottom:10,
     },
@@ -322,21 +336,26 @@ function Card({ data }) {
       letterSpacing: 0.5,
       color: "#FFFF",
       textAlign: "center",
-      marginBottom:10,
+      marginBottom:20,
     },
 
     moods: {
 
       flexDirection: "row",
+      marginRight: 2,
+      marginLeft: 2,
+      marginBottom:10,
+
     },
 
     gameimg: {
 
-      borderWidth: 4,
-      borderColor: "#FFFF",
+      borderWidth: 1,
+      borderColor: "#DDABFE",
       borderRadius: 100,
-      height: 80,
-      width: 80
+      height: 65,
+      width: 65,
+      margin: 2,
     },
 
     cardsText: {

@@ -7,7 +7,16 @@ import Header from "../components/cards/Header"
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+
+let token='';
+
+AsyncStorage.getItem("users", function(error, data) {
+    console.log("data", data);
+    token = data
+   });
 
 
 function ChatScreen(props) {
@@ -17,14 +26,15 @@ function ChatScreen(props) {
     const header =  Header("DiscoverScreen",props)
     let rooms
 
-    let  token = '-pJ9drXw5U9WgxOrQ_vuR2GYFMXfIwFU'
+
+    
 
     let pseudo = "CowBeez"
 
     useEffect(() => { 
 
       async function dataLoad () {
-        var rawData = await fetch(`http://192.168.10.138:3000/message/historique?token=${token}`);
+        var rawData = await fetch(`http://192.168.10.129:3000/message/historique?token=${token}`);
          rooms = await rawData.json()
        console.log(rooms);
         setRoom(rooms.message)
@@ -59,28 +69,28 @@ function ChatScreen(props) {
       resizeMode="cover"
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
-{header}
-      <View style={styles.container}>
-      <Text style={styles.text}>Liste des matchs</Text>
-      <ScrollView style={{ width : 350}}>
-      <View>
-  {
-    channel.map((item, i) => (
 
-        <TouchableOpacity key={i}
-        onPress={() => {
-        
-            props.saveRoom(item.id)
-            props.navigation.navigate("ChatScreen")}}
+      {header}
+
+      <View style={styles.container}>
+        <Text style={styles.text}>Liste des matchs</Text>
+        <ScrollView style={{ width : 350}}>
+      <View>
+
+      {
+        channel.map((item, i) => (
+
+            <TouchableOpacity key={i}
+            onPress={() => {
+            
+                props.saveRoom(item.id)
+                props.navigation.navigate("ChatScreen")}}
         >
             
-        <ListItem >
-          <ListItem.Content style ={styles.truc}>
-            
-       <Image  style={styles.tinyLogo}
-       source={{ uri: item.user.picture,}} />
-
-           <Text>{item.user.pseudo}</Text> 
+        <ListItem containerStyle={{backgroundColor:"grey5"}}>
+          <ListItem.Content style ={styles.profil}>
+            <Image  style={styles.tinyLogo} source={{ uri: item.user.picture,}} />
+            <Text style={styles.pseudo}>{item.user.pseudo}</Text> 
           </ListItem.Content>
         </ListItem>
         </TouchableOpacity>
@@ -94,7 +104,7 @@ function ChatScreen(props) {
     </ImageBackground>
   );
 }
-  else{
+  else {
     return (
 
         <ImageBackground
@@ -103,7 +113,7 @@ function ChatScreen(props) {
           source={require('../assets/backgrounds/fond_buddy.png')}>
     {header}
           <View>
-          <Text style={styles.text2}>Liste des matchs</Text>
+          <Text style={styles.text}>Liste des matchs</Text>
           <View style={{ width : 350}}>
           <Text style={{   
   marginTop : 100,
@@ -131,25 +141,18 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
-  container: {
-
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor : "DADADA",
-  },
-
   tinyLogo: {
     
-    width: 100,
-    height: 100,
-   
+    width: 80,
+    height: 80,
+    borderRadius: 60,
+    marginRight: 20,
   },
   
   text: {
 
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 40,
 
     fontWeight: "400",
     fontSize: 26,
@@ -158,17 +161,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },  
   
-    text2: {
-
-    marginTop: 100,
-    marginBottom: 0,
+  pseudo: {
 
     fontWeight: "400",
-    fontSize: 26,
+    fontSize: 20,
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
   },
+
+  profil: {
+    
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  }
 
 });
 

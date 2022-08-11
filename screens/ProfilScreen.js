@@ -40,7 +40,7 @@ AsyncStorage.getItem("users", function(error, data) {
     async function loadData() {
       
     var rawDataMyProfil = await fetch(
-      "http://192.168.10.138:3000/users/getmyprofil",
+      "http://192.168.10.129:3000/users/getmyprofil",
       { method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,
