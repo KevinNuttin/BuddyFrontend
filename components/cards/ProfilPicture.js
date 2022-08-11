@@ -7,7 +7,7 @@ function profilPicture(image) {
     <View style={styles.container}>
       <Image
         style={styles.picture}
-        source={(image)}
+        source={{ uri: `${image}`}}
       />
       <View />
     </View>

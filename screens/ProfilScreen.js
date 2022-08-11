@@ -17,26 +17,31 @@ import CardGame from "../components/cards/CardGame";
 import Header4 from "../components/cards/Header4";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+var token = ""
+
+//* récupération du token du users pour pouvoir utiliser la comparaison de match
+
+AsyncStorage.getItem("users", function(error, data) {
+
+  token = data
+ });
+
 export default function ProfilScreen(props) {
   
-  var ProfilPic = ProfilPicture();
+
   var header = Header4("DiscoverScreen","ChatScreen", "EditScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState("..");
   const [dataPlatform, setDataPlatform] = useState([]);
   const [dataGames, setDataGames] = useState([]);
+  const [picture, setPicture] = useState('');
 
-  var token = ""
 
-//* récupération du token du users pour pouvoir utiliser la comparaison de match
 
-AsyncStorage.getItem("users", function(error, data) {
-  console.log("data", data);
-  token = data
- });
-console.log(token);
+let profil;
 
   useEffect(() => {
+  
     async function loadData() {
       
     var rawDataMyProfil = await fetch(
@@ -46,16 +51,20 @@ console.log(token);
       body: `token=${token}`,
       })
     
-      var dataMyProfil = await rawDataMyProfil.json(); 
-       console.log(dataMyProfil);
-      setMyProfil(dataMyProfil)
+       var json = await rawDataMyProfil.json(); 
+       console.log(json);
+
+      setPicture(json.user.picture)
 
     }
-    loadData(); 
+  loadData(); 
+   
+
 
   }, []);
 
-console.log(dataPlatform);
+  var  ProfilPic = ProfilPicture(picture);
+
   var test = dataPlatform.map((plateforme, i) => {
     return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
   });
