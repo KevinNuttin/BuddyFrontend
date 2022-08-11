@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
 
-  function inscription(redirection){
+  function inscription(redirection){ 
     props.navigation.navigate(redirection); 
   }
   function connexion(redirection){
