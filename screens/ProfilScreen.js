@@ -34,7 +34,7 @@ AsyncStorage.getItem("users", function(error, data) {
   console.log("data", data);
   token = data
  });
-
+console.log(token);
 
   useEffect(() => {
     async function loadData() {
@@ -45,8 +45,9 @@ AsyncStorage.getItem("users", function(error, data) {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,
       })
-      
-      var dataMyProfil = await rawDataMyProfil.json();
+    
+      var dataMyProfil = await rawDataMyProfil.json(); 
+       console.log(dataMyProfil);
       setMyProfil(dataMyProfil)
 
     }

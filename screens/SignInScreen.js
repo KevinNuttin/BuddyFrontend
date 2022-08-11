@@ -6,6 +6,9 @@ import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { connect } from 'react-redux';
+
+
 
 function SignInScreen(props) {
 
@@ -29,12 +32,15 @@ function SignInScreen(props) {
         })
         const body = await data.json()
 
+   
 
+      if(body.result){  
+        console.log(body.user.pseudo);
+        props.onConfirmer(body.user.pseudo);
+        
       let getUser = body.token   
 
       AsyncStorage.setItem('users', getUser)
-
-      if(body.result){
       props.navigation.navigate(redirection);} }
 
      // props.navigation.navigate(redirection);
@@ -121,4 +127,20 @@ const styles = StyleSheet.create({
 
 });
 
-export default SignInScreen
+
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onConfirmer: function (pseudo) {
+      dispatch({ type: 'addPseudo', pseudo : pseudo  })
+    }
+  }
+}
+
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignInScreen);

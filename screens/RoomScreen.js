@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 let token='';
 
 AsyncStorage.getItem("users", function(error, data) {
-    console.log("data", data);
+
     token = data
    });
 
@@ -29,14 +29,15 @@ function ChatScreen(props) {
 
     
 
-    let pseudo = "CowBeez"
+    let pseudo = props.pseudo
+
 
     useEffect(() => { 
 
       async function dataLoad () {
         var rawData = await fetch(`http://192.168.10.132:3000/message/historique?token=${token}`);
          rooms = await rawData.json()
-       console.log(rooms);
+
         setRoom(rooms.message)
         
         
@@ -53,7 +54,7 @@ function ChatScreen(props) {
             table.push({user: user , id: rooms.message[i]._id})
             
         }
-        console.log(table,"tabbbble");
+    
         setChannel(table)
     }
     dataLoad();
