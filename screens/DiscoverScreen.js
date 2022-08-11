@@ -109,15 +109,24 @@ function Card({ data }) {
           var dataMyProfil = await rawDataMyProfil.json();
           setMyProfil(dataMyProfil)
 
+          var gametrue= false
+
           arraytemp = dataProfilfetch.user.map((profil) => {
           var games = []
           var likes = []
           var langues = []
           var moods = []
           var moodsImage = []
+          
 
           for(var i=0; i< profil.games.length; i++){
             games.push(profil.games[i])
+
+            istrue = profil.games[i]._id.includes(dataMyProfil.user.games[i])
+            if(istrue == true){
+              gametrue = true
+            }
+            console.log("gametrue", gametrue);
           }
 
           for(var i=0; i< profil.like.length; i++){
@@ -128,12 +137,6 @@ function Card({ data }) {
             langues.push(profil.langue[i])
           }
 
-          var gametrue= false
-        
-          for(var i =0; i < games.length; i++){
-            gametrue = arraytemp.includes(games[i])
-           }
-           console.log(gametrue);
           for(var i=0; i< profil.mood.length; i++){
             // moods.push(profil.mood[i]._id)
 
@@ -175,9 +178,7 @@ function Card({ data }) {
 
 
         // corriger le filtre de langue 
-       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && e.langues != dataMyProfil.user.langue && samegames == true)
-    
-  
+       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && gametrue == true)
 
        console.log("langue",arraytemp[0].langues );
 
