@@ -34,7 +34,6 @@ export default function ProfilScreen(props) {
 //* récupération du token du users pour pouvoir utiliser la comparaison de match
 
 
-
   useEffect(() => {
     async function loadData(token) {
     var rawDataMyProfil = await fetch(

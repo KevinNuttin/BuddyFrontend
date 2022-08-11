@@ -9,7 +9,7 @@ import ProfilPicture from "../components/cards/ProfilPicture"
 
 function ChatScreen(props) { 
 
-    let pseudo = "CowBeez";
+    let pseudo = props.pseudo;
     const header =  Header("RoomScreen",props) // changer la redirection pour page des conversations
     const [ text, setText] = useState('')
     const [ message, setMessage] = useState([])
@@ -51,7 +51,7 @@ function ChatScreen(props) {
     async function sendMessage(){
       var date = new Date();
       socket.emit("message", currentRoom, text, pseudo);
-       const data = await fetch('http://192.168.10.132:3000/message/send', {
+       const data = await fetch('http://192.168.10.145:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${text}`
@@ -75,7 +75,7 @@ function chat(item){
     <View style={styles.bubbleUser}>
       <Text style={styles.pseudo}>{item.pseudo}</Text>
       <Text style={styles.message}>{item.message}</Text>
-      <Text style={styles.date}>{item.date}</Text>
+      <Text style={styles.date}>{dateFormat(item.date)}</Text>
     </View>
    )
   }else{

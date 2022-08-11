@@ -5,7 +5,7 @@ import {StyleSheet, View, ImageBackground, Image} from "react-native";
 import OffsetButton from "../components/buttons/OffsetButton";
 
 import socketIOClient from 'socket.io-client';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'; 
 
  function Homescreen(props) {
 
