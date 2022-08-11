@@ -22,7 +22,7 @@ function SignInScreen(props) {
 
     async function comfirmation(redirection){
       if(mail != null || mdp != null){
-        const data = await fetch('http://192.168.10.169:3000/users/sign-in', {
+        const data = await fetch('http://192.168.10.129:3000/users/sign-in', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`

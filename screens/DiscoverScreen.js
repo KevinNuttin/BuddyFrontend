@@ -14,9 +14,12 @@ const cardsData = [
   { src: require('../assets/avatars/Group6.png') },
 ];
 
+
+
 var token = ""
 
 //* récupération du token du users pour pouvoir utiliser la comparaison de match
+
 
 AsyncStorage.getItem("users", function(error, data) {
   console.log("data", data);
@@ -24,27 +27,40 @@ AsyncStorage.getItem("users", function(error, data) {
  });
 
 
-  function Card({ data }) {
+function Card({ data }) {
 
-    var gamesList = data.games.map((games) => {
-      return(games.name)
-     })
-     var gameListImage = data.games.map((games, j) => {
-      return(
-        <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
-     })
-     var plateformeList = data.plateformes.map((plateforme) => {
-      return(plateforme.plateforme)
-     })
+  var gamesList = data.games.map((games) => {
+    return(games.name)
+  })
+
+  var gameListImage = data.games.map((games, j) => {
+    return(
+    <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
+  })
+
+  var plateformeList = data.plateformes.map((plateforme) => {
+    return(plateforme.plateforme)
+  })
+
+  var moodListImage = data.moods.map((moods, k) => {
+    return(
+      <View style={styles.moods}>
+        <Image key={k} source={moods}/> 
+      </View>
+      )
+  })
      
      
     return (
       <View style={[styles.card, { backgroundColor: "#866FD3" }]}>
-        <Text>{data.text}</Text>
-        <Image style={styles.img} source= {{uri :(data.picture)}}></Image>
-        <Text style={styles.pseudo}> {data.pseudo}</Text>
-        <Text style={styles.description}> {plateformeList}</Text>
-      <View style={styles.plateforme}><Text style={styles.description}>{data.description}</Text></View>
+
+          <Image style={styles.image} source= {{uri :(data.picture)}}></Image>
+            <Text style={styles.pseudo}> {data.pseudo}</Text>
+            <Text style={styles.plateforme}> {plateformeList}</Text>
+            <Text style={styles.description}>{data.description}</Text>
+
+
+        {moodListImage}
         <Text style={styles.description}> {gamesList} </Text>
         <ScrollView  style={styles.scroll} horizontal={true}>
         {gameListImage}
@@ -80,13 +96,15 @@ AsyncStorage.getItem("users", function(error, data) {
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.169:3000/users/getprofil");
+          "http://192.168.10.129:3000/users/getprofil");
+
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.169:3000/users/getmyprofil",
+          "http://192.168.10.129:3000/users/getmyprofil",
+
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -98,15 +116,44 @@ AsyncStorage.getItem("users", function(error, data) {
           arraytemp = dataProfilfetch.user.map((profil) => {
           var games = []
           var likes = []
-          var langues =[]
+          var langues = []
+          var moods = []
+          var moodsImage = []
 
           for(var i=0; i< profil.games.length; i++){
             games.push(profil.games[i])
           }
+
           for(var i=0; i< profil.like.length; i++){
             likes.push(profil.like[i])
           }
+
+          for(var i=0; i< profil.langue.length; i++){
+            langues.push(profil.langue[i])
+          }
   
+
+          for(var i=0; i< profil.mood.length; i++){
+            // moods.push(profil.mood[i]._id)
+
+            if(profil.mood[i]._id == "62e8fb0755b46687cabb297d") {
+               moodsImage.push(require("../assets/emojis/chill.png"))
+            } if (profil.mood[i]._id == "62e8fb2755b46687cabb297f") {
+               moodsImage.push(require("../assets/emojis/tryharder.png"))
+            } if (profil.mood[i]._id == "62e8fb2f55b46687cabb2981") {
+                moodsImage.push(require("../assets/emojis/normal.png"))
+            } if (profil.mood[i]._id == "62e8fb3855b46687cabb2983") {
+                moodsImage.push(require("../assets/emojis/competitif.png"))
+            } if (profil.mood[i]._id == "62e8fb3d55b46687cabb2985") {
+                moodsImage.push(require("../assets/emojis/zen.png"))
+            } if (profil.mood[i]._id == "62e8fb4655b46687cabb2987") {
+                moodsImage.push(require("../assets/emojis/rageux.png"))
+            } if (profil.mood[i]._id == "62e8fb4f55b46687cabb2989") {
+                moodsImage.push(require("../assets/emojis/civilise.png"))
+            } if (profil.mood[i]._id == "62e8fb5655b46687cabb298b") {
+               moodsImage.push(require("../assets/emojis/toxique.png"))
+            }
+          }
 
           return {
             id: profil._id,
@@ -118,7 +165,7 @@ AsyncStorage.getItem("users", function(error, data) {
             games : profil.games,
             likes: likes,
             plateformes: profil.plateforme,
-            moods : profil.mood,
+            moods : moodsImage,
             langues : langues
         
           }
@@ -135,7 +182,8 @@ AsyncStorage.getItem("users", function(error, data) {
       console.log(`Yup for ${card.text}`);
       console.log("token",token);
       console.log("like", card.likes.length);
-      const data = await fetch('http://192.168.10.169:3000/match/like', {
+
+      const data = await fetch('http://192.168.10.129:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -165,9 +213,9 @@ AsyncStorage.getItem("users", function(error, data) {
     return (
 
       <ImageBackground
-      resizeMode="cover"
-      style={styles.background}
-      source={require('../assets/backgrounds/fond_buddy.png')}>
+        resizeMode="cover"
+        style={styles.background}
+        source={require('../assets/backgrounds/fond_buddy.png')}>
 
       {header}
 
@@ -190,9 +238,10 @@ AsyncStorage.getItem("users", function(error, data) {
               stackDepth={3}
             />
           ) : (
-            <StatusCard text="Loading Buddies..." />
+            <StatusCard text="On te trouve des Buddies..." />
           )}
         </View>
+
       </ImageBackground>
     );
   }
@@ -203,7 +252,9 @@ AsyncStorage.getItem("users", function(error, data) {
 
       height: "100%",
     },
+
     container: {
+
       flex: 1,
       flexDirection: "column",
       alignItems: "center",
@@ -212,13 +263,25 @@ AsyncStorage.getItem("users", function(error, data) {
 
     card: {
       flexDirection: "column",
-      justifyContent: "space-evenly",
+      justifyContent: "center",
       alignItems: "center",
+      textAlign: "center",
+
       width: 320,
       height: 580,
+      backgroundColor: "#866FD3",
       borderRadius: 40,
-      textAlign: "center",
       padding: 10,
+    },
+
+    image: {
+
+      borderWidth: 4,
+      borderColor: "#FFFF",
+      borderRadius: 100,
+      height: 160,
+      width: 160,
+      marginBottom:10
     },
 
     pseudo: {
@@ -228,7 +291,16 @@ AsyncStorage.getItem("users", function(error, data) {
       letterSpacing: 0.5,
       color: "#FFFF",
       marginBottom:10
-    
+    },
+
+    plateforme:{
+
+      fontWeight: "400",
+      fontSize: 12,
+      letterSpacing: 0.5,
+      color: "#FFFF",
+      textAlign: "center",
+      marginBottom:10,
     },
 
     description: {
@@ -242,44 +314,36 @@ AsyncStorage.getItem("users", function(error, data) {
       marginBottom:10,
     },
 
-    img: {
+    moods: {
 
-      borderWidth: 4,
-      borderColor: "#FFFF",
-      borderRadius: 100,
-      height: 180,
-      width: 180,
-      marginBottom:10
-
+      flexDirection: "row",
     },
+
     gameimg: {
+
       borderWidth: 4,
       borderColor: "#FFFF",
       borderRadius: 100,
       height: 80,
       width: 80
     },
+
     cardsText: {
       fontSize: 22,
     },
 
     like:{
+
     flexDirection: "row-reverse",
     justifyContent: "space-evenly",
     width: 450,
     marginBottom:20
     },
+
     scroll: {
+
       flexDirection: "row",  
     },
-    emoji: {
-      flexDirection: "row", 
-      width: 200,
-      height: 80
-    },
-    plateforme:{
-      width: 200,
-      justifyContent: "space-evenly",
-    }
+
   });
   
