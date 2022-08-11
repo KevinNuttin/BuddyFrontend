@@ -19,10 +19,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfilScreen(props) {
   
-  var ProfilPic = ProfilPicture();
+
+  const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
+
+  var ProfilPic = ProfilPicture(avatar);
   var header = Header4("DiscoverScreen","ChatScreen", "EditScreen", props)
 
-  const [dataPseudo, setDataPseudo] = useState("..");
+  const [dataPseudo, setDataPseudo] = useState(null);
   const [dataPlatform, setDataPlatform] = useState([]);
   const [dataGames, setDataGames] = useState([]);
 
@@ -30,35 +33,32 @@ export default function ProfilScreen(props) {
 
 //* récupération du token du users pour pouvoir utiliser la comparaison de match
 
-AsyncStorage.getItem("users", function(error, data) {
-  console.log("data", data);
-  token = data
- });
-console.log(token);
 
   useEffect(() => {
-    async function loadData() {
-      
+    async function loadData(token) {
     var rawDataMyProfil = await fetch(
-      "http://192.168.10.132:3000/users/getmyprofil",
+      "http://192.168.10.145:3000/users/getmyprofil",
       { method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,
       })
-    
-      var dataMyProfil = await rawDataMyProfil.json(); 
-       console.log(dataMyProfil);
-      setMyProfil(dataMyProfil)
+      console.log("data", token);
+      var dataMyProfil = await rawDataMyProfil.json();
+      console.log(dataMyProfil)
+      
+      setDataPseudo({pseudo: dataMyProfil.user.pseudo, plateforme: dataMyProfil.user.plateforme})
+
 
     }
-    loadData(); 
+    AsyncStorage.getItem("users", function(error, data) {
+
+      token = data
+      loadData(token)
+     });
 
   }, []);
 
-console.log(dataPlatform);
-  var test = dataPlatform.map((plateforme, i) => {
-    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
-  });
+
 
   var image = dataGames.map ((image, j ) => {
     return   <Image key={j}
@@ -84,10 +84,10 @@ console.log(dataPlatform);
         {ProfilPic}
 
         <View style={styles.containerText}>
-          <Text style={styles.text1}>{dataPseudo}</Text>
-          <View style={styles.plateforme}>{test}</View>
+          <Text style={styles.text1}>{dataPseudo ? dataPseudo.pseudo : null}</Text>
+          <View style={styles.plateforme}><Text>{dataPseudo ? dataPseudo.plateforme.map(plateforme=>plateforme.plateforme).join(' / ') : ''}</Text></View>
           <Text style={styles.text3}>
-            Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
+            Salut c'est {dataPseudo ? dataPseudo.pseudo : null}, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
           </Text>
         </View>
 
@@ -166,6 +166,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 150,
     marginBottom:50,
+    marginRight: 2,
+    marginLeft:2
   },
 
   scroll: {

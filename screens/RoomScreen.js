@@ -35,7 +35,7 @@ function ChatScreen(props) {
     useEffect(() => { 
 
       async function dataLoad () {
-        var rawData = await fetch(`http://192.168.10.132:3000/message/historique?token=${token}`);
+        var rawData = await fetch(`http://192.168.10.145:3000/message/historique?token=${token}`);
          rooms = await rawData.json()
 
         setRoom(rooms.message)
