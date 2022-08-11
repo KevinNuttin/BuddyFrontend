@@ -18,12 +18,12 @@ function Header3(redirection,redirection2, redirection3, props) {
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection2)}}>
-                    <MessageIcon/>
+                    <OptionIcon/>
             </TouchableOpacity>
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection3)}}>
-                    <OptionIcon/>
+                    <MessageBadgeIcon/>
             </TouchableOpacity>
 
 

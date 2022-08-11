@@ -22,7 +22,7 @@ import { connect } from 'react-redux';
 
 
   useEffect(() => { 
-    var socket = socketIOClient("http://192.168.10.132:3000");
+    var socket = socketIOClient("http://172.20.10.3:3000");
 
     props.saveSocket(socket);
 
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "contain",
     width: "50%",
-    marginTop: 100,
+    marginTop: 80,
+    marginBottom: -100,
   },
 
   container: {

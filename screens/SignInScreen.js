@@ -25,7 +25,7 @@ function SignInScreen(props) {
 
     async function comfirmation(redirection){
       if(mail != null || mdp != null){
-        const data = await fetch('http://192.168.10.132:3000/users/sign-in', {
+        const data = await fetch('http://172.20.10.3:3000/users/sign-in', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
 
   container: {
 
-    flex: 1,
     flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
@@ -105,8 +104,8 @@ const styles = StyleSheet.create({
 
   text: {
 
-    marginTop: 20,
-    marginBottom: 140,
+    marginTop: 120,
+    marginBottom: 160,
 
     fontWeight: "400",
     fontSize: 26,

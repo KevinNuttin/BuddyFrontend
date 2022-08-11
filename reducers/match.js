@@ -1,7 +1,7 @@
-export default function(pseudo = null, action) {
+export default function(id = '', action) {
     if(action.type == 'addMatch') {
-        return action.pseudo;
+        return action.id;
     } else {
-        return pseudo;
+        return id;
     }
   }

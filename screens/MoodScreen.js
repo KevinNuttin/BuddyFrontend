@@ -75,7 +75,7 @@ function MoodScreen(props) {
 
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.132:3000/users/mood', {
+    const data = await fetch('http://172.20.10.3:3000/users/mood', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `mood1=${mood1}&mood2=${mood2}&mood3=${mood3}&mood4=${mood4}&token=${token}`,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   buttons: {
 
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 60,
   }
 
 });

@@ -26,7 +26,7 @@ var token = ""
 
 
 AsyncStorage.getItem("users", function(error, data) {
-  console.log("data hello", data);
+
   token = data
  });
 
@@ -66,7 +66,7 @@ let pseudo = data.pseudo
             <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.moods}>{moodListImage}</View>
-        <ScrollView  style={styles.scroll} horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} style={styles.scroll} horizontal={true}>
         {gameListImage}
         </ScrollView>
 
@@ -100,13 +100,13 @@ let pseudo = data.pseudo
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.132:3000/users/getprofil");
+          "http://172.20.10.3:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.132:3000/users/getmyprofil",
+          "http://172.20.10.3:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -114,7 +114,7 @@ let pseudo = data.pseudo
           
           var dataMyProfil = await rawDataMyProfil.json();
           setMyProfil(dataMyProfil)
-
+  
           var gametrue= false
 
           arraytemp = dataProfilfetch.user.map((profil) => {
@@ -123,16 +123,16 @@ let pseudo = data.pseudo
           var langues = []
           var moods = []
           var moodsImage = []
-          
+   
 
           for(var i=0; i< profil.games.length; i++){
             games.push(profil.games[i])
 
-            istrue = profil.games[i]._id.includes(dataMyProfil.user.games[i])
-            if(istrue == true){
+           //var istrue = profil.games[i]._id.includes(dataMyProfil.user.games[i]._id)
+            if(istrue = true){
               gametrue = true
             }
-            console.log("gametrue", gametrue);
+ 
           }
 
           for(var i=0; i< profil.like.length; i++){
@@ -186,7 +186,7 @@ let pseudo = data.pseudo
         // corriger le filtre de langue 
        arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && gametrue == true)
 
-       console.log("langue",arraytemp[0].langues );
+    
 
         setCards(arraytemp)
       }
@@ -196,8 +196,8 @@ let pseudo = data.pseudo
 
     async function handleYup(card) {
 
-      console.log(`Yup for ${card.text}`);
-      const data = await fetch('http://192.168.10.132:3000/match/like', {
+
+      const data = await fetch('http://172.20.10.3:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -214,29 +214,29 @@ let pseudo = data.pseudo
          }
         }
         if(pourLeFetch == true){
-          const message = await fetch('http://192.168.10.132:3000/message/new', {
+          const message = await fetch('http://172.20.10.3:3000/message/new', {
             method: "POST",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `user1=${card.id}&user2=${myProfil.user._id}`,  
           })
-    
-              props.onMatch(card.pseudo)
+    console.log(card.token);
+              props.onMatch(card.token)
     
                
               props.navigation.navigate("MatchScreen") 
         }
      // force le match pour la demo (à retirer)
-      console.log(`Card, ${card.token}` );
+     
 
       return true; // return false if you wish to cancel the action
     }
     function handleNope(card) {
-      console.log(`Nope for ${card.text}`);
+
     
       return true;
     }
     function handleMaybe(card) {
-      console.log(`Maybe for ${card.text}`);
+  
       return true;
     }
   
@@ -300,11 +300,11 @@ let pseudo = data.pseudo
       borderWidth: 2,
       borderColor: "#372C60",
 
-      width: 320,
-      height: 580,
+      width: 340,
+      height: 640,
       borderRadius: 40,
       padding: 10,
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: "#372C60",
     },
 
@@ -315,8 +315,8 @@ let pseudo = data.pseudo
       borderRadius: 100,
       height: 160,
       width: 160,
-      marginTop: 20,
-      marginBottom:10,
+      marginTop: 40,
+      marginBottom:20,
     },
 
     pseudo: {
@@ -347,7 +347,7 @@ let pseudo = data.pseudo
       letterSpacing: 0.5,
       color: "#FFFF",
       textAlign: "center",
-      marginBottom:20,
+      marginBottom: 30,
     },
 
     moods: {
@@ -378,7 +378,7 @@ let pseudo = data.pseudo
     flexDirection: "row-reverse",
     justifyContent: "space-evenly",
     width: 450,
-    marginBottom:20
+    marginBottom: 30,
     },
 
     scroll: {
@@ -391,8 +391,8 @@ let pseudo = data.pseudo
 
   function mapDispatchToProps(dispatch) {
     return {
-      onMatch: function (pseudo) {
-        dispatch({ type: 'addMatch', pseudo : pseudo  })
+      onMatch: function (id) {
+        dispatch({ type: 'addMatch', id : id  })
       }
     }
   }

@@ -29,7 +29,7 @@ AsyncStorage.getItem("users", function(error, data) {
 export default function ProfilScreen(props) {
   
 
-  var header = Header4("DiscoverScreen","ChatScreen", "EditScreen", props)
+  var header = Header4("DiscoverScreen","SearchGames", "ChatScreen", props)
 
   const [dataPseudo, setDataPseudo] = useState(null);
   const [dataPlatform, setDataPlatform] = useState([]);
@@ -55,7 +55,7 @@ let profil;
     async function loadData() {
       
     var rawDataMyProfil = await fetch(
-      "http://192.168.10.132:3000/users/getmyprofil",
+      "http://172.20.10.3:3000/users/getmyprofil",
       { method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,
