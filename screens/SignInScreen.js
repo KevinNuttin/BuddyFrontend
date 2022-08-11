@@ -28,10 +28,10 @@ function SignInScreen(props) {
           body: `&mail=${mail}&password=${mdp}`
         })
         const body = await data.json()
-        console.log(body);
 
-      let getUser = body.user.token   
-      console.log("getUser",getUser);
+
+      let getUser = body.token   
+
       AsyncStorage.setItem('users', getUser)
 
       if(body.result){
