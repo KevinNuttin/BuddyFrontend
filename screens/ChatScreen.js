@@ -38,9 +38,10 @@ function ChatScreen(props) {
        }, []);
 
        useEffect(() => {
-        socket.on('messageFromBack', (newMessage, userPseudo, date) => {
-          
-          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) 
+
+        socket.on('messageFromBack', (newMessage, userPseudo, date,room) => {
+          if(room == currentRoom){
+          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) }
         });
         return()=>{
         socket.off('message')
@@ -58,13 +59,19 @@ function ChatScreen(props) {
        setText('')
     }
 
-console.log(message);
+
+    function dateFormat(date){
+      var newDate = new Date(date);
+      var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear()+'  '+newDate.getHours()+':'+newDate.getMinutes();
+      return format;
+    }
 
 function chat(item){
 
   if(item.pseudo == pseudo){
 
    return(
+   
     <View style={styles.bubbleUser}>
       <Text style={styles.pseudo}>{item.pseudo}</Text>
       <Text style={styles.message}>{item.message}</Text>
@@ -74,10 +81,11 @@ function chat(item){
   }else{
 
     return(
+
       <View style={styles.bubbleMatch}>
         <Text style={styles.pseudo}>{item.pseudo}</Text>
         <Text style={styles.message}>{item.message}</Text>
-        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.date}>{dateFormat(item.date)}</Text>
       </View>
     )
     }
@@ -140,6 +148,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     padding: 10,
     marginLeft: "40%",
+
   },
 
   bubbleMatch: {

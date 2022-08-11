@@ -5,7 +5,6 @@ import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, Fl
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
-import SelectDropdown from 'react-native-select-dropdown';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 const noGame = ["Vous n'avez pas encore sélectionné de jeux"]
 import Header from '../components/cards/Header';
@@ -27,14 +26,14 @@ export default function searchGames(props) {
 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
-    createTwoButtonAlert = () =>
+   function createTwoButtonAlert  (){
     Alert.alert(
       "Tu n'as pas de jeux...",
       "Merci d'ajouter au moins un jeux  wesh!",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
-    );
+    );}
 
       async function comfirmation(redirection){
         if(wishGame.length > 0){
