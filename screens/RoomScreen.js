@@ -138,13 +138,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor : "DADADA",
   },
+
   tinyLogo: {
     
     width: 100,
     height: 100,
    
-
   },
+  
   text: {
 
     marginTop: 10,
@@ -155,7 +156,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#372C60",
     textAlign: "center",
-  },  text2: {
+  },  
+  
+    text2: {
 
     marginTop: 100,
     marginBottom: 0,

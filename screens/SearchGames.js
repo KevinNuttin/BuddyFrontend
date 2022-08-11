@@ -53,7 +53,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.1.14:3000/library/games');
+    var rawResponse = await fetch('http://192.168.10.138:3000/library/games');
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
     console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
