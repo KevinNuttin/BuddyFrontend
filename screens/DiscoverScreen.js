@@ -100,13 +100,13 @@ let pseudo = data.pseudo
       async function loadData() {
       
         var rawDataProfil = await fetch(
-          "http://172.20.10.3:3000/users/getprofil");
+          "http://192.168.10.143:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://172.20.10.3:3000/users/getmyprofil",
+          "http://192.168.10.143:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`,
@@ -197,7 +197,7 @@ let pseudo = data.pseudo
     async function handleYup(card) {
 
 
-      const data = await fetch('http://172.20.10.3:3000/match/like', {
+      const data = await fetch('http://192.168.10.143:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -214,7 +214,7 @@ let pseudo = data.pseudo
          }
         }
         if(pourLeFetch == true){
-          const message = await fetch('http://172.20.10.3:3000/message/new', {
+          const message = await fetch('http://192.168.10.143:3000/message/new', {
             method: "POST",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `user1=${card.id}&user2=${myProfil.user._id}`,  

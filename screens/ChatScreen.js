@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput,ScrollView,TouchableOpacity,FlatList,Image} from "react-native"
+import { StyleSheet, Text, View, ImageBackground, TextInput,ScrollView,TouchableOpacity,FlatList,Image, KeyboardAvoidingView, Platform} from "react-native"
 import { Button, ListItem,  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Header from "../components/cards/Header"
@@ -25,7 +25,7 @@ function ChatScreen(props) {
 
       let table = [];
       async function dataLoad () {
-         var rawData = await fetch(`http://172.20.10.3:3000/message/messagerie?id=${id}`);
+         var rawData = await fetch(`http://192.168.10.143:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
          setRoom(data.message.room)
@@ -51,7 +51,7 @@ function ChatScreen(props) {
     async function sendMessage(){
       var date = new Date();
       socket.emit("message", currentRoom, text, pseudo);
-       const data = await fetch('http://172.20.10.3:3000/message/send', {
+       const data = await fetch('http://192.168.10.143:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${text}`
@@ -63,7 +63,7 @@ function ChatScreen(props) {
       let mes = 'Voici mon discord : Kevin#03314'
       var date = new Date();
       socket.emit("message", currentRoom, mes, pseudo);
-       const data = await fetch('http://172.20.10.3:3000/message/send', {
+       const data = await fetch('http://192.168.10.143:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${mes}`
@@ -118,13 +118,15 @@ function chat(item){
             )}
           />
      </View>
-     <View style={styles.sender}>
+     <KeyboardAvoidingView style={styles.sender} behavior={Platform.OS === "ios" ? "padding" : "height"}
+     keyboardVerticalOffset={Platform.select({ios: 10, android: 500})}>
      <TextInput
               style={styles.input}
                   onChangeText={(message) => setText(message)}
                   value={text}
                   keyboardType="default"
                   placeholder=""
+
             />
      <View style={styles.ButtonSender}>
        {send}
@@ -135,7 +137,7 @@ function chat(item){
     }
        ><Image source={require('../assets/icons/discord_iconbuddy.png')} /></TouchableOpacity>
      </View>
-     </View>
+     </KeyboardAvoidingView>
     </ImageBackground>
   );
 }

@@ -49,7 +49,7 @@ import {
     async function loadData() {
       
     var rawDataMyProfil = await fetch(
-      "http://172.20.10.3:3000/users/getmyprofil",
+      "http://192.168.10.143:3000/users/getmyprofil",
       { method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,

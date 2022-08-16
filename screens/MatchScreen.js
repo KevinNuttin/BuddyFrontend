@@ -24,7 +24,7 @@ function MoodScreen(props) {
 
   useEffect(() => {  
      async function loadData() {
-    const message = await fetch('http://172.20.10.3:3000/users/getmyprofil', {
+    const message = await fetch('http://192.168.10.143:3000/users/getmyprofil', {
             method: "PUT",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `token=${props.match}`,  
@@ -38,7 +38,7 @@ function MoodScreen(props) {
         loadData()
 
         async function loadData2() {
-          const message = await fetch('http://172.20.10.3:3000/users/getmyprofil', {
+          const message = await fetch('http://192.168.10.143:3000/users/getmyprofil', {
                   method: "PUT",
                   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                   body: `token=${token}`,  
