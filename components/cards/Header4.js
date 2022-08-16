@@ -7,9 +7,12 @@ import MessageIcon from "../icons/MessageIcon";
 import MessageBadgeIcon from "../icons/MessageBadgeIcon";
 import BackIcon from "../icons/BackIcon";
 
-function Header3(redirection,redirection2, redirection3, props) {
+// Le header 4 a 3 icones pour la page ProfilScreen (dont l'option pour modifier les infos user)
+
+function Header3(redirection, redirection2, redirection3, props) { 
 
     return(
+
         <View style={styles.container}>
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection)}}>
@@ -18,17 +21,14 @@ function Header3(redirection,redirection2, redirection3, props) {
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection2)}}>
-                    <MessageIcon/>
+                    <OptionIcon/>
             </TouchableOpacity>
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection3)}}>
-                    <OptionIcon/>
+                    <MessageBadgeIcon/>
             </TouchableOpacity>
-
-
         </View>
-
         
     )
 }

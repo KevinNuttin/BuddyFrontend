@@ -5,3 +5,5 @@ export default function(password = null, action) {
         return password;
     }
   }
+
+// Sauvegarde du MDP dans le Store lors de l'inscription

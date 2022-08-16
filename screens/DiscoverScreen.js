@@ -1,5 +1,6 @@
+
 import React, {useState, useEffect} from "react"
-import { StyleSheet, Text, View, ImageBackground, Button, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image, ScrollView } from "react-native";
 
 import Header2 from "../components/cards/Header2";
 import SwipeCards from "react-native-swipe-cards-deck";
@@ -7,25 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { connect } from 'react-redux';
 
+// Page du swipe
 
-const cardsData = [
-  { src: require('../assets/avatars/Group.png') },
-  { src: require('../assets/avatars/Group2.png') },
-  { src: require('../assets/avatars/Group3.png') },
-  { src: require('../assets/avatars/Group4.png') },
-  { src: require('../assets/avatars/Group5.png') },
-  { src: require('../assets/avatars/Group6.png') },
-];
+var token = "" //* récupération du token du users pour pouvoir utiliser la comparaison de match
 
+AsyncStorage.getItem("users", function(error, data) { 
 
-
-var token = ""
-
-//* récupération du token du users pour pouvoir utiliser la comparaison de match
-
-
-AsyncStorage.getItem("users", function(error, data) {
-  console.log("data hello", data);
   token = data
  });
 
@@ -34,20 +22,20 @@ function Card({ data }) {
 
 let pseudo = data.pseudo
 
-  var gamesList = data.games.map((games) => {
+  var gamesList = data.games.map((games) => { // retirer car prend trop de place sur la card à l'affichage
     return(games.name)
   })
 
-  var gameListImage = data.games.map((games, j) => {
+  var gameListImage = data.games.map((games, j) => {  // retourne l'image des jeux sur chaque card des profils
     return(
     <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
   })
 
-  var plateformeList = data.plateformes.map((plateforme) => {
+  var plateformeList = data.plateformes.map((plateforme) => { // retourne la platforme sur chaque card des profils
     return(plateforme.plateforme)
   })
 
-  var moodListImage = data.moods.map((moods, k) => {
+  var moodListImage = data.moods.map((moods, k) => {  // retourne les mooods sur chaque card des profils
     return(
       <View style={styles.moods}>
         <Image key={k} source={moods}/> 
@@ -56,7 +44,7 @@ let pseudo = data.pseudo
   })
      
      
-    return (
+    return (  // Le return d'une carte (fonction card)
       <View style={[styles.card, { backgroundColor: "#8469E1" }]}>
 
           <Image style={styles.image} source= {{uri :(data.picture)}}></Image>
@@ -65,7 +53,7 @@ let pseudo = data.pseudo
             <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.moods}>{moodListImage}</View>
-        <ScrollView  style={styles.scroll} horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} style={styles.scroll} horizontal={true}> {/*showsHorizontalScrollIndicator : enlève la barre de scroll horizontale */}
         {gameListImage}
         </ScrollView>
 
@@ -78,7 +66,7 @@ let pseudo = data.pseudo
     );
   }
   
-  function StatusCard({ text }) {
+  function StatusCard({ text }) { // status de la carte (YEP, NOPE, MAYBE)
     return (
       <View>
         <Text style={styles.cardsText}>{text}</Text>
@@ -90,13 +78,12 @@ let pseudo = data.pseudo
 
     var header = Header2("ProfilScreen", "RoomScreen", props)
     var arraytemp =[]
-    const [cards, setCards] = useState();
-    const [myProfil, setMyProfil] = useState();
+    const [cards, setCards] = useState(); // deck de cartes
+    const [myProfil, setMyProfil] = useState(); // infos du profil perso
 
-    // replace with real remote data fetching
-    useEffect(() => {
+    useEffect(() => { 
 
-      async function loadData() {
+      async function loadData() { // on cherche tous les profils et le profil perso
       
         var rawDataProfil = await fetch(
           "http://192.168.10.129:3000/users/getprofil");
@@ -108,44 +95,44 @@ let pseudo = data.pseudo
           "http://192.168.10.129:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          body: `token=${token}`,
+          body: `token=${token}`, // pour moi
           })
           
           var dataMyProfil = await rawDataMyProfil.json();
-          setMyProfil(dataMyProfil)
+          setMyProfil(dataMyProfil) // Enregistrés dans la variable d'état
+  
+          var gametrue= false // variable pour filtrer les jeux en communs (true si au moins 1 jeu en commun)
 
-          var gametrue= false
-
-          arraytemp = dataProfilfetch.user.map((profil) => {
+          arraytemp = dataProfilfetch.user.map((profil) => { 
           var games = []
           var likes = []
           var langues = []
-          var moods = []
+          var moods = [] //! A voir
           var moodsImage = []
-          
+   
 
-          for(var i=0; i< profil.games.length; i++){
+          for(var i=0; i< profil.games.length; i++){ // Données du jeu de la carte user
             games.push(profil.games[i])
 
-            istrue = profil.games[i]._id.includes(dataMyProfil.user.games[i])
-            if(istrue == true){
+           //var istrue = profil.games[i]._id.includes(dataMyProfil.user.games[i]._id) //! VOIR variable gametrue
+            if(istrue = true){
               gametrue = true
             }
-            console.log("gametrue", gametrue);
+ 
           }
 
-          for(var i=0; i< profil.like.length; i++){
+          for(var i=0; i< profil.like.length; i++){ // Données des ID des likes user
             likes.push(profil.like[i])
           }
 
-          for(var i=0; i< profil.langue.length; i++){
+          for(var i=0; i< profil.langue.length; i++){ // Données des langues du profil
             langues.push(profil.langue[i])
           }
 
-          for(var i=0; i< profil.mood.length; i++){
+          for(var i=0; i< profil.mood.length; i++){ // Données des moods du profil
             // moods.push(profil.mood[i]._id)
 
-            if(profil.mood[i]._id == "62e8fb0755b46687cabb297d") {
+            if(profil.mood[i]._id == "62e8fb0755b46687cabb297d") {  // push la bonne image du mood à partir de l'id stocké
                moodsImage.push(require("../assets/emojis/chill.png"))
             } if (profil.mood[i]._id == "62e8fb2755b46687cabb297f") {
                moodsImage.push(require("../assets/emojis/tryharder.png"))
@@ -164,7 +151,7 @@ let pseudo = data.pseudo
             }
           }
 
-          return {
+          return {  // retourne un objet :
             id: profil._id,
             pseudo: profil.pseudo,
             description : profil.description,
@@ -181,56 +168,57 @@ let pseudo = data.pseudo
          
         })
 
-
-        // corriger le filtre de langue 
-       arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && gametrue == true)
-
-       console.log("langue",arraytemp[0].langues );
-
+        //! corriger le filtre de langue 
+        arraytemp = arraytemp.filter(e => e.pseudo != dataMyProfil.user.pseudo && gametrue == true) // filtre pour masquer sa propre card
         setCards(arraytemp)
       }
       loadData(); 
 
     }, []);
 
-    async function handleYup(card) {
+    async function handleYup(card) { // swipe like à droite
 
-      console.log(`Yup for ${card.text}`);
+      console.log(`Yup for ${card.text}`)
       const data = await fetch('http://192.168.10.129:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
         })
-      
+        
+        let pourLeFetch = false;
+
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
 
-          
-           //                                                                      ///////////////////////////////////////////////////////////
-           const data = await fetch('http://192.168.10.129:3000/message/new', {
-        method: "POST",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `user1=${card.likes[i]}&user2=${myProfil.user._id}`,
-        })
-
-          props.onMatch(card.pseudo)
-
+          pourLeFetch = true;
            
-          props.navigation.navigate("MatchScreen") 
+         
          }
         }
-     // force le match pour la demo (à retirer)
-      console.log(`Card, ${card.token}` );
+        if(pourLeFetch == true){ // condition pour vérifier le match
+          const message = await fetch('http://192.168.10.143:3000/message/new', {
+            method: "POST",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `user1=${card.id}&user2=${myProfil.user._id}`,  
+        })
+            props.onMatch(card.token) // stocke le token de la carte likée
+          
+            props.navigation.navigate("MatchScreen") 
+        }
+     
 
       return true; // return false if you wish to cancel the action
     }
-    function handleNope(card) {
-      console.log(`Nope for ${card.text}`);
+
+    function handleNope(card) { //! peut permetre de supprimer definivement une carte
+
     
       return true;
+
     }
-    function handleMaybe(card) {
-      console.log(`Maybe for ${card.text}`);
+
+    function handleMaybe(card) { //! Stock des profils au cas où pour plus tard ???
+  
       return true;
     }
   
@@ -246,23 +234,23 @@ let pseudo = data.pseudo
         <View style={styles.container}>
           {cards ? (
             <SwipeCards
-              cards={cards}
-              renderCard={(cardData) => <Card data={cardData} />}
-              keyExtractor={(cardData) => String(cardData.text)}
+              cards={cards} // données du deck de carte
+              renderCard={(cardData) => <Card data={cardData} />} // données de chaque cartes
+              keyExtractor={(cardData) => String(cardData.text)} // Clé de la carte
               renderNoMoreCards={() => <StatusCard text="Pas de Buddy, pas de partie..." />}
               actions={{
                 nope: { onAction: handleNope },
                 yup: { onAction: handleYup },
                 maybe: { onAction: handleMaybe },
               }}
-              hasMaybeAction={true}
+              hasMaybeAction={true} // Maybe visible ?
     
               // If you want a stack of cards instead of one-per-one view, activate stack mode
               stack={true}
-              stackDepth={2}
+              stackDepth={2} // profondeur visible du deck
             />
           ) : (
-            <StatusCard text="On te trouve des Buddies..." />
+            <StatusCard text="On te trouve des Buddies..." /> // loading
           )}
         </View>
 
@@ -294,11 +282,11 @@ let pseudo = data.pseudo
       borderWidth: 2,
       borderColor: "#372C60",
 
-      width: 320,
-      height: 580,
+      width: 340,
+      height: 640,
       borderRadius: 40,
       padding: 10,
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: "#372C60",
     },
 
@@ -309,8 +297,8 @@ let pseudo = data.pseudo
       borderRadius: 100,
       height: 160,
       width: 160,
-      marginTop: 20,
-      marginBottom:10,
+      marginTop: 40,
+      marginBottom:20,
     },
 
     pseudo: {
@@ -341,7 +329,7 @@ let pseudo = data.pseudo
       letterSpacing: 0.5,
       color: "#FFFF",
       textAlign: "center",
-      marginBottom:20,
+      marginBottom: 30,
     },
 
     moods: {
@@ -372,7 +360,7 @@ let pseudo = data.pseudo
     flexDirection: "row-reverse",
     justifyContent: "space-evenly",
     width: 450,
-    marginBottom:20
+    marginBottom: 30,
     },
 
     scroll: {
@@ -383,10 +371,10 @@ let pseudo = data.pseudo
   });
 
 
-  function mapDispatchToProps(dispatch) {
+  function mapDispatchToProps(dispatch) { // Stockage de l'ID de la carte en cours pour la stocker en cas de match
     return {
-      onMatch: function (pseudo) {
-        dispatch({ type: 'addPseudo', pseudo : pseudo  })
+      onMatch: function (id) {
+        dispatch({ type: 'addMatch', id : id  })
       }
     }
   }

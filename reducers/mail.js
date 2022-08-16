@@ -5,3 +5,5 @@ export default function(mail = null, action) {
         return mail;
     }
   }
+
+// Sauvegarde du mail dans le Store lors de l'inscription

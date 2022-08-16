@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import { StyleSheet, Text, View, ImageBackground} from "react-native"
 
 
@@ -6,12 +6,54 @@ import Header2 from "../components/cards/Header2"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import ProfilPicture from "../components/cards/ProfilPicture"
 import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Page du match
 
+// Récupération du token dans le local storage
+var token = '';
+AsyncStorage.getItem("users", function(error, data) {
+
+   token = data
+ });
 
 function MoodScreen(props) {
 
-  var header = Header2("DiscoverScreen", props)
+  const [pseudo, setPseudo] = useState(''); // set du pseudo du match
+  const [picture1, set1] = useState('');  // set de la pp user
+  const [picture2, set2] = useState('');  // set de la pp du match
+
+  useEffect(() => {  // Récupération du pseudo et de la PP match
+    async function loadData() {
+    const message = await fetch('http://192.168.10.143:3000/users/getmyprofil', {
+            method: "PUT",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `token=${props.match}`,  
+    })
+          var json = await message.json(); 
+          setPseudo(json.user.pseudo)
+          set1(json.user.picture)
+    }
+
+        
+        loadData()
+
+        async function loadData2() {  // Récupération de la PP du user
+          const message = await fetch('http://192.168.10.143:3000/users/getmyprofil', {
+                  method: "PUT",
+                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                  body: `token=${token}`,  
+                })
+                var json = await message.json(); 
+                set2(json.user.picture)
+              }
+              loadData2()
+
+  }, []);
+
+
+  // Ici on parametre les composants importés
+  var header = Header2("ProfilScreen", "RoomScreen", props)
   var message = OffsetMiniButton("Message", "RoomScreen", goDiscover)
   var swipe = OffsetMiniButton("swipe", "DiscoverScreen", goDiscover)
 
@@ -31,12 +73,12 @@ function MoodScreen(props) {
       <View style={styles.container}>
 
         <View style={styles.profils}>
-        {ProfilPicture()}
-        {ProfilPicture()}
+        {ProfilPicture(picture2)}
+        {ProfilPicture(picture1)}
         </View>
 
-        <Text style={styles.text1}>I'ts a MATCH !</Text>
-        <Text style={styles.text2}>With {props.match}{"\n\n\n"}╰(*°▽°*)╯</Text>
+        <Text style={styles.matchText}>I'ts a MATCH !</Text>
+        <Text style={styles.pseudoText}>With {pseudo}{"\n\n\n"}╰(*°▽°*)╯</Text>
 
         {message}
         {swipe}
@@ -56,6 +98,7 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
+    flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -65,12 +108,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: -40,
-    marginLeft: 25,
-    marginBottom: -60,
+    marginTop: -100,
+    marginLeft: "10%",
+    marginBottom: 60,
   },
 
-  text1: {
+  matchText: {
 
     fontWeight: "800",
     fontSize: 36,
@@ -79,7 +122,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  text2: {
+  pseudoText: {
 
     fontWeight: "400",
     fontSize: 18,

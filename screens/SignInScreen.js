@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput } from 'react-native';
 
 import Header from "../components/cards/Header"
-import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { connect } from 'react-redux';
+
+// page de connexion
 
 function SignInScreen(props) {
 
@@ -21,24 +23,19 @@ function SignInScreen(props) {
 //! ATTENTION bien modifier avec son IP
 
     async function comfirmation(redirection){
-      if(mail != null || mdp != null){
-        const data = await fetch('http://192.168.10.129:3000/users/sign-in', {
+      if(mail != null || mdp != null){ // vérification que le mail ou le mdp ne sont pas null
+        const data = await fetch('http://192.168.10.129:3000/users/sign-in', { // requete au back pour connecter le user
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`
         })
         const body = await data.json()
-
-
-      let getUser = body.token   
-
-      AsyncStorage.setItem('users', getUser)
-
-      if(body.result){
-      props.navigation.navigate(redirection);} }
-
-     // props.navigation.navigate(redirection);
-      
+   
+      if(body.result){  // si le resultat est correcte on redirige l'utilisateur et on stock son token
+        props.onConfirmer(body.user.pseudo);
+        let getUser = body.token   
+        AsyncStorage.setItem('users', getUser)
+        props.navigation.navigate(redirection);} }      
     }
       
 
@@ -91,7 +88,6 @@ const styles = StyleSheet.create({
 
   container: {
 
-    flex: 1,
     flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
@@ -99,8 +95,8 @@ const styles = StyleSheet.create({
 
   text: {
 
-    marginTop: 20,
-    marginBottom: 140,
+    marginTop: 120,
+    marginBottom: 160,
 
     fontWeight: "400",
     fontSize: 26,
@@ -121,4 +117,20 @@ const styles = StyleSheet.create({
 
 });
 
-export default SignInScreen
+
+
+//syntax du redux
+function mapDispatchToProps(dispatch) {
+  return {
+    onConfirmer: function (pseudo) {
+      dispatch({ type: 'addPseudo', pseudo : pseudo  }) // sauvegarde du pseudo dans le store
+    }
+  }
+}
+
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignInScreen);

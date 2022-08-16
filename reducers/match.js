@@ -1,7 +1,9 @@
-export default function(pseudo = null, action) {
-    if(action.type == 'addPseudo') {
-        return action.pseudo;
+export default function(id = '', action) {
+    if(action.type == 'addMatch') {
+        return action.id;
     } else {
-        return pseudo;
+        return id;
     }
   }
+
+// Récupération de l'ID pour l'afficher la PP du user qui match dans la MatchScreen

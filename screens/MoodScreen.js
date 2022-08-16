@@ -7,6 +7,8 @@ import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Page de selection des moods
+
 function MoodScreen(props) {
 
   const [selected1, setSelected1] = useState(false)
@@ -14,11 +16,12 @@ function MoodScreen(props) {
   const [selected3, setSelected3] = useState(false)
   const [selected4, setSelected4] = useState(false)
 
-  const [mood1, setMood1] = useState("62e8fb0755b46687cabb297d")
+  const [mood1, setMood1] = useState("62e8fb0755b46687cabb297d") // Etats des moods envoyés dans le back
   const [mood2, setMood2] = useState("62e8fb2f55b46687cabb2981")
   const [mood3, setMood3] = useState("62e8fb3d55b46687cabb2985")
   const [mood4, setMood4] = useState("62e8fb4f55b46687cabb2989")
 
+  // Ici on parametre les composants importés
   var header = Header("SearchGames", props)
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
   var tunnel = Tunnel(2)
@@ -31,7 +34,7 @@ function MoodScreen(props) {
       token = data
      });
 
-  var chooseMood1 = (moodName) => {
+  var chooseMood1 = (moodName) => { // Enregristre le bon ID de la selection du toggle 
     setSelected1(moodName)
 
     if(moodName) {
@@ -71,7 +74,7 @@ function MoodScreen(props) {
     }
   }
 
-  async function goPlatform(redirection){
+  async function goPlatform(redirection){ // requete en BDD pour sauvegarder les moods du user
 
     props.navigation.navigate(redirection); 
 
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
   buttons: {
 
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 60,
   }
 
 });

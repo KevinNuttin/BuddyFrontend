@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function OffsetMiniButton(title, redirection, onPress) {
+function OffsetMiniButton(title, redirection, onPress) {    // Voir commentaires OffsetButton
 
     return(
 

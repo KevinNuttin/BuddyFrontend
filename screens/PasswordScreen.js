@@ -3,62 +3,39 @@ import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from "../components/cards/Header"
-import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 import { connect } from 'react-redux';
 
+// Page du choix de MDP du user
 
 function PasswordScreen(props) {
 
-  // En attendant le composant Input
   const [text, setText] = useState(props.user.mdp);
-  const [userExists, setUserExists] = useState(false)
-  const [listErrorsSignin, setErrorsSignin] = useState([])
-  const [listErrorsSignup, setErrorsSignup] = useState([])
-
-  //var passwordInput = Input("password")
+  const [listErrorsSignup, setErrorsSignup] = useState([]) //! A utiliser pour les erreurs d'incriptions
   var header = Header("EmailScreen", props)
-
   var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
-  
-  async function comfirmation(redirection){
-    props.navigation.navigate(redirection)
-  }
-
   var tunnel = Tunnel(4)
 
-  async function comfirmation(redirection){
-    if(text != null){
-      var birthday = new Date("2015-03-26");
-      const data = await fetch('http://192.168.10.129:3000/users/sign-up', {
-
+  async function comfirmation(redirection){ 
+    if(text != null){ //  verifie l'entrée d'un MDP
+      const data = await fetch('http://192.168.10.129:3000/users/sign-up', { // creation de l'utilisateur
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `pseudo=${props.user.pseudo}&mail=${props.user.mail}&password=${text}&birthday=${props.user.age}&min=${18}&max=${35}`
       })
       const body = await data.json()
-      console.log("body",body);
-      console.log("token",body.user.token);
 
-    if(body.result === true){
+    if(body.result === true){ // si la creation a eu lieu on sauvegarde le token dans le store et en AsyncStorage puis on navigue à la page suivante
       props.addToken(body.user.token)
       let getUser = body.user.token
-      console.log("getUser",getUser);
-
       AsyncStorage.setItem('users', getUser)
-
-      setUserExists(true) 
-
       props.navigation.navigate(redirection)
 
     } else {
       setErrorsSignup(body.user.error)
     }
-
-  
-  
-    props.onConfirmer(text)
+    props.onConfirmer(text) // sauvegarde du MDP dans le store
     if(body.result){
     props.navigation.navigate(redirection);} }
   }
@@ -133,14 +110,14 @@ const styles = StyleSheet.create({
 
 });
 
-
+//syntaxe pour le redux
 function mapDispatchToProps(dispatch) {
   return {
     onConfirmer: function (password) {
-      dispatch({ type: 'addMdp', mdp : password})
+      dispatch({ type: 'addMdp', mdp : password}) // sauvegarde dans le store du MDP
       },
       addToken: function (token) {
-        dispatch({ type: 'addToken', token: token})
+        dispatch({ type: 'addToken', token: token}) // sauvegarde dans le store du token
         }
     }
   }

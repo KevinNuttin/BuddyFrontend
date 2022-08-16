@@ -1,5 +1,8 @@
 import React from 'react';
 
+//! Tentative de création d'un Composant fonctionnel pour la mecanique du swipe
+//! Remplacé par une librairie
+
 import {
   Image,
   StatusBar,

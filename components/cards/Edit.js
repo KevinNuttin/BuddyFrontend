@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Image, View} from "react-native";
 import EditIcon from "../icons/EditIcon";
 
+//! La fonction edition changera la PP du user / N'ai pas utilisée
+
 function Edit(redirection, onPress) {
 
     return(

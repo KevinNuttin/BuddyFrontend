@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View} from "react-native";
 
+
+//! Pas utilisé dans le projet 
+
 function Input(label, placeholder, props) {
 
     const [text, setText] = useState('');

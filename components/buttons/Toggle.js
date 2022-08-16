@@ -3,22 +3,24 @@ import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
 function Toggle(props) {
     
-    const [isPress, setIsPress] = useState(true)
+    // Etat pour changer la couleur du bouton au click
+    const [isPress, setIsPress] = useState(true)    
 
     var onPress = (moodName)=> {
 
-        props.handleClickChooseMoodParent(moodName)
-
         if( isPress === false ){
-
             setIsPress(true)
+            // Reverse Data flow "moodName" au premier click envoi le nom
+            props.handleClickChooseMoodParent(moodName) 
 
         } else {
-
             setIsPress(false)
+            // Reverse Data flow "moodName" au second click reset le nom
+            props.handleClickChooseMoodParent(null)
         }
     }
 
+    // Lorsque le click se fait sur un button, il change de couleur et le second est reset
     var colorButtonLeft
     var colorButtonRight
 
@@ -29,16 +31,6 @@ function Toggle(props) {
         colorButtonRight = {...styles.button, backgroundColor: "#DDABFE"}
         colorButtonLeft = {...styles.button}
     }
-
-
-    // if(props.selected1 === true){
-    //     colorButtonLeft = {...styles.button, backgroundColor: "#FFA588"}
-    //     colorButtonRight = {...styles.button}
-    //  } else {
-    //     colorButtonRight = {...styles.button, backgroundColor: "#DDABFE"}
-    //     colorButtonLeft = {...styles.button}
-    // }
-
 
     return(
 

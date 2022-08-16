@@ -1,55 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput,ScrollView,TouchableOpacity,FlatList,Image} from "react-native"
-import { Button, ListItem,  } from 'react-native-elements';
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity,FlatList,Image, KeyboardAvoidingView, Platform} from "react-native"
 import { connect } from 'react-redux';
 import Header from "../components/cards/Header"
 
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
-import ProfilPicture from "../components/cards/ProfilPicture"
+import ProfilPicture from "../components/cards/ProfilPicture" //! sera utilisée dans le header pour afficher la PP du match
+
+// Page de chat
 
 function ChatScreen(props) { 
 
-    let pseudo = "CowBeez";
+    let pseudo = props.pseudo; // récupération du pseudo depuis le Store
     const header =  Header("RoomScreen",props) // changer la redirection pour page des conversations
-    const [ text, setText] = useState('')
-    const [ message, setMessage] = useState([])
-    var send = OffsetMiniButton("Envoyer","NO", sendMessage)
-    var socket = props.socket
-    const [ currentRoom, setRoom] = useState('')
-    let count  = [0,1,2,3,4,5]
-
-    let id = props.id;
+    const [ text, setText] = useState('') // text de l'input au moment de la saisie
+    const [ message, setMessage] = useState([]) // l'ensemble des messages affichés 
+    var send = OffsetMiniButton("Envoyer","NO", sendMessage) // boutton pour envoyer le message
+    var socket = props.socket // récupération du socket du user pour communiquer avec le serveur
+    const [ currentRoom, setRoom] = useState('') // ID de la room (générée à la création d'une room) dans la quelle nous nous trouvons pour filtrer les messages entrants 
+    let id = props.id; // ID de la room BDD (Pour récupérer l'historique des messages)
 
     useEffect(() => { 
       let data;
 
-      let table = [];
+      // Récupération de tous les messages et le "token" de la room en BDD de la current room avec l'ID
       async function dataLoad () {
          var rawData = await fetch(`http://192.168.10.129:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
-         setRoom(data.message.room)
-       console.log(data.message.content);
+         setRoom(data.message.room) // le "token"
 
-         setMessage(data.message.content)
+         setMessage(data.message.content) // historique des messages
       }  
       dataLoad();
 
        }, []);
 
-       useEffect(() => {
+       useEffect(() => {  // mise en place d'un écouteur pour récupérer les messages du serveur
 
-        socket.on('messageFromBack', (newMessage, userPseudo, date,room) => {
+        socket.on('messageFromBack', (newMessage, userPseudo, date, room) => {
           if(room == currentRoom){
-          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) }
+          setMessage([...message,{message : newMessage , pseudo : userPseudo, date : date}]) } // affiche les messages dans la room désirée
         });
         return()=>{
-        socket.off('message')
+        socket.off('message') // evite une faille de mémoire avec trop de render
         }
       }, [message]);
   
-    async function sendMessage(){
-      var date = new Date();
+    async function sendMessage(){ // envoi du message en BDD et au serveur 
+      var date = new Date();  
       socket.emit("message", currentRoom, text, pseudo);
        const data = await fetch('http://192.168.10.129:3000/message/send', {
         method: 'PUT',
@@ -59,14 +57,25 @@ function ChatScreen(props) {
        setText('')
     }
 
+    async function discordo(){  // envoi du pseudo Discord en dur //! A ajouter plus tard (avec une connexion discord)
+      let mes = 'Voici mon discord : Kevin#03314'
+      var date = new Date();
+      socket.emit("message", currentRoom, mes, pseudo);
+       const data = await fetch('http://192.168.10.143:3000/message/send', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${mes}`
+      })
+      
+    }
 
-    function dateFormat(date){
+    function dateFormat(date){  // Formatage de l'affichage de la date 
       var newDate = new Date(date);
       var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear()+'  '+newDate.getHours()+':'+newDate.getMinutes();
       return format;
     }
 
-function chat(item){
+function chat(item){  // Alternance d'affichage du message en fonction de l'emetteur(style)
 
   if(item.pseudo == pseudo){
 
@@ -75,7 +84,7 @@ function chat(item){
     <View style={styles.bubbleUser}>
       <Text style={styles.pseudo}>{item.pseudo}</Text>
       <Text style={styles.message}>{item.message}</Text>
-      <Text style={styles.date}>{item.date}</Text>
+      <Text style={styles.date}>{dateFormat(item.date)}</Text>
     </View>
    )
   }else{
@@ -98,28 +107,37 @@ function chat(item){
       style={styles.background}
       source={require('../assets/backgrounds/fond_buddy.png')}>
       {header}
+
       <View style={styles.chat}>
-          <FlatList                            // <= à déjà une ScrollView
-            data={message}                    // <= array requis
-                // <= Key is used for caching and as the react key to track item re-ordering
-            renderItem={({item}) => (          // <= Takes an item from data and renders it into the list
-             chat(item)
+          <FlatList showsVerticalScrollIndicator={false}  // <= à déjà une ScrollView
+            data={message}                                // <= array requis
+            renderItem={({message}) => (                  // <= Takes an item from data and renders it into the list
+            chat(message)                                 // Renvoi à la fonction qui traite le style des messages en fonction de l'emmeteur
             )}
           />
      </View>
-     <View style={styles.sender}>
+
+     <KeyboardAvoidingView style={styles.sender} behavior={Platform.OS === "ios" ? "padding" : "height"}
+     keyboardVerticalOffset={Platform.select({ios: 10, android: 500})}> {/* fait remonter l'Input et le bouton à  l'affichage du clavier*/}
+
      <TextInput
-              style={styles.input}
-                  onChangeText={(message) => setText(message)}
-                  value={text}
-                  keyboardType="default"
-                  placeholder=""
+        style={styles.input}
+          onChangeText={(message) => setText(message)}
+          value={text}
+          keyboardType="default"
+          placeholder=""
+
             />
      <View style={styles.ButtonSender}>
        {send}
-       <TouchableOpacity style={styles.icon}><Image source={require('../assets/icons/discord_iconbuddy.png')} /></TouchableOpacity>
+       <TouchableOpacity style={styles.icon}
+       onPress={() => {
+      discordo(); // Fonction qui envoie le pseudo discord
+    }
+    }
+       ><Image source={require('../assets/icons/discord_iconbuddy.png')} /></TouchableOpacity>
      </View>
-     </View>
+     </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
@@ -136,6 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+
   },
 
   bubbleUser: {
@@ -147,13 +166,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,
-    marginLeft: "40%",
+    marginLeft: "20%",
+    width:300,
 
   },
 
   bubbleMatch: {
 
-    width:"60%",
+    width:300,
     backgroundColor: "#FFA588",
     marginTop: 20,
     marginBottom: 20,

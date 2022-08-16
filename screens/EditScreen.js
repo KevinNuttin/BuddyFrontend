@@ -18,6 +18,8 @@ import {
   import Edit from "../components/cards/Edit";
   import AsyncStorage from '@react-native-async-storage/async-storage';
 
+//! Pas utilisé pour le MVP (doit permettre d'editer la pp de profil)
+
 
   export default function ProfilScreen(props) {
     

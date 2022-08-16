@@ -5,6 +5,9 @@ import backIcon from "../components/icons/BackIcon"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
+//! Non utilisé (doit servir pour la selection du tranche d'age)
+//! Non fonctionnel
+
 function AgeScreen(props) {
 
   var retour = backIcon("SearchGames", props)

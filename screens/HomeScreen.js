@@ -5,14 +5,17 @@ import {StyleSheet, View, ImageBackground, Image} from "react-native";
 import OffsetButton from "../components/buttons/OffsetButton";
 
 import socketIOClient from 'socket.io-client';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'; 
+
+// Page d'acceuil de l'appli
 
  function Homescreen(props) {
 
+  // Ici on parametre les composants importés
   var inscription = OffsetButton("Inscription", "BirthdayScreen", inscription)
   var connexion = OffsetButton("Connexion", "SignInScreen", connexion) //SignInScreen
 
-  function inscription(redirection){ 
+  function inscription(redirection){  // fonction pour la redirection
     props.navigation.navigate(redirection); 
   }
   function connexion(redirection){
@@ -21,13 +24,10 @@ import { connect } from 'react-redux';
 
 
 
-  useEffect(() => { 
+  useEffect(() => {  // création du socket et sauvegarde dans le Store
     var socket = socketIOClient("http://192.168.10.129:3000");
 
     props.saveSocket(socket);
-
-
- 
 
   }, []);
 
@@ -53,11 +53,11 @@ import { connect } from 'react-redux';
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) { // récuperation du socket
   return { socket: state.socket };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) { //sauvegarde du socket
   return {
     saveSocket: function (socket) {
       dispatch({ type: 'saveSocket', socket });
@@ -77,6 +77,7 @@ export default connect(
 const styles = StyleSheet.create({
 
   background: {
+
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
@@ -84,13 +85,16 @@ const styles = StyleSheet.create({
   },
 
   logo: {
+
     flex: 1,
     resizeMode: "contain",
     width: "50%",
-    marginTop: 100,
+    marginTop: 80,
+    marginBottom: -100,
   },
 
   container: {
+
     flex: 1,
     flexDirection: "column",
     alignItems: "center",

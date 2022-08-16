@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View} from "react-native";
 
-function tunnel(number) {
+// Le tunnel est un composant pour suivre les étapes de progression des pages
 
-  var number
+function tunnel(number) {
 
   if(number === 2) {
     return(

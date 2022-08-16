@@ -2,26 +2,24 @@ import React, {useState} from "react"
 import { StyleSheet, Text, View, ImageBackground, TextInput} from "react-native"
 
 import Header from "../components/cards/Header"
-import Input from "../components/buttons/Input"
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 
 import { connect } from 'react-redux';
 
+// page d'ajout du pseudo lors de l'incription
 
 function PseudoScreen(props) {
  
-  // En attendant le composant Input
   const [text, setText] = useState(props.user.pseudo);
 
-  //var pseudoInput = Input("Username")
   var header = Header("BirthdayScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "EmailScreen",comfirmation)
   var tunnel = Tunnel(2)
 
   function comfirmation(redirection){
-    if(text != null){
-    props.onConfirmer(text)
+    if(text != null){ // vérification que le pseudo ne soit pas null
+    props.onConfirmer(text) // ajout du pseudo dans le store
     props.navigation.navigate(redirection); }
   }
 
@@ -38,7 +36,6 @@ function PseudoScreen(props) {
 
         <Text style={styles.text}>Ton Pseudo</Text>
 
-        {/* A remplacer par le composant Input*/}
         <TextInput
         style={styles.input}
                 onChangeText={(value) => setText(value)}
@@ -46,7 +43,6 @@ function PseudoScreen(props) {
                 keyboardType="default"
                 placeholder="On est sûr qu'il est beau"
         />
-        {/*{pseudoInput}*/}
         {confirmer}
 
         {tunnel}
@@ -95,11 +91,11 @@ const styles = StyleSheet.create({
 
 });
 
-
+//syntaxe pour le redux
 function mapDispatchToProps(dispatch) {
   return {
     onConfirmer: function (pseudo) {
-      dispatch({ type: 'addPseudo', pseudo : pseudo  })
+      dispatch({ type: 'addPseudo', pseudo : pseudo  })// sauvegarde du pseudo dans le store
     }
   }
 }

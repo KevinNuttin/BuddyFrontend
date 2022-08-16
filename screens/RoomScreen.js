@@ -1,68 +1,49 @@
 
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput,ScrollView,TouchableOpacity, Image} from "react-native"
-import { Button, ListItem,  } from 'react-native-elements';
+import { ListItem,  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Header from "../components/cards/Header"
-
-import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
-import ProfilPicture from "../components/cards/ProfilPicture"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
-let token='';
-
+let token=''; // récupération du token 
 AsyncStorage.getItem("users", function(error, data) {
-    console.log("data", data);
     token = data
    });
 
+// page des conversations
 
 function ChatScreen(props) {
 
-    const [roomList, setRoom] = useState([]);
-    const [channel, setChannel] = useState([]);
+    const [channel, setChannel] = useState([]); // liste des conversations du user
     const header =  Header("DiscoverScreen",props)
     let rooms
-
-
-    
-
-    let pseudo = "CowBeez"
+    let pseudo = props.pseudo // récupération du pseudo du user
 
     useEffect(() => { 
 
       async function dataLoad () {
-        var rawData = await fetch(`http://192.168.10.129:3000/message/historique?token=${token}`);
+        var rawData = await fetch(`http://192.168.10.129:3000/message/historique?token=${token}`); // récupération de la liste des conversations
          rooms = await rawData.json()
-       console.log(rooms);
-        setRoom(rooms.message)
-        
         
          let table = [];
-         let id;
          for(let i = 0 ; i< rooms.message.length; i++){
             let user;
-    
             if(pseudo == rooms.message[i].user1.pseudo){
                  user = rooms.message[i].user2
             }else {
                  user = rooms.message[i].user1
             }
-            table.push({user: user , id: rooms.message[i]._id})
-            
+            table.push({user: user , id: rooms.message[i]._id}) 
         }
-        console.log(table,"tabbbble");
-        setChannel(table)
+    
+        setChannel(table) // tableau de toutes les conversations
     }
     dataLoad();
    
       }, []);
    
-
-
-      if(!rooms){
+      if(!rooms){ // verification des conversations
   return (
 
     <ImageBackground
@@ -74,11 +55,11 @@ function ChatScreen(props) {
 
       <View style={styles.container}>
         <Text style={styles.text}>Liste des matchs</Text>
-        <ScrollView style={{ width : 350}}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ width : 350, height: 500, }}>
       <View>
 
       {
-        channel.map((item, i) => (
+        channel.map((item, i) => ( // affichage des conversations
 
             <TouchableOpacity key={i}
             onPress={() => {
@@ -104,7 +85,7 @@ function ChatScreen(props) {
     </ImageBackground>
   );
 }
-  else {
+  else { // si aucune conversations n'est trouvées
     return (
 
         <ImageBackground
@@ -179,7 +160,7 @@ const styles = StyleSheet.create({
 
 });
 
-
+// syntaxe du redux
 function mapStateToProps(state) {
   return { socket: state.socket, pseudo : state.pseudo };
 }
@@ -188,8 +169,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
       saveRoom: function (room) {
-       
-        dispatch({ type: 'addRoom', room });
+        dispatch({ type: 'addRoom', room }); // sauvegarde de la room à utiliser dans la chatScreen
       },
     };
   }

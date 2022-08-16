@@ -8,7 +8,9 @@ import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function PlatformScreen(props) {
+// Page de selection des plateformes
+
+function PlatformScreen(props) { 
 
   const [selected1, setSelected1] = useState(false)
   const [selected2, setSelected2] = useState(false)
@@ -17,7 +19,7 @@ function PlatformScreen(props) {
   const [selected5, setSelected5] = useState(false)
   const [selected6, setSelected6] = useState(false)
 
-  const [platformSelected, setPlatformSelected] = useState([])
+  const [platformSelected, setPlatformSelected] = useState([]) // liste des plateformes selectionnées
 
   var header = Header("MoodScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "LanguageScreen", goLanguage)
@@ -31,6 +33,7 @@ function PlatformScreen(props) {
     token = data
    });
 
+   // liste des traitements pour ajouter les plateformes au user
   var choosePlatformPC = (platformName) => {
     setSelected1(platformName)
 
@@ -95,12 +98,11 @@ function PlatformScreen(props) {
   async function goLanguage(redirection){
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.129:3000/users/plateforme', {
+    const data = await fetch('http://192.168.10.129:3000/users/plateforme', { // requete au backend pour sauvegarder les plateformes en BDD
       method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `plateforme=${JSON.stringify(platformSelected)}&token=${token}`,
       })
-      console.log(platformSelected);
   }
 
   return (

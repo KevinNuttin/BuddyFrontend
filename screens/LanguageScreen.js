@@ -8,17 +8,20 @@ import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Page de selection des langues
+
 function LanguageScreen(props) {
 
-  const [selected1, setSelected1] = useState(false)
+  const [selected1, setSelected1] = useState(false) // Renvoi à la bonne selection du bouton
   const [selected2, setSelected2] = useState(false)
   const [selected3, setSelected3] = useState(false)
   const [selected4, setSelected4] = useState(false)
   const [selected5, setSelected5] = useState(false)
   const [selected6, setSelected6] = useState(false)
 
-  const [languageSelected, setLanguageSelected] = useState([])
+  const [languageSelected, setLanguageSelected] = useState([]) // Liste des langues selectionées
 
+  // Ici on parametre les composants importés
   var header = Header("PlatformScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "DiscoverScreen", goGames)
   var tunnel = Tunnel(4)
@@ -31,9 +34,8 @@ function LanguageScreen(props) {
     token = data
    });
 
-  async function goGames(redirection){
+  async function goGames(redirection){  // Envoi de la liste des langues au back 
     props.navigation.navigate(redirection); 
-
 
     const data = await fetch('http://192.168.10.129:3000/users/langues', {
     method: "PUT",
@@ -42,7 +44,7 @@ function LanguageScreen(props) {
     })
   } 
 
-  var chooseLanguageFR = (platformName) => {
+  var chooseLanguageFR = (platformName) => {  // Enregistre la langue selectionnée dans l'état et la retire au second click
     setSelected1(platformName)
 
     if(platformName) {

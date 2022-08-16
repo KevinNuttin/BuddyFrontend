@@ -1,13 +1,15 @@
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 
+// Composant de la PP pour le profil, l'edit profil, Swipe et Match
+
 function profilPicture(image) {
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.picture}
-        source={(image)}
+        source={{ uri: `${image}`}}
       />
       <View />
     </View>
