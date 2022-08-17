@@ -37,7 +37,7 @@ export default function ProfilScreen(props) {
   useEffect(() => {
     async function loadData() { // récupération des données du user
     var rawDataMyProfil = await fetch(
-      "http://192.168.10.129:3000/users/getmyprofil",
+      "http://192.168.1.21:3000/users/getmyprofil",
       { method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${token}`,

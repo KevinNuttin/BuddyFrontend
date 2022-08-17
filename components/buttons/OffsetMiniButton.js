@@ -10,8 +10,7 @@ function OffsetMiniButton(title, redirection, onPress) {    // Voir commentaires
                 style={styles.button} 
                 onPress={() => {
                     onPress(redirection)
-                }}>
-                    <Text style={styles.buttonText}>{title}</Text>
+                }}><Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
             
             <View style={styles.rectangle}/>

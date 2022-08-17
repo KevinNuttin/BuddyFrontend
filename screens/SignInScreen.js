@@ -11,12 +11,11 @@ import { connect } from 'react-redux';
 
 function SignInScreen(props) {
 
-    // En attendant le composant Input
+ 
     const [mail, setMail] = useState('');
     const [mdp, setMdp] = useState('');
 
-    //var PseudoInput = Input("Username")
-    //var PasswordInput = Input("Password")
+
     var header = Header("HomeScreen", props)
     var confirmer = OffsetMiniButton("Confirmer", "SearchGames", comfirmation)
 
@@ -24,7 +23,7 @@ function SignInScreen(props) {
 
     async function comfirmation(redirection){
       if(mail != null || mdp != null){ // vérification que le mail ou le mdp ne sont pas null
-        const data = await fetch('http://192.168.10.129:3000/users/sign-in', { // requete au back pour connecter le user
+        const data = await fetch('http://192.168.1.21:3000/users/sign-in', { // requete au back pour connecter le user
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`
@@ -52,7 +51,7 @@ function SignInScreen(props) {
 
         <Text style={styles.text}>Connexion</Text>
 
-        {/* A remplacer par le composant Input*/}
+
         <TextInput
         style={styles.input}
                 onChangeText={(value) => setMail(value)}
@@ -69,7 +68,7 @@ function SignInScreen(props) {
                 secureTextEntry={true}
                 placeholder="Ton mot de passe"
         />
-        {/*{birthdayInput}*/}
+      
         {confirmer}
 
       </View>

@@ -23,7 +23,7 @@ function ChatScreen(props) {
     useEffect(() => { 
 
       async function dataLoad () {
-        var rawData = await fetch(`http://192.168.10.129:3000/message/historique?token=${token}`); // récupération de la liste des conversations
+        var rawData = await fetch(`http://192.168.1.21:3000/message/historique?token=${token}`); // récupération de la liste des conversations
          rooms = await rawData.json()
         
          let table = [];

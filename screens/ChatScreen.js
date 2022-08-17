@@ -24,7 +24,7 @@ function ChatScreen(props) {
 
       // Récupération de tous les messages et le "token" de la room en BDD de la current room avec l'ID
       async function dataLoad () {
-         var rawData = await fetch(`http://192.168.10.129:3000/message/messagerie?id=${id}`);
+         var rawData = await fetch(`http://192.168.1.21:3000/message/messagerie?id=${id}`);
          data = await rawData.json()
          socket.emit('connected', data.message.room )
          setRoom(data.message.room) // le "token"
@@ -49,7 +49,7 @@ function ChatScreen(props) {
     async function sendMessage(){ // envoi du message en BDD et au serveur 
       var date = new Date();  
       socket.emit("message", currentRoom, text, pseudo);
-       const data = await fetch('http://192.168.10.129:3000/message/send', {
+       const data = await fetch('http://192.168.1.21:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${text}`
@@ -61,7 +61,7 @@ function ChatScreen(props) {
       let mes = 'Voici mon discord : Kevin#03314'
       var date = new Date();
       socket.emit("message", currentRoom, mes, pseudo);
-       const data = await fetch('http://192.168.10.143:3000/message/send', {
+       const data = await fetch('http://192.168.1.21:3000/message/send', {
         method: 'PUT',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `id=${id}&pseudo=${pseudo}&date=${date}&content=${mes}`
@@ -76,7 +76,7 @@ function ChatScreen(props) {
     }
 
 function chat(item){  // Alternance d'affichage du message en fonction de l'emetteur(style)
-
+console.log(item,"ici");
   if(item.pseudo == pseudo){
 
    return(
@@ -111,14 +111,14 @@ function chat(item){  // Alternance d'affichage du message en fonction de l'emet
       <View style={styles.chat}>
           <FlatList showsVerticalScrollIndicator={false}  // <= à déjà une ScrollView
             data={message}                                // <= array requis
-            renderItem={({message}) => (                  // <= Takes an item from data and renders it into the list
-            chat(message)                                 // Renvoi à la fonction qui traite le style des messages en fonction de l'emmeteur
+            renderItem={({item}) => (                  // <= Takes an item from data and renders it into the list
+            chat(item)                                 // Renvoi à la fonction qui traite le style des messages en fonction de l'emmeteur
             )}
           />
      </View>
 
      <KeyboardAvoidingView style={styles.sender} behavior={Platform.OS === "ios" ? "padding" : "height"}
-     keyboardVerticalOffset={Platform.select({ios: 10, android: 500})}> {/* fait remonter l'Input et le bouton à  l'affichage du clavier*/}
+     keyboardVerticalOffset={Platform.select({ios: 10, android: 500})}>{/* fait remonter l'Input et le bouton à  l'affichage du clavier*/}
 
      <TextInput
         style={styles.input}

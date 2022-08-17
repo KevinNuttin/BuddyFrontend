@@ -38,7 +38,7 @@ function OffsetButton(title , redirection, onPress) {
                 onPress={() => {
                     onPress(redirection)   // Appel de la fonction parent en lui passant la redirection
                     isPress(true)
-                    {/*isPress(true) va avec la mecanique du rectangle*/}
+                    /*isPress(true) va avec la mecanique du rectangle*/
                 }}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>

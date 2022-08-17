@@ -37,7 +37,7 @@ function LanguageScreen(props) {
   async function goGames(redirection){  // Envoi de la liste des langues au back 
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.129:3000/users/langues', {
+    const data = await fetch('http://192.168.1.21:3000/users/langues', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `plateforme=${JSON.stringify(languageSelected)}&token=${token}`,

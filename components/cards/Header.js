@@ -11,7 +11,7 @@ function Header(redirection, props) {
     return(
         <View style={styles.container}>
             <TouchableOpacity  
-                onPress={() => {props.navigation.navigate(redirection)}}> {/* Appel de la fonction parent pour la redirection */}
+                onPress={() => {props.navigation.navigate(redirection)}}>{/* Appel de la fonction parent pour la redirection */}
                     <BackIcon/>
             </TouchableOpacity>
         </View>

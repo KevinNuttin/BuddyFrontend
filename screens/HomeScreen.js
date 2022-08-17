@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 
 
   useEffect(() => {  // création du socket et sauvegarde dans le Store
-    var socket = socketIOClient("http://192.168.10.129:3000");
+    var socket = socketIOClient("http://192.168.1.21:3000");
 
     props.saveSocket(socket);
 

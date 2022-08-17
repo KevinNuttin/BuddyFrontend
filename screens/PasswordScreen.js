@@ -19,7 +19,7 @@ function PasswordScreen(props) {
 
   async function comfirmation(redirection){ 
     if(text != null){ //  verifie l'entrée d'un MDP
-      const data = await fetch('http://192.168.10.129:3000/users/sign-up', { // creation de l'utilisateur
+      const data = await fetch('http://192.168.1.21:3000/users/sign-up', { // creation de l'utilisateur
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `pseudo=${props.user.pseudo}&mail=${props.user.mail}&password=${text}&birthday=${props.user.age}&min=${18}&max=${35}`

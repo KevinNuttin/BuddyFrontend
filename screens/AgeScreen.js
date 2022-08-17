@@ -28,7 +28,7 @@ function AgeScreen(props) {
 
         <Text style={styles.text}>Tranche d'âge</Text>
 
-        {/* ICI les toggles */}
+      
         
         {confirmer}
  

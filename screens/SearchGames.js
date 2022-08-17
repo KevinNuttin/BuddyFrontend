@@ -17,7 +17,7 @@ export default function searchGames(props) {
     const [wishGame, setWishGame] = useState([]);
     var header = Header("SignInScreen", props)
     var tunnel = Tunnel(1)
-    var token = ""
+    var token = "" 
     var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
     //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
@@ -41,7 +41,7 @@ export default function searchGames(props) {
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.10.129:3000/library/addgames', { // ajout des jeux à l'utilisateur en BDD
+       const data = await fetch('http://192.168.1.21:3000/library/addgames', { // ajout des jeux à l'utilisateur en BDD
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
@@ -54,7 +54,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.10.129:3000/library/games'); 
+    var rawResponse = await fetch('http://192.168.1.21:3000/library/games'); 
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }

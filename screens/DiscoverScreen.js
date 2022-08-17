@@ -53,7 +53,7 @@ let pseudo = data.pseudo
             <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.moods}>{moodListImage}</View>
-        <ScrollView showsHorizontalScrollIndicator={false} style={styles.scroll} horizontal={true}> {/*showsHorizontalScrollIndicator : enlève la barre de scroll horizontale */}
+        <ScrollView showsHorizontalScrollIndicator={false} style={styles.scroll} horizontal={true}>{/*showsHorizontalScrollIndicator : enlève la barre de scroll horizontale */}
         {gameListImage}
         </ScrollView>
 
@@ -86,13 +86,13 @@ let pseudo = data.pseudo
       async function loadData() { // on cherche tous les profils et le profil perso
       
         var rawDataProfil = await fetch(
-          "http://192.168.10.129:3000/users/getprofil");
+          "http://192.168.1.21:3000/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.10.129:3000/users/getmyprofil",
+          "http://192.168.1.21:3000/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`, // pour moi
@@ -179,24 +179,25 @@ let pseudo = data.pseudo
     async function handleYup(card) { // swipe like à droite
 
       console.log(`Yup for ${card.text}`)
-      const data = await fetch('http://192.168.10.129:3000/match/like', {
+      const data = await fetch('http://192.168.1.21:3000/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
         })
-        
+      
         let pourLeFetch = false;
 
         for(var i=0; i< card.likes.length; i++){
          if(card.likes[i] == myProfil.user._id ){
-
+       
           pourLeFetch = true;
            
          
          }
         }
         if(pourLeFetch == true){ // condition pour vérifier le match
-          const message = await fetch('http://192.168.10.143:3000/message/new', {
+          console.log("hello");
+          const message = await fetch('http://192.168.1.21:3000/message/new', {
             method: "POST",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `user1=${card.id}&user2=${myProfil.user._id}`,  

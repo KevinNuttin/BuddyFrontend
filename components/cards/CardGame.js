@@ -26,7 +26,7 @@ if(props.GameLike){    // au click change la couleur du background si GameLike e
     return(
 
 
-        <Pressable onPress={() => GameSelectColor(props.name,props.img, props.slug)} > {/* Slug: nom du jeu sous format particulier pour la requete API*/}
+        <Pressable onPress={() => GameSelectColor(props.name,props.img, props.slug)} >{/* Slug: nom du jeu sous format particulier pour la requete API*/}
         <View style= {SelectColor}>
         <Text style={styles.GameName}>{props.name}</Text>
         <Image source={{ uri: `${props.img}`}} style={styles.image }></Image>

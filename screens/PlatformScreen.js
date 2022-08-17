@@ -98,7 +98,7 @@ function PlatformScreen(props) {
   async function goLanguage(redirection){
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.10.129:3000/users/plateforme', { // requete au backend pour sauvegarder les plateformes en BDD
+    const data = await fetch('http://192.168.1.21:3000/users/plateforme', { // requete au backend pour sauvegarder les plateformes en BDD
       method: "PUT",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `plateforme=${JSON.stringify(platformSelected)}&token=${token}`,
