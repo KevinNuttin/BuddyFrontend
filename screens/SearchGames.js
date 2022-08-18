@@ -41,7 +41,7 @@ export default function searchGames(props) {
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.1.21:3000/library/addgames', { // ajout des jeux à l'utilisateur en BDD
+       const data = await fetch('https://buddygaming.herokuapp.com/library/addgames', { // ajout des jeux à l'utilisateur en BDD
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
@@ -54,7 +54,7 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.1.21:3000/library/games'); 
+    var rawResponse = await fetch('https://buddygaming.herokuapp.com/library/games'); 
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
 }

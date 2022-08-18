@@ -86,13 +86,13 @@ let pseudo = data.pseudo
       async function loadData() { // on cherche tous les profils et le profil perso
       
         var rawDataProfil = await fetch(
-          "http://192.168.1.21:3000/users/getprofil");
+          "https://buddygaming.herokuapp.com/users/getprofil");
   
         var dataProfilfetch = await rawDataProfil.json();
 
 
         var rawDataMyProfil = await fetch(
-          "http://192.168.1.21:3000/users/getmyprofil",
+          "https://buddygaming.herokuapp.com/users/getmyprofil",
           { method: "PUT",
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${token}`, // pour moi
@@ -179,7 +179,7 @@ let pseudo = data.pseudo
     async function handleYup(card) { // swipe like à droite
 
       console.log(`Yup for ${card.text}`)
-      const data = await fetch('http://192.168.1.21:3000/match/like', {
+      const data = await fetch('https://buddygaming.herokuapp.com/match/like', {
         method: "PUT",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `like=${card.token}&token=${token}`,
@@ -197,7 +197,7 @@ let pseudo = data.pseudo
         }
         if(pourLeFetch == true){ // condition pour vérifier le match
           console.log("hello");
-          const message = await fetch('http://192.168.1.21:3000/message/new', {
+          const message = await fetch('https://buddygaming.herokuapp.com/message/new', {
             method: "POST",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `user1=${card.id}&user2=${myProfil.user._id}`,  

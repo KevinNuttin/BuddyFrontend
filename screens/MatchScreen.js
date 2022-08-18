@@ -25,7 +25,7 @@ function MoodScreen(props) {
 
   useEffect(() => {  // Récupération du pseudo et de la PP match
     async function loadData() {
-    const message = await fetch('http://192.168.1.21:3000/users/getmyprofil', {
+    const message = await fetch('https://buddygaming.herokuapp.com/users/getmyprofil', {
             method: "PUT",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `token=${props.match}`,  
@@ -40,7 +40,7 @@ function MoodScreen(props) {
         loadData()
 
         async function loadData2() {  // Récupération de la PP du user
-          const message = await fetch('http://192.168.1.21:3000/users/getmyprofil', {
+          const message = await fetch('https://buddygaming.herokuapp.com/users/getmyprofil', {
                   method: "PUT",
                   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                   body: `token=${token}`,  

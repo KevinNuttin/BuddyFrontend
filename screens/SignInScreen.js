@@ -23,7 +23,7 @@ function SignInScreen(props) {
 
     async function comfirmation(redirection){
       if(mail != null || mdp != null){ // vérification que le mail ou le mdp ne sont pas null
-        const data = await fetch('http://192.168.1.21:3000/users/sign-in', { // requete au back pour connecter le user
+        const data = await fetch('https://buddygaming.herokuapp.com/users/sign-in', { // requete au back pour connecter le user
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `&mail=${mail}&password=${mdp}`
