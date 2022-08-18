@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 // Composant Bouton de redirection pour la HomeScreen
 
 function OffsetButton(title , redirection, onPress) {
 
-//    Mecanique qui permet de centrer le rectangle au bouton (peu lisible avant redirection ???)
+// Mecanique qui permet de centrer le rectangle au bouton
 
     const [pressed, setPressed] = useState(false)
 
@@ -30,19 +30,15 @@ function OffsetButton(title , redirection, onPress) {
         positionButton = {...styles.rectangle}
     }
 
-    //     useEffect(() => {
-    //     setPressed(false)
-    // }, []);
-
     return(
 
         <View>
             <TouchableOpacity 
                 style={styles.button} 
                 onPress={() => {
-                    onPress(redirection)
+                    onPress(redirection)   // Appel de la fonction parent en lui passant la redirection
                     isPress(true)
-                    {/*isPress(true) va avec la mecanique du rectangle*/}
+                    /*isPress(true) va avec la mecanique du rectangle*/
                 }}>
                     <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>

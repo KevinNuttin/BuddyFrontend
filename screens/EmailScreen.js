@@ -8,21 +8,21 @@ import Tunnel from "../components/buttons/Tunnel"
 
 import { connect } from 'react-redux';
 
+// Page d'inscription pour l'email
 
 function BirthdayScreen(props) {
 
-
-  // En attendant le composant Input
   const [text, setText] = useState(props.user.mail);
 
-  //var emailInput = Input("Email")
+  // Ici on parametre les composants importés
   var header = Header("PseudoScreen", props)
   var confirmer = OffsetMiniButton("Confirmer", "PasswordScreen",comfirmation)
   var tunnel = Tunnel(3)
 
+  // Permet la redicrection au click avec une condition d'Input non null
   function comfirmation(redirection){
     if(text != null){
-    props.onConfirmer(text)
+    props.onConfirmer(text) // Appel du dispatch pour stocker l'email dans le store
     props.navigation.navigate(redirection); }
   }
   return (
@@ -38,7 +38,6 @@ function BirthdayScreen(props) {
 
         <Text style={styles.text}>Ton Email</Text>
 
-        {/* A remplacer par le composant Input*/}
         <TextInput
           style={styles.input}
           onChangeText={(value) => setText(value)}

@@ -7,6 +7,8 @@ import OffsetMiniButton from '../components/buttons/OffsetMiniButton'
 import Tunnel from "../components/buttons/Tunnel"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Page de selection des moods
+
 function MoodScreen(props) {
 
   const [selected1, setSelected1] = useState(false)
@@ -14,11 +16,12 @@ function MoodScreen(props) {
   const [selected3, setSelected3] = useState(false)
   const [selected4, setSelected4] = useState(false)
 
-  const [mood1, setMood1] = useState("62e8fb0755b46687cabb297d")
+  const [mood1, setMood1] = useState("62e8fb0755b46687cabb297d") // Etats des moods envoyés dans le back
   const [mood2, setMood2] = useState("62e8fb2f55b46687cabb2981")
   const [mood3, setMood3] = useState("62e8fb3d55b46687cabb2985")
   const [mood4, setMood4] = useState("62e8fb4f55b46687cabb2989")
 
+  // Ici on parametre les composants importés
   var header = Header("SearchGames", props)
   var confirmer = OffsetMiniButton("Confirmer", "PlatformScreen", goPlatform)
   var tunnel = Tunnel(2)
@@ -31,51 +34,51 @@ function MoodScreen(props) {
       token = data
      });
 
-  var chooseMood1 = (moodName) => {
-
+  var chooseMood1 = (moodName) => { // Enregristre le bon ID de la selection du toggle 
     setSelected1(moodName)
-    if(selected1 == true) {
-      setMood1("62e8fb0755b46687cabb297d") // id BDD pour Chill
-    } else {
+
+    if(moodName) {
       setMood1("62e8fb2755b46687cabb297f") // id BDD pour TryHarder
+    } else {
+      setMood1("62e8fb0755b46687cabb297d") // id BDD pour Chill
     }
   }
 
   var chooseMood2 = (moodName) => {
-
     setSelected2(moodName)
-    if(selected2 == true) {
-      setMood2("62e8fb2f55b46687cabb2981") // id BDD pour Normal
-    } else {
+
+    if(moodName) {
       setMood2("62e8fb3855b46687cabb2983") // id BDD pour Compétitif
+    } else {
+      setMood2("62e8fb2f55b46687cabb2981") // id BDD pour Normal
     }
   }
 
   var chooseMood3 = (moodName) => {
-
     setSelected3(moodName)
-    if(selected3 == true) {
-      setMood3("62e8fb3d55b46687cabb2985") // id BDD pour Zen
-    } else {
+
+    if(moodName) {
       setMood3("62e8fb4655b46687cabb2987") // id BDD pour Rageux
+    } else {
+      setMood3("62e8fb3d55b46687cabb2985") // id BDD pour Zen
     }
   }
 
   var chooseMood4 = (moodName) => {
-
     setSelected4(moodName)
-    if(selected4 == true) {
-      setMood4("62e8fb4f55b46687cabb2989") // id BBD pour Civilisé
-    } else {
+    
+    if(moodName) {
       setMood4("62e8fb5655b46687cabb298b") // id BBD pour Toxique
+    } else {
+      setMood4("62e8fb4f55b46687cabb2989") // id BBD pour Civilisé  
     }
   }
 
-  async function goPlatform(redirection){
+  async function goPlatform(redirection){ // requete en BDD pour sauvegarder les moods du user
 
     props.navigation.navigate(redirection); 
 
-    const data = await fetch('http://192.168.1.14:3000/users/mood', {
+    const data = await fetch('http://192.168.1.21:3000/users/mood', {
     method: "PUT",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `mood1=${mood1}&mood2=${mood2}&mood3=${mood3}&mood4=${mood4}&token=${token}`,
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
   buttons: {
 
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 60,
   }
 
 });

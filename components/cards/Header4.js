@@ -2,25 +2,30 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Image, View} from "react-native";
 
 import UserIcon from "../icons/UserIcon";
-import MessageIcon from "../icons/MessageIcon"; //! l'icone de message sera utile pour afficher un badge si les messages sont lus
+import OptionIcon from "../icons/OptionIcon";
+import MessageIcon from "../icons/MessageIcon";
 import MessageBadgeIcon from "../icons/MessageBadgeIcon";
+import BackIcon from "../icons/BackIcon";
 
-// Le header 2 correspond au header de Discover avec une redirection vers le cpt User 
-// et l'autre ver la messagerie
+// Le header 4 a 3 icones pour la page ProfilScreen (dont l'option pour modifier les infos user)
 
-function Header2(redirection, redirection2, props) {
-
-
+function Header3(redirection, redirection2, redirection3, props) { 
 
     return(
+
         <View style={styles.container}>
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection)}}>
-                    <UserIcon/>
+                 <BackIcon/>
             </TouchableOpacity>
 
             <TouchableOpacity  
                 onPress={() => {props.navigation.navigate(redirection2)}}>
+                    <OptionIcon/>
+            </TouchableOpacity>
+
+            <TouchableOpacity  
+                onPress={() => {props.navigation.navigate(redirection3)}}>
                     <MessageBadgeIcon/>
             </TouchableOpacity>
         </View>
@@ -42,4 +47,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Header2
+export default Header3

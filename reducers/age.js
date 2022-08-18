@@ -5,3 +5,5 @@ export default function(age = null, action) {
         return age;
     }
   }
+
+// Sauvegarde de l'age dans le Store lors de l'inscription

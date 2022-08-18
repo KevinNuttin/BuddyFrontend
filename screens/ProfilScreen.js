@@ -2,61 +2,120 @@ import {
   StyleSheet,
   Text,
   View,
-  Title,
-  Button,
   ImageBackground,
   Image,
-  SafeAreaView,
   ScrollView,
-  Pressable,
 } from "react-native";
 
 import React, { useState, useEffect } from "react";
 import ProfilPicture from "../components/cards/ProfilPicture";
-import CardGame from "../components/cards/CardGame";
-import Header2 from "../components/cards/Header2";
+import Header4 from "../components/cards/Header4";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+var token = ""
+// Page de profil 
+//* récupération du token du users pour pouvoir utiliser la comparaison de match
+
+AsyncStorage.getItem("users", function(error, data) {
+
+  token = data
+ });
 
 export default function ProfilScreen(props) {
-  
-  var ProfilPic = ProfilPicture();
-  var header = Header2("DiscoverScreen","DiscoverScreen",props)
 
-  const [dataPseudo, setDataPseudo] = useState("..");
-  const [dataPlatform, setDataPlatform] = useState([]);
-  const [dataGames, setDataGames] = useState([]);
+  var header = Header4("DiscoverScreen","SearchGames", "RoomScreen", props)
+
+  const [picture, setPicture] = useState('');
+  const [description, setDesc] = useState('');
+  const [mood, setMood] = useState([]);
+  const [pseudo, setPseudo] = useState('');
+  const [plat, setPlat] = useState([]);
+  const [games, setGames] = useState([]);
+
+  let profil;
 
   useEffect(() => {
-    async function loadData() {
-      
-      var rawData = await fetch("http://192.168.10.97:3000/users/getprofil");
-      var data = await rawData.json();
-      console.log("logggg", data.user.pseudo);
-      setDataPseudo(data.user.pseudo);
+    async function loadData() { // récupération des données du user
+    var rawDataMyProfil = await fetch(
+      "http://192.168.1.21:3000/users/getmyprofil",
+      { method: "PUT",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `token=${token}`,
+      })
+    
+       var json = await rawDataMyProfil.json(); 
+       
+      setPicture(json.user.picture) // ajout de la profil picture
+      setDesc(json.user.description) // ajout de la description
+      setPseudo(json.user.pseudo) // ajout du pseudo
+      setMood(json.user.mood) // ajout des moods
+      setPlat(json.user.plateforme) // ajout des plateformes
+      setGames(json.user.games) // ajout des jeux
 
-      console.log("logggg", data.user.plateforme);
-      setDataPlatform(data.user.plateforme);
-
-      console.log("ahhhhh", data.user.games);
-      setDataGames(data.user.games);
     }
-
-    loadData();
+  loadData(); 
   }, []);
 
-  var test = dataPlatform.map((plateforme, i) => {
-    return <Text key={i} style={styles.text2}>{plateforme.plateforme}</Text>;
-  });
+  var  ProfilPic = ProfilPicture(picture);
 
-  var image = dataGames.map ((image, j ) => {
-    return   <Image key={j}
-              source={{
-                uri: image.image,
-              }}
-              style={styles.image}
-            ></Image>
-         
-  });
+  function emoji(data){ // récupération des bonnes immages pour les moods sélectionnés
+    let moodsImage = [];
+    for(var i=0; i< data.length; i++){
+      // moods.push(profil.mood[i]._id)
 
+      if(data[i]._id == "62e8fb0755b46687cabb297d") {
+         moodsImage.push(require("../assets/emojis/chill.png"))
+      } if (data[i]._id == "62e8fb2755b46687cabb297f") {
+         moodsImage.push(require("../assets/emojis/tryharder.png"))
+      } if (data[i]._id == "62e8fb2f55b46687cabb2981") {
+          moodsImage.push(require("../assets/emojis/normal.png"))
+      } if (data[i]._id == "62e8fb3855b46687cabb2983") {
+          moodsImage.push(require("../assets/emojis/competitif.png"))
+      } if (data[i]._id == "62e8fb3d55b46687cabb2985") {
+          moodsImage.push(require("../assets/emojis/zen.png"))
+      } if (data[i]._id == "62e8fb4655b46687cabb2987") {
+          moodsImage.push(require("../assets/emojis/rageux.png"))
+      } if (data[i]._id == "62e8fb4f55b46687cabb2989") {
+          moodsImage.push(require("../assets/emojis/civilise.png"))
+      } if (data[i]._id == "62e8fb5655b46687cabb298b") {
+         moodsImage.push(require("../assets/emojis/toxique.png"))
+      }
+    }
+return(
+  <View style={styles.mood}>
+  <Image source={moodsImage[0]} style ={styles.emoji}></Image>
+  <Image source={moodsImage[1]}  style ={styles.emoji}></Image>
+  <Image source={moodsImage[2]}  style ={styles.emoji}></Image>
+  <Image source={moodsImage[3]}   style ={styles.emoji}></Image>
+  </View>
+)
+  }
+
+function displayPlateforme(data){ // affichage des plateformes sous la forme d'une ligne
+
+let text = '';
+if(data){
+  for(var i=0; i< data.length; i++){
+    text = text+' '+data[i].plateforme
+
+
+}
+}
+return text
+}
+
+var plateformes =  displayPlateforme(plat)
+
+  var emoJ = emoji(mood)
+
+
+  var gameListImage = games.map((games, j) => { // affichage de toutes les images de jeux 
+
+    return(
+    <Image key ={j} style={styles.gameimg} source= {{uri :(games.image)}}></Image> )
+  })
+
+  console.log(gameListImage);
 
   return (
 
@@ -71,26 +130,21 @@ export default function ProfilScreen(props) {
         {ProfilPic}
 
         <View style={styles.containerText}>
-          <Text style={styles.text1}>{dataPseudo}</Text>
-          <View style={styles.plateforme}>{test}</View>
+          <Text style={styles.text1}>{pseudo}</Text>
+          <View style={styles.plateforme}><Text>{plateformes}</Text></View>
           <Text style={styles.text3}>
-            Salut c'est Matth, j'aime les nachos et jouer de l'harmonica Alsacien... (c'est faux).
+            {description}
           </Text>
         </View>
 
         {/* View pour les images de mood --> les mettre en ligne  */}
-        <View style={styles.emoji}>
-          <Image source={require("../assets/emojis/chill.png")}></Image>
-          <Image source={require("../assets/emojis/civilise.png")}></Image>
-          <Image source={require("../assets/emojis/competitif.png")}></Image>
-          <Image source={require("../assets/emojis/normal.png")}></Image>
-          <Image source={require("../assets/emojis/rageux.png")}></Image>
-        </View>
+{emoJ}
 
         {/* View pour les images de jeux / les mettre en lignes --> envisager un caroussel */}
         <ScrollView style={styles.scroll} horizontal={true}>
-          {image}
+          {gameListImage}
         </ScrollView>
+        
       </View>
     </ImageBackground>
   );
@@ -148,15 +202,22 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
 
-  emoji: {
+  mood: {
 
     flexDirection: "row",
     marginTop: 150,
     marginBottom:50,
+
+  },
+  
+  emoji:{
+
+    marginLeft : 10,
+    marginRight : 10
   },
 
   scroll: {
-    marginRight: 10,
+    marginRight: 20,
     marginLeft: 20,
   },
 
@@ -170,18 +231,31 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 60,
   },
+
   image:{
+
     height:100,
     width:100,
     marginRight: 20,
     marginLeft: 20,
   },
+
   plateforme:{
+
     flexDirection:"row",
     marginTop:10,
     marginBottom: 50,
     width: 300,
     justifyContent: "space-evenly"
-  }
+  },
+  
+  gameimg: {
+
+    borderWidth: 1,
+    borderRadius: 100,
+    height: 55,
+    width: 55,
+    margin: 6,
+  },
 
 });

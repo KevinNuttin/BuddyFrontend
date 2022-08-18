@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Button, ScrollView, FlatList, Image, Pressable, Alert, ImageBackground} from "react-native";
-
+import {  StyleSheet,  View, Text, ScrollView,  Image,  Alert, ImageBackground} from "react-native";
 import OffsetMiniButton from '../components/buttons/OffsetMiniButton';
 import CardGame from '../components/cards/CardGame';
 import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
@@ -11,12 +9,16 @@ import Header from '../components/cards/Header';
 import Tunnel from '../components/buttons/Tunnel';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// page de l'ajout des jeux à l'utilisateur
+
 export default function searchGames(props) {
+
     const [gameList, setGameList] = useState([]);
     const [wishGame, setWishGame] = useState([]);
     var header = Header("SignInScreen", props)
     var tunnel = Tunnel(1)
-    var token = ""
+    var token = "" 
+    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
     //* récupération du token du users pour pouvoir ajouter sa liste de jeux à son profil 
     AsyncStorage.getItem("users", function(error, data) {
@@ -24,28 +26,27 @@ export default function searchGames(props) {
       token = data
      });
 
-    var confirmer = OffsetMiniButton("Confirmer", "MoodScreen",comfirmation)
 
-    createTwoButtonAlert = () =>
+   function createTwoButtonAlert  (){ // creation d'une alerte si aucun jeu n'a été sélectionné
     Alert.alert(
       "Tu n'as pas de jeux...",
       "Merci d'ajouter au moins un jeux  wesh!",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
-    );
+    );}
 
-      async function comfirmation(redirection){
+   async function comfirmation(redirection){
         if(wishGame.length > 0){
         props.navigation.navigate(redirection)
 
      
-       const data = await fetch('http://192.168.1.14:3000/library/addgames', {
+       const data = await fetch('http://192.168.1.21:3000/library/addgames', { // ajout des jeux à l'utilisateur en BDD
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `wishgame=${JSON.stringify(wishGame)}&token=${token}`
       }); 
-        }else(createTwoButtonAlert())
+        }else(createTwoButtonAlert()) // alerte si aucun jeu sélectionné
           
       }
 
@@ -53,11 +54,9 @@ export default function searchGames(props) {
 
 useEffect(() => {  
     async function dataLoad () {
-    var rawResponse = await fetch('http://192.168.1.14:3000/library/games');
+    var rawResponse = await fetch('http://192.168.1.21:3000/library/games'); 
     var gamesListSearch = await rawResponse.json();
     setGameList(gamesListSearch)
-    console.log("🚀 ~ file: SearchGames.js ~ line 43 ~ dataLoad ~ gamesListSearch", gamesListSearch)
-    console.log("coucou")
 }
     dataLoad();
     
@@ -84,8 +83,7 @@ useEffect(() => {
 
         //* au clique sur un jeux suppression dans un état du jeux à la wishlist de jeux avec le nom grâce à un filter
 
-          var handleClickDeleteGame = (name, img) => {
-            console.log("name",name);
+          var handleClickDeleteGame = (name) => {
             setWishGame(wishGame.filter(object => object.name != name))
           }
 
@@ -94,7 +92,7 @@ useEffect(() => {
      return( <CardGame key={i} GameLike={iLike} name={game.name} img={game.img} slug={game.slug} handleClickAddGameParent={handleClickAddGame} handleClickDeleteGameParent={handleClickDeleteGame}/>)
     })
 
-    var gameWishList = wishGame.map((game, i) => {
+    var gameWishList = wishGame.map((game, i) => { // affichages des jeux
         if(gameWishList){
       return(
         noGame
@@ -107,13 +105,12 @@ useEffect(() => {
     })
   
         const [dropdown, setDropdown] = useState("Vos jeux");
-        const [selected, setSelected] = useState([]);
 
-        const _renderItem = item => {
+        const _renderItem = item => { // menu déroulant
             return (
             <View style={styles.item} >
                 <Text style={styles.textItem}>{item.name}</Text>
-                <Image style={styles.icon} source={require('../assets/icons/trash_iconbuddy.png')} onPress={() => handleClickDeleteGame(item.name)} />
+                <Image style={styles.icon} source={require('../assets/icons/trash_iconbuddy.png')} onPress={() => handleClickDeleteGame(item.name)} /> {/*utilisation du reverse data flow pour selectioner le bon jeu*/} 
             </View>
             );
         }
@@ -126,12 +123,6 @@ useEffect(() => {
         <View style={styles.container}>
             <Text style = {styles.text}>On joue à quoi ?</Text>
         <StatusBar style="auto" />
-       {/*  <TextInput  style={styles.input} 
-        placeholder='Your search'
-        onChangeText={(val) => setGameName(val)}
-    value={gameName}>
-    </TextInput>*/}
-
                 <Dropdown
                     style={styles.dropdown}
                     containerStyle={styles.shadow}
@@ -220,7 +211,7 @@ useEffect(() => {
             flexWrap: 'wrap',
           },
           dropdown: {
-            width:120,
+            width:200,
             marginTop: 20,
             textAlign:"center",
             justifyContent: "center"

@@ -3,27 +3,32 @@ import { StyleSheet, TouchableOpacity, Text} from "react-native";
 
 function ButtonRight(props) {
 
-    const [isPress, setIsPress] = useState(false)
+    // Etat pour changer la couleur du bouton au click
+    const [isPress, setIsPress] = useState(true)
 
     var onPress = (platformName) => {
 
         props.handleClickChoosePlatformParent(platformName)
 
-
         if(isPress === false){
             
             setIsPress(true)
+            
+            // Reverse Data flow "customButtonName" au premier click envoi le nom
+            props.handleClickChoosePlatformParent(customButtonName)
 
         } else {
 
             setIsPress(false)
+            // Reverse Data flow "customButtonName" au second click reset le nom
+            props.handleClickChoosePlatformParent(null)
         }
     }
     
-
+    // Condition de changement de couleur du bouton à chaque click
     var colorButton
 
-    if(isPress === true ) {
+    if(isPress === false ) {
         colorButton = {...styles.button, backgroundColor: "#DDABFE"}
     } else {
         colorButton = {...styles.button}
@@ -32,7 +37,7 @@ function ButtonRight(props) {
     return(
             <TouchableOpacity 
                 style={colorButton} 
-                onPress={() => onPress(true)}>
+                onPress={() => onPress(isPress)}>
                     <Text style={styles.buttonText}>{props.title}</Text>
             </TouchableOpacity>
     )

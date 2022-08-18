@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-function OffsetMiniButton(title, redirection, onPress) {
+function OffsetMiniButton(title, redirection, onPress) {    // Voir commentaires OffsetButton
 
     return(
 
@@ -10,8 +10,7 @@ function OffsetMiniButton(title, redirection, onPress) {
                 style={styles.button} 
                 onPress={() => {
                     onPress(redirection)
-                }}>
-                    <Text style={styles.buttonText}>{title}</Text>
+                }}><Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
             
             <View style={styles.rectangle}/>

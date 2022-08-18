@@ -2,14 +2,10 @@ import {
   StyleSheet,
   Text,
   View,
-  Title,
-  Button,
   ImageBackground,
   Image,
-  SafeAreaView,
   ScrollView,
   Pressable,
-  Icon,
   TouchableOpacity
 } from "react-native";
 
@@ -18,12 +14,13 @@ import ProfilPicture from "../components/cards/ProfilPicture";
 import Header2 from "../components/cards/Header2";
 import profilPicture from "../components/cards/ProfilPicture";
 
+//! Pas utilisé pour le MVP (doit permettre d'editer la pp de profil)
 
 export default function EditPictureScreen(props) {
   const [avatar, setAvatar] = useState(require("../assets/avatars/avatarDefault.png"))
 
   var ProfilPic = ProfilPicture(avatar);
-  var header = Header2("EditScreen","EditScreen",props)
+  var header = Header2("EditScreen","ChatScreen",props)
   var pictures = [
   require("../assets/avatars/Group.png"),
   require("../assets/avatars/Group2.png"),

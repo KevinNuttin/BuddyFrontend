@@ -5,3 +5,5 @@ export default function(pseudo = null, action) {
         return pseudo;
     }
   }
+
+// Sauvegarde du Pseudo dans le Store lors de l'inscription
